@@ -5,10 +5,12 @@ import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
+import org.androware.androbeans.utils.ResourceUtils;
 import org.androware.flow.base.FlowBase;
 import org.androware.flow.builder.*;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,10 +41,18 @@ public class FlowToolWindowFactory implements ToolWindowFactory {
 
         FlowBase flowBase = loadFlow("/home/jkirkley/tmp/tflow.js");
 
+        ResourceUtils.R = ResEx.class;
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
-        StepForm stepForm = new StepForm(project, toolWindow, flowBase.steps.get("try_words"));
 
-        Content content = contentFactory.createContent(stepForm.getRootPanel(), "", false);
+        MainForm mainForm = new MainForm(project, toolWindow, flowBase);
+
+        mainForm.buildFlowTree(flowBase);
+
+
+        //StepForm stepForm = new StepForm(project, toolWindow, flowBase.steps.get("try_words"), flowBase);
+        //Content content = contentFactory.createContent(stepForm.getRootPanel(), "", false);
+
+        Content content = contentFactory.createContent(mainForm.getRootPanel(), "", false);
         toolWindow.getContentManager().addContent(content);
     }
 }

@@ -22,41 +22,20 @@ public class ResourcePickerForm implements CRUDForm{
 
     }
 
-    public static class ClassWrap {
-        Class clazz;
-        ClassWrap(Class clazz){
-            this.clazz = clazz;
-        }
-
-        public String toString() {
-            return clazz.getSimpleName();
-        }
-    }
-
-    public static class FieldWrap{
-        Field field;
-        FieldWrap(Field field){
-            this.field = field;
-        }
-        public String toString() {
-            return field.getName();
-        }
-    }
-
     @Override
     public void init(Project project, ToolWindow toolWindow, Object target) {
 
         final Class[] groupClasses = ResEx.class.getDeclaredClasses();
-        DefaultListModel<ClassWrap> model = new DefaultListModel<>();
+        DefaultListModel<CompFactory.ClassWrap> model = new DefaultListModel<>();
         for(Class c: groupClasses){
-            model.addElement(new ClassWrap(c));
+            model.addElement(new CompFactory.ClassWrap(c));
         }
         groupList.setModel(model);
 
         groupList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         fieldsList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        final DefaultListModel<FieldWrap> fieldsModel = new DefaultListModel<>();
+        final DefaultListModel<CompFactory.FieldWrap> fieldsModel = new DefaultListModel<>();
         fieldsList.setModel(fieldsModel);
 
         groupList.addListSelectionListener(new ListSelectionListener() {
@@ -68,7 +47,7 @@ public class ResourcePickerForm implements CRUDForm{
                     fieldsModel.removeAllElements();
                     Field fields[] = groupClass.getFields();
                     for (Field field : fields) {
-                        fieldsModel.addElement(new FieldWrap(field));
+                        fieldsModel.addElement(new CompFactory.FieldWrap(field));
                     }
                     //fieldsList.
                 }
@@ -102,4 +81,10 @@ public class ResourcePickerForm implements CRUDForm{
     public void populate(Object object) {
 
     }
+
+    @Override
+    public void done() {
+
+    }
+
 }

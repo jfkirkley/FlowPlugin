@@ -1,5 +1,7 @@
 package org.androware.flow.builder;
 
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.wm.ToolWindow;
 import org.androware.flow.base.FlowBase;
 import org.androware.flow.base.NavBase;
 import org.androware.flow.base.ObjectLoaderSpecBase;
@@ -8,6 +10,7 @@ import org.androware.flow.base.StepBase;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -22,6 +25,9 @@ public class MainForm {
     private JTree flowTree;
     private JTable table1;
     private JSplitPane mainSplitPane;
+    Project project;
+    ToolWindow toolWindow;
+    FlowBase flowBase;
 
     public JPanel loadPanelForType(NodeObjectWrapper nodeObjectWrapper) {
 
@@ -30,13 +36,19 @@ public class MainForm {
             NavForm navPanel = new NavForm();
             return navPanel.getNavPanel();
         } else if(object instanceof StepBase){
-            //StepForm stepForm = new StepForm();
-            //return stepForm.getRootPanel();
+            StepForm stepForm = new StepForm(project, toolWindow, (StepBase)object, flowBase);
+
+            return stepForm.getRootPanel();
         }
         return new JPanel();
     }
 
-    public MainForm() {
+    public MainForm(Project project, ToolWindow toolWindow, FlowBase flowBase) {
+
+        this.project = project;
+        this.toolWindow = toolWindow;
+        this.flowBase = flowBase;
+
         flowTree.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -55,7 +67,6 @@ public class MainForm {
     }
 
     public JPanel getRootPanel() {
-
 
         return panel1;
     }
@@ -150,6 +161,8 @@ public class MainForm {
         flowTree.setModel(model);
 
         model.reload();
+
+        flowTree.setSelectionPath(new TreePath(top.getLastLeaf().getPath()));
 
         mainSplitPane.setDividerLocation(300);
     }

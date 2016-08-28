@@ -3,6 +3,7 @@ package org.androware.flow.builder;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import org.androware.androbeans.utils.ConstructorSpec;
+import org.androware.androbeans.utils.ReflectionUtils;
 
 
 import javax.swing.*;
@@ -26,8 +27,19 @@ public class ConstructorSpecForm implements CRUDForm<ConstructorSpec> {
 
     private ConstructorSpec constructorSpec;
 
+
     @Override
-    public void init(Project project, ToolWindow toolWindow, ConstructorSpec target, FormAssembler<CRUDForm> formAssembler) {
+    public void populate(ConstructorSpec object) {
+
+    }
+
+    @Override
+    public void done() {
+
+    }
+
+    @Override
+    public void init(Project project, ToolWindow toolWindow, ConstructorSpec target, FormAssembler formAssembler) {
 
     }
     public class ParamObjectFormAssembler implements FormAssembler<SimpleTypeListForm> {
@@ -42,9 +54,19 @@ public class ConstructorSpecForm implements CRUDForm<ConstructorSpec> {
                         paramAnyObjectForm.clear();
                         form.getTypeListComboBox().addItem(v);
                     } else {
-                        ResourcePickerForm.FieldWrap fieldWrap = (ResourcePickerForm.FieldWrap)resourcePickerForm.getTarget();
-                        if(v != null) {
-                            form.getTypeListComboBox().addItem(fieldWrap.field);
+                        CompFactory.FieldWrap fieldWrap = (CompFactory.FieldWrap)resourcePickerForm.getTarget();
+                        if(fieldWrap != null) {
+                            v = fieldWrap.toString();
+                            form.getTypeListComboBox().addItem(v);
+                        }
+                    }
+                    if( v != null) {
+                        //if()
+                        if(constructorSpec.paramObjects == null) {
+                            constructorSpec.paramObjects = new Object[1];
+                        } else {
+                            constructorSpec.paramObjects = Arrays.copyOf(constructorSpec.paramObjects, constructorSpec.paramObjects.length+1 );
+                            constructorSpec.paramObjects[constructorSpec.paramObjects.length-1] = v;
                         }
                     }
                 }
@@ -63,14 +85,12 @@ public class ConstructorSpecForm implements CRUDForm<ConstructorSpec> {
             target.paramObjects = new Object[0];
         }
 
-        targetClassChooser.init(project, toolWindow, target.targetClassName);
+        targetClassChooser.init(project, "Choose target class", new ReflectionUtils.FieldSetter(target, "targetClassName"));
 
         paramAnyObjectForm.init(project, toolWindow, null);
         resourcePickerForm.init(project, toolWindow, null);
 
         paramClassSimpleTypeListForm.init(project, toolWindow, target.paramClassNames, paramClassSimpleTypeListForm.new TreeClassChooserFormAssembler());
-
-        //paramObjectSimpleTypeListForm.init(project, toolWindow, Arrays.asList(target.paramObjects), paramObjectSimpleTypeListForm.new AnyObjectFormAssembler(paramAnyObjectForm));
 
         paramObjectSimpleTypeListForm.init(project, toolWindow, Arrays.asList(target.paramObjects), new ParamObjectFormAssembler());
 
@@ -97,8 +117,4 @@ public class ConstructorSpecForm implements CRUDForm<ConstructorSpec> {
     public void clear() {
     }
 
-    @Override
-    public void populate(ConstructorSpec object) {
-
-    }
 }

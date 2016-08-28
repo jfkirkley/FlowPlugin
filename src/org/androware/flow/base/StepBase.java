@@ -35,5 +35,12 @@ public class StepBase {
         map.put(NavBase.class, "org.androware.flow.Nav");
     }
 
+    public void addLoadedObjectsToRegistry(Map<String, String> registry) {
+        for(ObjectLoaderSpecBase objectLoaderSpecBase: objectLoaderSpecs) {
+            if(objectLoaderSpecBase.objectClassName != null && objectLoaderSpecBase.objectClassName.length()>0) {
+                registry.put(objectLoaderSpecBase.toString(), objectLoaderSpecBase.objectClassName);
+            }
+        }
+    }
 
 }

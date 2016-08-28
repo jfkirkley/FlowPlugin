@@ -14,7 +14,7 @@ public class StringForm implements CRUDForm<String> {
     String string;
 
     @Override
-    public void init(Project project, ToolWindow toolWindow, String target, FormAssembler<CRUDForm> formAssembler) {
+    public void init(Project project, ToolWindow toolWindow, String target, FormAssembler formAssembler) {
 
     }
 
@@ -43,4 +43,10 @@ public class StringForm implements CRUDForm<String> {
     public void populate(String object) {
 
     }
+
+    @Override
+    public void done() {
+
+    }
+
 }

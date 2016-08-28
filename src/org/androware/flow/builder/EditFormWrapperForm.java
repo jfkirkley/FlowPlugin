@@ -34,6 +34,7 @@ public class EditFormWrapperForm {
                 for(Content content: previousContents) {
                     toolWindow.getContentManager().addContent(content);
                 }
+                crudObjectEditor.done();
             }
         });
 

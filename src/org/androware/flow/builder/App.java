@@ -22,7 +22,7 @@ public class App {
             System.out.println("flow: " + flow);
 
             JFrame jFrame = new JFrame("yah");
-            MainForm mainForm = new MainForm();
+            MainForm mainForm = new MainForm(null,null,null);
 
             //mainForm.clearTree();
             jFrame.setContentPane(mainForm.getRootPanel());

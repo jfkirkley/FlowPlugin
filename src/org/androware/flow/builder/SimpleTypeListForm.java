@@ -17,6 +17,7 @@ public class SimpleTypeListForm<T> implements CRUDForm<List<T>> {
 
     private JComboBox typeListComboBox;
     private JButton addButton;
+
     private JButton deleteButton;
     private JPanel rootPanel;
     List<T> targetList;
@@ -60,10 +61,20 @@ public class SimpleTypeListForm<T> implements CRUDForm<List<T>> {
         }
     }
 
+
     @Override
-    public void init(Project project, ToolWindow toolWindow, List<T> target, FormAssembler<CRUDForm> formAssembler) {
+    public void populate(List<T> object) {
+        if(targetList != null) {
+            CompFactory.fillCombo(typeListComboBox, targetList);
+        }
+    }
+
+    @Override
+    public void init(Project project, ToolWindow toolWindow, List<T> target, FormAssembler formAssembler) {
         targetList = target;
-        formAssembler.assemble(project, toolWindow, this);
+        if(formAssembler != null) {
+            formAssembler.assemble(project, toolWindow, this);
+        }
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -72,6 +83,7 @@ public class SimpleTypeListForm<T> implements CRUDForm<List<T>> {
                 }
             }
         });
+        populate(target);
     }
 
     @Override
@@ -92,11 +104,6 @@ public class SimpleTypeListForm<T> implements CRUDForm<List<T>> {
     public void clear() {
     }
 
-    @Override
-    public void populate(List<T> object) {
-
-    }
-
     public JComboBox getTypeListComboBox() {
         return typeListComboBox;
     }
@@ -109,5 +116,9 @@ public class SimpleTypeListForm<T> implements CRUDForm<List<T>> {
         return deleteButton;
     }
 
+    @Override
+    public void done() {
+
+    }
 
 }

@@ -23,7 +23,7 @@ public class FileChooserWidget implements CRUDForm<String>{
     }
 
     @Override
-    public void init(Project project, ToolWindow toolWindow, String target, FormAssembler<CRUDForm> formAssembler) {
+    public void init(Project project, ToolWindow toolWindow, String target, FormAssembler formAssembler) {
 
     }
 
@@ -54,5 +54,10 @@ public class FileChooserWidget implements CRUDForm<String>{
 
     public boolean hasValue(){
         return fileTextField.getText().length() > 0;
+    }
+
+    @Override
+    public void done() {
+
     }
 }

@@ -1,5 +1,6 @@
 package org.androware.flow.builder;
 
+import java.io.*;
 import java.util.Arrays;
 
 import org.androware.androbeans.utils.ReflectionUtils;
@@ -7,11 +8,6 @@ import sun.rmi.runtime.Log;
 
 import javax.swing.text.View;
 import javax.swing.text.html.ListView;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -121,6 +117,14 @@ public class Utils {
         }
     }
 
+    public static Object getKeyForValue(Map map, Object value) {
+        for(Object k: map.keySet()) {
+            Object v = map.get(k);
+            if(v != null && v.equals(value)) return k;
+        }
+        return null;
+    }
+
     public static void addValueToMappedContainer(Field mapField, Map map,  Object key, Object value) {
         if(!map.containsKey(key)) {
             Class containerType = ReflectionUtils.getGenericType(mapField, 1);
@@ -130,5 +134,29 @@ public class Utils {
                 map.put(key, collection);
             }
         }
+    }
+
+    public static  String getFileContents(String fileName){
+        try {
+            byte buffer[] = new byte[1024*16];
+            FileInputStream fileInputStream = new FileInputStream(new File(fileName));
+            int cnt = 0;
+            StringBuffer stringBuffer = new StringBuffer(1024);
+            do {
+                cnt = fileInputStream.read(buffer);
+                if(cnt >= 0) {
+                    stringBuffer.append(new String(buffer, 0, cnt));
+                }
+            } while (cnt >= 0);
+
+            return stringBuffer.toString();
+        } catch (IOException e) {
+
+        }
+        return null;
+    }
+
+    public static  String HACKgetLayoutFileContents(String layoutName) {
+        return getFileContents("/home/jkirkley/AndroidStudioProjects/EngEzy/app/src/main/res/layout/" + layoutName + ".xml");
     }
 }

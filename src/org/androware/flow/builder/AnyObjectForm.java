@@ -123,4 +123,8 @@ public class AnyObjectForm implements CRUDForm {
         }
     }
 
+    @Override
+    public void done() {
+
+    }
 }

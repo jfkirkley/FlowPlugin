@@ -1,88 +1,109 @@
 package org.androware.flow.builder;
 
-import com.intellij.ide.util.TreeClassChooser;
-import com.intellij.ide.util.TreeClassChooserFactory;
-import com.intellij.openapi.actionSystem.PlatformDataKeys;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.fileTypes.FileTypeRegistry;
-import com.intellij.openapi.fileTypes.StdFileTypes;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
-import com.intellij.psi.PsiClass;
+import org.androware.androbeans.utils.ConstructorSpec;
+import org.androware.androbeans.utils.ReflectionUtils;
 import org.androware.flow.base.*;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import static com.intellij.openapi.fileTypes.StdFileTypes.JS;
+import static org.androware.androbeans.utils.ReflectionUtils.ensureFieldExists;
+import static org.androware.flow.builder.ResEx.attr.layout;
 
 /**
  * Created by jkirkley on 8/18/16.
  */
 public class StepForm {
-    private JButton addSaverButton;
+
     private JButton addCustomizerButton;
 
     private JPanel rootPanel;
-    private JButton editUIButton;
-    private JButton twoWayMapperButton;
+
+
     private ClassChooserWidget transitionClassChooserPanel;
     private ClassChooserWidget parentContainerClassChooserPanel;
     private ClassChooserWidget processorClassChooserPanel;
     private ComboBoxCRUDForm objectLoadersComboBoxCRUDForm;
     private ComboBoxCRUDForm navsComboBoxCRUDForm;
-    private FileChooserWidget targetFlowFileChooserWidget;
-    private FileChooserWidget layoutFileChooserWidget;
-    private JTextField textField1;
+
+
+    private ComboBoxCRUDForm adapterViewComboBoxCRUDForm;
+    private ObjectSaverSpecForm objectSaverSpecForm;
+    private JComboBox layoutComboBox;
+    private TwoWayMapperForm twoWayMapperForm;
+    private JComboBox targetFlowComboBox;
+
 
     ToolWindow toolWindow;
     StepBase stepBase;
+    FlowBase flowBase;
+    public StepForm(final Project project, ToolWindow toolWindow, StepBase stepBase, FlowBase flowBase) {
 
-    public StepForm(final Project project, ToolWindow toolWindow, StepBase stepBase) {
         this.stepBase = stepBase;
         this.toolWindow = toolWindow;
+        this.flowBase = flowBase;
 
-        transitionClassChooserPanel.init(project, "Choose Step Transition Class");
-        parentContainerClassChooserPanel.init(project, "Choose Parent Container Class");
-        processorClassChooserPanel.init(project, "Choose Step processor class");
+        transitionClassChooserPanel.init(project, "Choose Step Transition Class", new ReflectionUtils.FieldSetter(stepBase, "transitionClassName"));
+        parentContainerClassChooserPanel.init(project, "Choose Parent Container Class", new ReflectionUtils.FieldSetter(stepBase, "parentContainer"));
+        processorClassChooserPanel.init(project, "Choose Step processor class", new ReflectionUtils.FieldSetter(stepBase, "processor"));
 
-        targetFlowFileChooserWidget.init(project, "Choose Target Flow", FileTypeRegistry.getInstance().getFileTypeByExtension(".js"));
 
-        layoutFileChooserWidget.init(project, "Choose Layout", StdFileTypes.XML);
+        objectLoadersComboBoxCRUDForm.init(
+                project,
+                new CompFactory.DefaultCRUDEditorImpl<ObjectLoaderSpecBase>(project, toolWindow, ObjectLoaderSpecForm.class, ObjectLoaderSpecBase.class),
+                (List)ensureFieldExists(stepBase, "objectLoaderSpecs")
+        );
 
-        objectLoadersComboBoxCRUDForm.init(project, new CompFactory.DefaultCRUDEditorImpl<ObjectLoaderSpecBase>(project, toolWindow, ObjectLoaderSpecForm.class, ObjectLoaderSpecBase.class), stepBase.objectLoaderSpecs);
+        navsComboBoxCRUDForm.init(
+                project,
+                new CompFactory.DefaultCRUDEditorImpl<NavBase>(project, toolWindow, NavForm.class, NavBase.class, null, null, new NavForm.NavFormAssembler(flowBase, stepBase)),
+                (Map)ensureFieldExists(stepBase, "navMap")
+        );
 
-        navsComboBoxCRUDForm.init(project, new CompFactory.DefaultCRUDEditorImpl<NavBase>(project, toolWindow, NavForm.class, NavBase.class), stepBase.navMap);
+        adapterViewComboBoxCRUDForm.init(
+                project,
+                new CompFactory.DefaultCRUDEditorImpl<AdapterViewSpec>(project, toolWindow, AdapterViewSpecForm.class, AdapterViewSpec.class),
+                (Map)ReflectionUtils.ensureFieldExists(ReflectionUtils.ensureFieldExists(stepBase, "ui"), "adapterViews")
+        );
 
-        CompFactory.mkAddEditToggleWidget(project, toolWindow, addSaverButton,
-                ObjectSaverSpecForm.class, ObjectSaverSpecBase.class, stepBase.objectSaverSpec,
-                new CreateObjectListener<ObjectSaverSpecBase>() {
+        objectSaverSpecForm.init(project, toolWindow, (ObjectSaverSpecBase)ReflectionUtils.ensureFieldExists(stepBase, "objectSaverSpec"));
+
+        setUpCombo(layoutComboBox, "layout", "layout", stepBase.layout);
+        setUpCombo(targetFlowComboBox, "raw", "targetFlow", stepBase.targetFlow);
+
+
+        if(stepBase.twoWayMapper == null) {
+            stepBase.twoWayMapper = new TwoWayMapperBase(new HashMap());
+        }
+
+        twoWayMapperForm.init(project, toolWindow, stepBase.twoWayMapper.componentId2BeanFieldMap, new TwoWayMapperForm.ThisFormAssembler(flowBase, stepBase));
+
+        CompFactory.mkAddEditToggleWidget(project, toolWindow, addCustomizerButton,
+                ConstructorSpecForm.class, ConstructorSpec.class, stepBase.viewCustomizerSpec,
+                new CreateObjectListener<ConstructorSpec>() {
                     @Override
-                    public void onCreate(ObjectSaverSpecBase object) {
-                        stepBase.objectSaverSpec = object;
+                    public void onCreate(ConstructorSpec object) {
+
+                        stepBase.viewCustomizerSpec = object;
                     }
                 });
 
-        CompFactory.mkAddEditToggleWidget(project, toolWindow, editUIButton,
-                UIform.class, UI.class, stepBase.ui,
-                new CreateObjectListener<UI>() {
-                    @Override
-                    public void onCreate(UI object) {
-                        stepBase.ui = object;
-                    }
-                });
+    }
 
-        twoWayMapperButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
+    public void setUpCombo(JComboBox jComboBox, String resGroup, String name, Object value) {
+        CompFactory.fillComboWithResourceGroup(jComboBox, resGroup);
 
-                System.out.println("hello");
-
-            }
-        });
+        if(value != null) {
+            CompFactory.setComboItemWithResourceGroupField(jComboBox, resGroup, (String)value);
+            //jComboBox.setSelectedItem(new CompFactory.FieldWrap(ReflectionUtils.getField(StepBase.class, name));
+        } else {
+            jComboBox.setSelectedIndex(-1);
+        }
+        CompFactory.setFieldSetterOnAction(jComboBox, new ReflectionUtils.FieldSetter(stepBase, name));
 
     }
 

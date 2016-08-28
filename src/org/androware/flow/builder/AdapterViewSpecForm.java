@@ -28,7 +28,7 @@ public class AdapterViewSpecForm implements CRUDForm<AdapterViewSpec> {
     AdapterViewSpec adapterViewSpec;
 
     @Override
-    public void init(Project project, ToolWindow toolWindow, AdapterViewSpec target, FormAssembler<CRUDForm> formAssembler) {
+    public void init(Project project, ToolWindow toolWindow, AdapterViewSpec target, FormAssembler formAssembler) {
     }
 
     @Override
@@ -91,6 +91,11 @@ public class AdapterViewSpecForm implements CRUDForm<AdapterViewSpec> {
 
     @Override
     public void populate(AdapterViewSpec object) {
+
+    }
+
+    @Override
+    public void done() {
 
     }
 }

@@ -5,6 +5,7 @@ import org.androware.androbeans.utils.ConstructorSpec;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by jkirkley on 8/16/16.
@@ -26,5 +27,14 @@ public class FlowBase {
         map.put(ObjectLoaderSpecBase.class, "org.androware.flow.binding.ObjectLoaderSpec");
     }
 
+    public static Set<String> ignoreTheseLoaderClasses;  // TODO,  to avoid things like CachedObjectLoader
+
+    public void addLoadedObjectsToRegistry(Map<String, String> registry) {
+        for(ObjectLoaderSpecBase objectLoaderSpecBase: objectLoaderSpecs) {
+            if(objectLoaderSpecBase.objectClassName != null && objectLoaderSpecBase.objectClassName.length()>0) {
+                registry.put(objectLoaderSpecBase.toString(), objectLoaderSpecBase.objectClassName);
+            }
+        }
+    }
 
 }

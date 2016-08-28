@@ -20,7 +20,7 @@ public class UIform implements CRUDForm<UI> {
     private UI ui;
 
     @Override
-    public void init(Project project, ToolWindow toolWindow, UI target, FormAssembler<CRUDForm> formAssembler) {
+    public void init(Project project, ToolWindow toolWindow, UI target, FormAssembler formAssembler) {
 
     }
 
@@ -47,6 +47,11 @@ public class UIform implements CRUDForm<UI> {
 
     @Override
     public void populate(UI object) {
+
+    }
+
+    @Override
+    public void done() {
 
     }
 }

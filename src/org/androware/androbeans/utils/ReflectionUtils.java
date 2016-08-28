@@ -7,10 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -184,6 +181,46 @@ public class ReflectionUtils {
             toInvoke = method;
         }
         return toInvoke;
+    }
+
+    public static class FieldSetter {
+        String fieldName;
+        Object target;
+        public FieldSetter(Object object, String fieldName) {
+            target = object;
+            this.fieldName = fieldName;
+        }
+        public void set(Object v) {
+            setField(target.getClass(), fieldName, target, v);
+        }
+        public Object get() {
+            return getFieldValue(target, fieldName);
+        }
+    }
+
+    static Map<Class, Class> interface2defaultTypeMap = new HashMap<>();
+    static {
+        interface2defaultTypeMap.put(List.class, ArrayList.class);
+        interface2defaultTypeMap.put(Map.class, HashMap.class);
+    }
+    public static Class getDefaultType(Class c) {
+        Class defClass = interface2defaultTypeMap.get(c);
+        return defClass != null? defClass: c;
+    }
+
+    public static Object ensureFieldExists(Object parent, String fieldName) {
+        Object v = getFieldValue(parent, fieldName);
+        if( v == null) {
+            Field field = getField(parent.getClass(), fieldName);
+            if( field != null) {
+                Class t = getDefaultType(field.getType());
+                v = newInstance(t);
+                if( v != null) {
+                    setField(parent.getClass(), fieldName, parent, v);
+                }
+            }
+        }
+        return v;
     }
 
 /*

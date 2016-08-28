@@ -78,7 +78,7 @@ public class MapForm implements CRUDForm<Map> {
     }
 
     @Override
-    public void init(Project project, ToolWindow toolWindow, Map target, FormAssembler<CRUDForm> formAssembler) {
+    public void init(Project project, ToolWindow toolWindow, Map target, FormAssembler formAssembler) {
 
     }
 
@@ -168,6 +168,10 @@ public class MapForm implements CRUDForm<Map> {
 
     @Override
     public void clear() {
+
+    }
+    @Override
+    public void done() {
 
     }
 

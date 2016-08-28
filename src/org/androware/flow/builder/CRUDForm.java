@@ -10,7 +10,7 @@ import javax.swing.*;
  */
 public interface CRUDForm<T> {
 
-    public void init(Project project, ToolWindow toolWindow, T target, FormAssembler<CRUDForm> formAssembler);
+    public void init(Project project, ToolWindow toolWindow, T target, FormAssembler formAssembler);
 
     public void init(Project project, ToolWindow toolWindow, T target);
 
@@ -21,4 +21,6 @@ public interface CRUDForm<T> {
     public void clear();
 
     public void populate(T object);
+
+    public void done();
 }

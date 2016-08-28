@@ -11,7 +11,7 @@
     </properties>
     <border type="none"/>
     <children>
-      <component id="df098" class="javax.swing.JCheckBox" binding="checkBox1" default-binding="true">
+      <component id="df098" class="javax.swing.JCheckBox" binding="useseStepGeneratorCheckBox">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -51,31 +51,31 @@
           <text value="Target"/>
         </properties>
       </component>
-      <component id="12f88" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+      <component id="12f88" class="javax.swing.JComboBox" binding="targetComboBox">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
-      <component id="3431b" class="javax.swing.JComboBox" binding="comboBox2" default-binding="true">
+      <component id="3431b" class="javax.swing.JComboBox" binding="animInComboBox">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
-      <component id="8abf7" class="javax.swing.JComboBox" binding="comboBox3" default-binding="true">
+      <component id="8abf7" class="javax.swing.JComboBox" binding="animOutComboBox">
         <constraints>
           <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
-      <component id="7072c" class="javax.swing.JComboBox" binding="comboBox4" default-binding="true">
+      <component id="7072c" class="javax.swing.JComboBox" binding="eventComboBox">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
-      <component id="c59c3" class="javax.swing.JComboBox" binding="comboBox5" default-binding="true">
+      <component id="c59c3" class="javax.swing.JComboBox" binding="widgetIdComboBox">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

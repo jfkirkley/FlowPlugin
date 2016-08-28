@@ -2,6 +2,7 @@ package org.androware.flow.builder;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
+import org.androware.androbeans.utils.ReflectionUtils;
 
 import javax.swing.*;
 
@@ -17,8 +18,18 @@ public class ClassChooserWidget implements CRUDForm<String>{
 
     String className;
 
+    public void init(Project project, String title, ReflectionUtils.FieldSetter fieldSetter) {
+        CompFactory.addTreeClassChooserAction(project, browseClassesButton, classNameTextField, title, fieldSetter);
+        if(fieldSetter != null) {
+            className = (String) fieldSetter.get();
+            if (className != null && className.length() > 0) {
+                classNameTextField.setText(className);
+            }
+        }
+    }
+
     public void init(Project project, String title) {
-        CompFactory.addTreeClassChooserAction(project, browseClassesButton, classNameTextField, title);
+        init(project, title, null);
     }
 
     public String getClassName(){
@@ -26,14 +37,14 @@ public class ClassChooserWidget implements CRUDForm<String>{
     }
 
     @Override
-    public void init(Project project, ToolWindow toolWindow, String target, FormAssembler<CRUDForm> formAssembler) {
+    public void init(Project project, ToolWindow toolWindow, String target, FormAssembler formAssembler) {
 
     }
 
     @Override
     public void init(Project project, ToolWindow toolWindow, String target) {
         this.className = target;
-        this.init(project, "Choose Class");
+        this.init(project, "Choose Class", null);
     }
 
     @Override
@@ -58,6 +69,11 @@ public class ClassChooserWidget implements CRUDForm<String>{
 
     public boolean hasValue(){
         return classNameTextField.getText().length() > 0;
+    }
+
+    @Override
+    public void done() {
+
     }
 
 }
