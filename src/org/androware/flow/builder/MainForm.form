@@ -23,12 +23,21 @@
             </constraints>
             <properties/>
           </component>
-          <component id="d9b03" class="javax.swing.JTable" binding="table1" default-binding="true">
+          <scrollpane id="e6bb7" binding="contentScrollPane">
             <constraints>
               <splitpane position="right"/>
             </constraints>
             <properties/>
-          </component>
+            <border type="none"/>
+            <children>
+              <grid id="34767" binding="contentPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints/>
+                <properties/>
+                <border type="none"/>
+                <children/>
+              </grid>
+            </children>
+          </scrollpane>
         </children>
       </splitpane>
     </children>

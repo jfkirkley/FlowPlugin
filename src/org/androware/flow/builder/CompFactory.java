@@ -12,17 +12,23 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiFile;
 import org.androware.androbeans.utils.ReflectionUtils;
 import org.androware.androbeans.utils.ResourceUtils;
+import org.androware.androbeans.utils.Type2TypeDefaultConstructorFactory;
+import org.androware.flow.base.ObjectLoaderSpecBase;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
+import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 
 
@@ -31,7 +37,43 @@ import java.util.Map;
  */
 public class CompFactory {
 
+    public static void setFieldSetterOnSelect(JList jList, ReflectionUtils.FieldSetter fieldSetter) {
+        setFieldSetterOnSelect(jList, fieldSetter, null);
+    }
+
+    public static void setFieldSetterOnSelect(JList jList, ReflectionUtils.FieldSetter fieldSetter, Object value) {
+
+        setSelectedValueOnJList(jList, value);
+
+        jList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {
+
+                if(!listSelectionEvent.getValueIsAdjusting()) {
+                    if(jList.getSelectionMode() == ListSelectionModel.MULTIPLE_INTERVAL_SELECTION) {
+                        fieldSetter.set(jList.getSelectedValuesList());
+                    } else {
+                        Object v = jList.getSelectedValue();
+                        if( v instanceof ObjectWrap) {
+                            v = v.toString();
+                        }
+                        fieldSetter.set(v);
+                    }
+                }
+            }
+        });
+
+
+
+    }
     public static void setFieldSetterOnAction(JComboBox jComboBox, ReflectionUtils.FieldSetter fieldSetter) {
+        setFieldSetterOnAction(jComboBox, fieldSetter, null);
+    }
+
+    public static void setFieldSetterOnAction(JComboBox jComboBox, ReflectionUtils.FieldSetter fieldSetter, Object value) {
+        if(value != null) {
+            jComboBox.setSelectedItem(value);
+        }
         jComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -41,6 +83,20 @@ public class CompFactory {
                 } else {
                     fieldSetter.set(o);
                 }
+            }
+        });
+    }
+
+    public static void setFieldSetterOnAction(JToggleButton button, ReflectionUtils.FieldSetter fieldSetter) {
+        setFieldSetterOnAction(button, fieldSetter, false);
+    }
+
+    public static void setFieldSetterOnAction(JToggleButton button, ReflectionUtils.FieldSetter fieldSetter, boolean select) {
+        button.setSelected(select);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                fieldSetter.set(button.isSelected());
             }
         });
     }
@@ -165,40 +221,70 @@ public class CompFactory {
     public static class JComboBoxCRUDWrapper<T> implements CRUDCompWrapper<T> {
 
         JComboBox<T> jComboBox;
-        List<T> items = null;
-        Map<String, T> itemMap = null;
+
+        Object collection;
+        ReflectionUtils.FieldSetter collectionFieldSetter;
 
         private void addItem(T item) {
-            if (items != null) {
-                items.add(item);
-            } else if (itemMap != null) {
-                itemMap.put(item.toString(), item);
+            if(collection == null) {
+                collection = collectionFieldSetter.set();
+            }
+
+            if(collection instanceof Map) {
+                ((Map)collection).put(item.toString(), item);
+            } else {
+                ((List)collection).add(item);
             }
         }
 
         private void removeItem(T item) {
-            if (items != null) {
-                items.remove(item);
-            } else if (itemMap != null) {
-                itemMap.remove(item.toString());
+            if(collection instanceof Map) {
+                ((Map)collection).remove(item.toString());
+            } else {
+                ((List)collection).remove(item);
             }
+        }
 
+        public JComboBoxCRUDWrapper(JComboBox<T> jComboBox, ReflectionUtils.FieldSetter collectionFieldSetter) {
+            this.jComboBox = jComboBox;
+            this.collectionFieldSetter = collectionFieldSetter;
+            this.collection = collectionFieldSetter.get();
+            fillCombo();
+        }
+
+        private void fillCombo(){
+            if(collection != null) {
+                if (collection instanceof Map) {
+                    Map<String, T> itemMap = (Map<String, T>) collection;
+                    for (String s : itemMap.keySet()) {
+                        this.jComboBox.addItem(itemMap.get(s));
+                    }
+                } else {
+                    List<T> items = (List<T>) collection;
+                    for (T t : items) {
+                        this.jComboBox.addItem(t);
+                    }
+                }
+            }
         }
 
         public JComboBoxCRUDWrapper(JComboBox<T> jComboBox, List<T> items) {
-            this.items = items;
+            this.collection = items;
             this.jComboBox = jComboBox;
-            for (T t : items) {
-                this.jComboBox.addItem(t);
-            }
+            if(items != null)
+                for (T t : items) {
+                    this.jComboBox.addItem(t);
+                }
 
         }
 
         public JComboBoxCRUDWrapper(JComboBox<T> jComboBox, Map<String, T> itemMap) {
-            this.itemMap = itemMap;
+            this.collection = itemMap;
             this.jComboBox = jComboBox;
-            for (String s : itemMap.keySet()) {
-                this.jComboBox.addItem(itemMap.get(s));
+            if(itemMap != null) {
+                for (String s : itemMap.keySet()) {
+                    this.jComboBox.addItem(itemMap.get(s));
+                }
             }
         }
 
@@ -294,7 +380,7 @@ public class CompFactory {
         Project project;
         Class formClass;
         Class targetClass;
-        CreateObjectListener createObjectListener;
+        ReflectionUtils.FieldSetter fieldSetter;
         T defaultTemplateObject;
         CRUDCompWrapper<T> crudCompWrapper;
         CRUDForm<T> form;
@@ -304,21 +390,21 @@ public class CompFactory {
             this(project, toolWindow, formClass, targetClass, null);
         }
 
-        public DefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, CreateObjectListener createObjectListener) {
-            this(project, toolWindow, formClass, targetClass, createObjectListener, null);
+        public DefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter) {
+            this(project, toolWindow, formClass, targetClass, fieldSetter, null);
         }
 
-        public DefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, CreateObjectListener createObjectListener, T defaultTemplateObject) {
-            this(project, toolWindow, formClass, targetClass, createObjectListener, defaultTemplateObject, null);
+        public DefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter, T defaultTemplateObject) {
+            this(project, toolWindow, formClass, targetClass, fieldSetter, defaultTemplateObject, null);
         }
 
-        public DefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, CreateObjectListener createObjectListener, T defaultTemplateObject, FormAssembler formAssembler) {
+        public DefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter, T defaultTemplateObject, FormAssembler formAssembler) {
             this.project = project;
             this.formAssembler = formAssembler;
             this.toolWindow = toolWindow;
             this.formClass = formClass;
             this.targetClass = targetClass;
-            this.createObjectListener = createObjectListener;
+            this.fieldSetter = fieldSetter;
             this.defaultTemplateObject = defaultTemplateObject;
         }
 
@@ -341,8 +427,8 @@ public class CompFactory {
         public T create() {
 
             T obj = defaultTemplateObject != null ? (T) ReflectionUtils.tryCopy(defaultTemplateObject) : (T) ReflectionUtils.newInstance(targetClass);
-            if (createObjectListener != null) {
-                createObjectListener.onCreate(obj);
+            if (fieldSetter != null) {
+                fieldSetter.set(obj);
             }
             return obj;
         }
@@ -370,12 +456,12 @@ public class CompFactory {
             super(project, toolWindow, formClass, targetClass);
         }
 
-        public PrimitiveTypeDefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, CreateObjectListener createObjectListener) {
-            super(project, toolWindow, formClass, targetClass, createObjectListener);
+        public PrimitiveTypeDefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter) {
+            super(project, toolWindow, formClass, targetClass, fieldSetter);
         }
 
-        public PrimitiveTypeDefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, CreateObjectListener createObjectListener, T defaultTemplateObject) {
-            super(project, toolWindow, formClass, targetClass, createObjectListener, defaultTemplateObject);
+        public PrimitiveTypeDefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter, T defaultTemplateObject) {
+            super(project, toolWindow, formClass, targetClass, fieldSetter, defaultTemplateObject);
         }
 
         @Override
@@ -385,18 +471,18 @@ public class CompFactory {
         }
     }
 
-    public static <T> void mkAddEditToggleWidget(Project project, ToolWindow toolWindow, AbstractButton toggleButton, Class formClass, Class targetClass, T target, CreateObjectListener createObjectListener) {
+    public static <T> void mkAddEditToggleWidget(Project project, ToolWindow toolWindow, AbstractButton toggleButton, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter) {
 
         toggleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                DefaultCRUDEditorImpl<T> editor = new DefaultCRUDEditorImpl<T>(project, toolWindow, formClass, targetClass, createObjectListener);
+                DefaultCRUDEditorImpl<T> editor = new DefaultCRUDEditorImpl<T>(project, toolWindow, formClass, targetClass, fieldSetter);
 
-                editor.edit(target);
+                editor.edit((T)fieldSetter.get());
             }
         });
 
-        if (target != null) {
+        if (fieldSetter.get() != null) {
             toggleButton.setText("Edit");
         } else {
             toggleButton.setText("Add");
@@ -425,28 +511,19 @@ public class CompFactory {
 
     public static void setComboItemWithResourceGroupField(JComboBox<FieldWrap> jComboBox, String resourceGroupName, String fieldName) {
         if (fieldName != null) {
-            try {
-                Class resourceGroupClass = ResourceUtils.getResourceGroup(resourceGroupName);
-                Field field = resourceGroupClass.getField(fieldName);
-                jComboBox.setSelectedItem(new FieldWrap(field));
-            } catch (NoSuchFieldException e) {
-
-                // not found set unselected
-                jComboBox.setSelectedIndex(-1);
-            }
+            jComboBox.setSelectedItem(new FieldWrap(resourceGroupName, fieldName));
         } else {
             jComboBox.setSelectedIndex(-1);
         }
     }
 
-    public static class ObjectWrap {
-        public String toString() {
-            return null;
-        }
+    public static abstract class ObjectWrap {
+        public abstract String toString();
 
         public Object get() {
             return null;
         }
+        public abstract Object set(Object o);
 
         public boolean equals(Object o) {
             return o != null && o.toString().equals(toString());
@@ -457,7 +534,9 @@ public class CompFactory {
     public static class ClassWrap extends ObjectWrap {
         Class clazz;
 
-        ClassWrap(Class clazz) {
+        public ClassWrap() {}
+
+        public ClassWrap(Class clazz) {
             this.clazz = clazz;
         }
 
@@ -468,12 +547,28 @@ public class CompFactory {
         public Object get() {
             return clazz;
         }
+
+        @Override
+        public Object set(Object o) {
+            clazz = (Class)o;
+            return clazz;
+        }
     }
 
     public static class FieldWrap extends ObjectWrap {
         Field field;
+        public FieldWrap() {}
 
-        FieldWrap(Field field) {
+
+        public FieldWrap(String resourceGroupName, String fieldName) {
+            Class resourceGroupClass = ResourceUtils.getResourceGroup(resourceGroupName);
+            try {
+                field = resourceGroupClass.getField(fieldName);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+        }
+        public FieldWrap(Field field) {
             this.field = field;
         }
 
@@ -484,13 +579,19 @@ public class CompFactory {
         public Object get() {
             return field;
         }
+        @Override
+        public Object set(Object o) {
+            field = (Field) o;
+            return field;
+        }
 
     }
 
     public static class MethodWrap extends ObjectWrap {
         Method method;
+        public MethodWrap() {}
 
-        MethodWrap(Method method) {
+        public MethodWrap(Method method) {
             this.method = method;
         }
 
@@ -501,27 +602,42 @@ public class CompFactory {
         public Object get() {
             return method;
         }
-
+        @Override
+        public Object set(Object o) {
+            method = (Method) o;
+            return method;
+        }
     }
+
+
+
+    public static Type2TypeDefaultConstructorFactory objectWrapType2TypeDefaultConstructorFactory =
+            new Type2TypeDefaultConstructorFactory(
+                    Class.class, ClassWrap.class,
+                    Method.class, MethodWrap.class,
+                    Field.class, FieldWrap.class);
 
     public static final String ID_ATTR = "android:id=\"@+id/";
 
     public static List<String> getWidgetIdList(String layout) {
         String layoutContents = Utils.HACKgetLayoutFileContents(layout);
         List<String> items = new ArrayList<>();
-        String lines[] = layoutContents.split("\\n");
-        for (String line : lines) {
-            int index = line.indexOf(ID_ATTR);
-            if (index != -1) {
-                index += ID_ATTR.length();
-                String id = line.substring(index, line.indexOf('\"', index));
-                items.add(id);
+
+        if(layoutContents != null) {
+            String lines[] = layoutContents.split("\\n");
+            for (String line : lines) {
+                int index = line.indexOf(ID_ATTR);
+                if (index != -1) {
+                    index += ID_ATTR.length();
+                    String id = line.substring(index, line.indexOf('\"', index));
+                    items.add(id);
+                }
             }
         }
         return items;
     }
 
-    public static void fillLayoutCombo(JComboBox comboBox, String layout) {
+    public static void fillComboWidthWdgetIdsFromLayout(JComboBox comboBox, String layout) {
         fillCombo(comboBox, getWidgetIdList(layout));
     }
 
@@ -547,46 +663,78 @@ public class CompFactory {
     }
 
 
-    public static void fillLayoutList(JList jList, String layout) {
+    public static void fillListWithWidgetIdsFromLayout(JList jList, String layout) {
         fillJList(jList, getWidgetIdList(layout));
     }
 
-
     public static void fillListWithClassFields(JList<FieldWrap> jList, Class aClass) {
+        fillListWithClassFields(jList, aClass, null);
+    }
+
+    public static void fillListWithClassFields(JList<FieldWrap> jList, Class aClass, Predicate<Member> predicate) {
 
         List<FieldWrap> items = new ArrayList<>();
         Field fields[] = aClass.getFields();
         for (Field field : fields) {
-            items.add(new FieldWrap(field));
+            if(predicate == null || predicate.test(field)) {
+                items.add(new FieldWrap(field));
+            }
         }
         fillJList(jList, items);
+    }
+
+    public static class IgnoreBaseObjectPredicate implements Predicate<Member> {
+        @Override
+        public boolean test(Member member) {
+            return member.getDeclaringClass() != Object.class;
+        }
     }
 
     public static void fillListWithAllClassMembers(JList<ObjectWrap> jList, Class aClass) {
-
-        List<ObjectWrap> items = new ArrayList<>();
-        Field fields[] = aClass.getFields();
-        for (Field field : fields) {
-            // TODO need to handle modifiers properly, also, this stuff should be refactored into ReflectionUtils
-            //if((field.getModifiers() | Modifier.STATIC) == 0) {
-            if( field.getDeclaringClass() != Object.class ) {
-                items.add(new FieldWrap(field));
-            }
-            //}
-        }
-        Method methods[] = aClass.getMethods();
-        for (Method method : methods) {
-            //if((method.getModifiers() | Modifier.STATIC) == 0) {
-            if( method.getDeclaringClass() != Object.class ) {
-                items.add(new MethodWrap(method));
-            }
-            //}
-        }
-        fillJList(jList, items);
+        fillListWithAllClassMembers(jList, aClass, new IgnoreBaseObjectPredicate());
     }
 
+    public static void fillListWithAllClassMembers(JList<ObjectWrap> jList, Class aClass, Predicate<Member> predicate) {
+
+        List<Member> members = ReflectionUtils.getAllMembers(aClass, predicate);
+        List<ObjectWrap> items = new ArrayList<>();
+
+        for(Member member: members) {
+            items.add((ObjectWrap) objectWrapType2TypeDefaultConstructorFactory.build(member.getClass(), member));
+        }
+        fillJList(jList, items);
+
+
+    }
+
+    public static void setSelectedValueOnJList(JList jList, Object value) {
+        if(value != null) {
+            if(value instanceof List) {
+                List l = (List)value;
+                for(Object o: l) {
+                    jList.setSelectedValue(o,false);
+                }
+            } else {
+                jList.setSelectedValue(value,true);
+            }
+        }
+    }
+
+    // TODO Regex version
+    // TODO Move this and ObjectWrap into ReflectionUtils
+    public static class IgnoreMemberWithPrefix implements Predicate<Member> {
+        String prefix;
+        public IgnoreMemberWithPrefix(String prefix) {
+
+            this.prefix = prefix;
+        }
+        @Override
+        public boolean test(Member member) {
+            return !member.getName().startsWith(prefix);
+        }
+    }
     public static void fillListWithResourceGroup(JList<FieldWrap> jListBox, String resourceGroupName) {
-        fillListWithClassFields(jListBox, ResourceUtils.getResourceGroup(resourceGroupName));
+        fillListWithClassFields(jListBox, ResourceUtils.getResourceGroup(resourceGroupName), new IgnoreMemberWithPrefix("abc_"));
     }
 
 
@@ -617,6 +765,14 @@ public class CompFactory {
             textField.setText(v.toString());
         }
     }
+
+    public static void setValFromTextfield(JTextField textField, Object target, String field) {
+        String v = textField.getText();
+        if (v != null && v.length() > 0) {
+            ReflectionUtils.setField(target.getClass(), field, target, v);
+        }
+    }
+
 
 
 }

@@ -52,7 +52,7 @@ public class NavForm  implements CRUDForm<NavBase> {
         public void assemble(Project project, ToolWindow toolWindow, NavForm form) {
             String layout = stepBase.layout;
             if(layout != null) {
-                CompFactory.fillLayoutCombo(form.getWidgetIdComboBox(), layout);
+                CompFactory.fillComboWidthWdgetIdsFromLayout(form.getWidgetIdComboBox(), layout);
             }
             CompFactory.fillCombo(form.getTargetComboBox(), new ArrayList<String>(flowBase.steps.keySet()));
         }

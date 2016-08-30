@@ -44,11 +44,10 @@ public class TwoWayMapperForm implements CRUDForm<Map> {
         public void assemble(Project project, ToolWindow toolWindow, TwoWayMapperForm form) {
             String layout = stepBase.layout;
             if (layout != null) {
-                CompFactory.fillLayoutList(form.getWidgetIDList(), layout);
+                CompFactory.fillListWithWidgetIdsFromLayout(form.getWidgetIDList(), layout);
             }
-            Map<String, String> registry = new HashMap<>();
-            flowBase.addLoadedObjectsToRegistry(registry);
-            stepBase.addLoadedObjectsToRegistry(registry);
+            Map<String, String> registry = flowBase.buildRegistry(stepBase);
+
             CompFactory.fillJList(form.getBeanList(), new ArrayList<>(registry.keySet()));
 
 

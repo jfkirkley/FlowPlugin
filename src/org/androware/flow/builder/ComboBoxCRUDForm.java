@@ -1,6 +1,7 @@
 package org.androware.flow.builder;
 
 import com.intellij.openapi.project.Project;
+import org.androware.androbeans.utils.ReflectionUtils;
 
 import javax.swing.*;
 import java.util.Arrays;
@@ -17,20 +18,23 @@ public class ComboBoxCRUDForm <T>{
     private JButton deleteButton;
     private JPanel rootPanel;
 
+    public void init(Project project, CompFactory.CRUDObjectEditor<T> crudObjectEditor, ReflectionUtils.FieldSetter fieldSetter) {
+        CompFactory.JComboBoxCRUDWrapper jComboBoxCRUDWrapper = new CompFactory.JComboBoxCRUDWrapper(comboBox, fieldSetter);
+
+        CompFactory.addCRUDWrapper(project, crudObjectEditor, editButton, addMutton, deleteButton, jComboBoxCRUDWrapper);
+    }
+
+
     public void init(Project project, CompFactory.CRUDObjectEditor<T> crudObjectEditor, List<T> items) {
         CompFactory.JComboBoxCRUDWrapper jComboBoxCRUDWrapper = new CompFactory.JComboBoxCRUDWrapper(comboBox, items);
 
         CompFactory.addCRUDWrapper(project, crudObjectEditor, editButton, addMutton, deleteButton, jComboBoxCRUDWrapper);
-
-
     }
 
     public void init(Project project, CompFactory.CRUDObjectEditor<T> crudObjectEditor, Map<String, T> itemMap) {
         CompFactory.JComboBoxCRUDWrapper jComboBoxCRUDWrapper = new CompFactory.JComboBoxCRUDWrapper(comboBox, itemMap);
 
         CompFactory.addCRUDWrapper(project, crudObjectEditor, editButton, addMutton, deleteButton, jComboBoxCRUDWrapper);
-
-
     }
 
     public void init(Project project, CompFactory.CRUDObjectEditor<T> crudObjectEditor, T[] items) {

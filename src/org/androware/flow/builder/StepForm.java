@@ -55,26 +55,25 @@ public class StepForm {
         objectLoadersComboBoxCRUDForm.init(
                 project,
                 new CompFactory.DefaultCRUDEditorImpl<ObjectLoaderSpecBase>(project, toolWindow, ObjectLoaderSpecForm.class, ObjectLoaderSpecBase.class),
-                (List)ensureFieldExists(stepBase, "objectLoaderSpecs")
+                new ReflectionUtils.FieldSetter(stepBase, "objectLoaderSpecs")
         );
 
         navsComboBoxCRUDForm.init(
                 project,
                 new CompFactory.DefaultCRUDEditorImpl<NavBase>(project, toolWindow, NavForm.class, NavBase.class, null, null, new NavForm.NavFormAssembler(flowBase, stepBase)),
-                (Map)ensureFieldExists(stepBase, "navMap")
+                new ReflectionUtils.FieldSetter(stepBase, "navMap")
         );
 
         adapterViewComboBoxCRUDForm.init(
                 project,
-                new CompFactory.DefaultCRUDEditorImpl<AdapterViewSpec>(project, toolWindow, AdapterViewSpecForm.class, AdapterViewSpec.class),
-                (Map)ReflectionUtils.ensureFieldExists(ReflectionUtils.ensureFieldExists(stepBase, "ui"), "adapterViews")
+                new CompFactory.DefaultCRUDEditorImpl<AdapterViewSpec>(project, toolWindow, AdapterViewSpecForm.class, AdapterViewSpec.class, null, null, new AdapterViewSpecForm.ThisFormAssembler(flowBase, stepBase)),
+                new ReflectionUtils.FieldSetter(new ReflectionUtils.FieldSetter(stepBase, "ui"), "adapterViews")
         );
 
         objectSaverSpecForm.init(project, toolWindow, (ObjectSaverSpecBase)ReflectionUtils.ensureFieldExists(stepBase, "objectSaverSpec"));
 
         setUpCombo(layoutComboBox, "layout", "layout", stepBase.layout);
         setUpCombo(targetFlowComboBox, "raw", "targetFlow", stepBase.targetFlow);
-
 
         if(stepBase.twoWayMapper == null) {
             stepBase.twoWayMapper = new TwoWayMapperBase(new HashMap());
@@ -83,14 +82,7 @@ public class StepForm {
         twoWayMapperForm.init(project, toolWindow, stepBase.twoWayMapper.componentId2BeanFieldMap, new TwoWayMapperForm.ThisFormAssembler(flowBase, stepBase));
 
         CompFactory.mkAddEditToggleWidget(project, toolWindow, addCustomizerButton,
-                ConstructorSpecForm.class, ConstructorSpec.class, stepBase.viewCustomizerSpec,
-                new CreateObjectListener<ConstructorSpec>() {
-                    @Override
-                    public void onCreate(ConstructorSpec object) {
-
-                        stepBase.viewCustomizerSpec = object;
-                    }
-                });
+                ConstructorSpecForm.class, ConstructorSpec.class, new ReflectionUtils.FieldSetter(stepBase, "viewCustomizerSpec"));
 
     }
 

@@ -24,24 +24,23 @@ public class ConstructorSpecForm implements CRUDForm<ConstructorSpec> {
     private SimpleTypeListForm paramObjectSimpleTypeListForm;
     private AnyObjectForm paramAnyObjectForm;
     private ResourcePickerForm resourcePickerForm;
-
     private ConstructorSpec constructorSpec;
 
+    List<String> paramObjectList = new ArrayList<>();
 
     @Override
     public void populate(ConstructorSpec object) {
-
     }
 
     @Override
     public void done() {
-
+        getTarget();
     }
 
     @Override
     public void init(Project project, ToolWindow toolWindow, ConstructorSpec target, FormAssembler formAssembler) {
-
     }
+
     public class ParamObjectFormAssembler implements FormAssembler<SimpleTypeListForm> {
 
         @Override
@@ -61,7 +60,7 @@ public class ConstructorSpecForm implements CRUDForm<ConstructorSpec> {
                         }
                     }
                     if( v != null) {
-                        //if()
+
                         if(constructorSpec.paramObjects == null) {
                             constructorSpec.paramObjects = new Object[1];
                         } else {
@@ -88,11 +87,12 @@ public class ConstructorSpecForm implements CRUDForm<ConstructorSpec> {
         targetClassChooser.init(project, "Choose target class", new ReflectionUtils.FieldSetter(target, "targetClassName"));
 
         paramAnyObjectForm.init(project, toolWindow, null);
-        resourcePickerForm.init(project, toolWindow, null);
 
         paramClassSimpleTypeListForm.init(project, toolWindow, target.paramClassNames, paramClassSimpleTypeListForm.new TreeClassChooserFormAssembler());
 
-        paramObjectSimpleTypeListForm.init(project, toolWindow, Arrays.asList(target.paramObjects), new ParamObjectFormAssembler());
+        //paramObjectSimpleTypeListForm.init(project, toolWindow, Arrays.asList(target.paramObjects), new ParamObjectFormAssembler());
+
+        paramObjectSimpleTypeListForm.init(project, toolWindow, Arrays.asList(target.paramObjects), paramObjectSimpleTypeListForm.new AnyObjectFormAssembler(paramAnyObjectForm, paramObjectList));
 
     }
 
@@ -103,6 +103,9 @@ public class ConstructorSpecForm implements CRUDForm<ConstructorSpec> {
 
     @Override
     public ConstructorSpec getTarget() {
+        constructorSpec.paramObjects = paramObjectList.toArray();
+        /*
+        Not needed, all widgets auto populate
         List l = paramObjectSimpleTypeListForm.getTarget();
         if(l != null && l.size() > 0){
             constructorSpec.paramObjects = l.toArray();
@@ -110,6 +113,7 @@ public class ConstructorSpecForm implements CRUDForm<ConstructorSpec> {
         if(targetClassChooser.hasValue()) {
             constructorSpec.targetClassName = targetClassChooser.getTarget();
         }
+        */
         return constructorSpec;
     }
 

@@ -1,14 +1,12 @@
 package org.androware.flow.builder;
 
-import com.intellij.ide.util.TreeClassChooser;
-import com.intellij.ide.util.TreeClassChooserFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
-import com.intellij.psi.PsiClass;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,6 +21,34 @@ public class EditFormWrapperForm {
 
 
     public <T> void init(Project project, ToolWindow toolWindow, JPanel editorPanel, final CompFactory.CRUDObjectEditor<T> crudObjectEditor ) {
+
+        Component lastComp = MainForm.mainForm.getContent();
+
+        doneButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                crudObjectEditor.done();
+                MainForm.mainForm.setContent((JPanel) lastComp);
+                crudObjectEditor.done();
+            }
+        });
+
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                crudObjectEditor.cancel();
+                MainForm.mainForm.setContent((JPanel) lastComp);
+            }
+        });
+
+        contentPanel.add(editorPanel);
+
+        MainForm.mainForm.setContent(rootPanel);
+    }
+
+
+/*
+    public <T> void init3(Project project, ToolWindow toolWindow, JPanel editorPanel, final CompFactory.CRUDObjectEditor<T> crudObjectEditor ) {
 
         final Content[] previousContents = toolWindow.getContentManager().getContents();
 
@@ -58,4 +84,5 @@ public class EditFormWrapperForm {
         toolWindow.getContentManager().addContent(content);
 
     }
+    */
 }

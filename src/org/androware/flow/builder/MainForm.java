@@ -12,6 +12,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -23,11 +24,14 @@ import java.util.Map;
 public class MainForm {
     private JPanel panel1;
     private JTree flowTree;
-    private JTable table1;
     private JSplitPane mainSplitPane;
+    private JScrollPane contentScrollPane;
+    private JPanel contentPanel;
     Project project;
     ToolWindow toolWindow;
     FlowBase flowBase;
+
+    public static MainForm mainForm;
 
     public JPanel loadPanelForType(NodeObjectWrapper nodeObjectWrapper) {
 
@@ -44,7 +48,7 @@ public class MainForm {
     }
 
     public MainForm(Project project, ToolWindow toolWindow, FlowBase flowBase) {
-
+        mainForm = this;
         this.project = project;
         this.toolWindow = toolWindow;
         this.flowBase = flowBase;
@@ -59,11 +63,21 @@ public class MainForm {
                 if(object != null && object instanceof DefaultMutableTreeNode) {
                     Object userObject = ((DefaultMutableTreeNode)object).getUserObject();
                     if(userObject instanceof NodeObjectWrapper) {
-                        mainSplitPane.setRightComponent(loadPanelForType((NodeObjectWrapper)userObject));
+                        //contentPanel.removeAll();
+                        //contentPanel.add(loadPanelForType((NodeObjectWrapper)userObject));
+                        setContent(loadPanelForType((NodeObjectWrapper)userObject));
                     }
                 }
             }
         });
+    }
+
+    public void setContent(JPanel content) {
+        mainSplitPane.setRightComponent(content);
+    }
+
+    public Component getContent() {
+        return mainSplitPane.getRightComponent();
     }
 
     public JPanel getRootPanel() {

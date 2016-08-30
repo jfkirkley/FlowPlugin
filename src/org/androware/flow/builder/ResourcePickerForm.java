@@ -74,7 +74,8 @@ public class ResourcePickerForm implements CRUDForm{
 
     @Override
     public void clear() {
-
+        groupList.setSelectedIndex(-1);
+        fieldsList.setSelectedIndex(-1);
     }
 
     @Override

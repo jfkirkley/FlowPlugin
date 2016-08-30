@@ -15,6 +15,8 @@ public class AdapterViewSpec {
     public String itemLayoutId;
     public boolean useDefault;
 
+    public String name;
+
     public ConstructorSpec adapterConstructorSpec;
 
     public List<Object> items;
@@ -50,6 +52,19 @@ public class AdapterViewSpec {
 
         return items;
     }
+
+    public String toString() {
+        return name != null? name: viewId != null ? viewId: itemLayoutId != null? itemLayoutId: super.toString();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
 }
 

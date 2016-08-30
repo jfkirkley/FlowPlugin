@@ -36,9 +36,11 @@ public class StepBase {
     }
 
     public void addLoadedObjectsToRegistry(Map<String, String> registry) {
-        for(ObjectLoaderSpecBase objectLoaderSpecBase: objectLoaderSpecs) {
-            if(objectLoaderSpecBase.objectClassName != null && objectLoaderSpecBase.objectClassName.length()>0) {
-                registry.put(objectLoaderSpecBase.toString(), objectLoaderSpecBase.objectClassName);
+        if(objectLoaderSpecs != null) {
+            for (ObjectLoaderSpecBase objectLoaderSpecBase : objectLoaderSpecs) {
+                if (objectLoaderSpecBase.objectClassName != null && objectLoaderSpecBase.objectClassName.length() > 0) {
+                    registry.put(objectLoaderSpecBase.toString(), objectLoaderSpecBase.objectClassName);
+                }
             }
         }
     }

@@ -1,13 +1,9 @@
 package org.androware.androbeans.utils;
 
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 import java.util.*;
+import java.util.function.Predicate;
 
 
 /**
@@ -190,11 +186,30 @@ public class ReflectionUtils {
             target = object;
             this.fieldName = fieldName;
         }
-        public void set(Object v) {
-            setField(target.getClass(), fieldName, target, v);
+
+        private Object resolveTarget() {
+            if(target instanceof  FieldSetter) {
+                FieldSetter fieldSetter = (FieldSetter)target;
+                target = fieldSetter.get();
+                if(target == null) {
+                    target = fieldSetter.set();
+                }
+            }
+            return target;
         }
+
+        public Object set(Object v) {
+            setField(resolveTarget().getClass(), fieldName, target, v);
+            return v;
+        }
+
+        public Object set() {
+            Field field = getField(resolveTarget().getClass(), fieldName);
+            return set(ReflectionUtils.newInstance(getDefaultType(field.getType())));
+        }
+
         public Object get() {
-            return getFieldValue(target, fieldName);
+            return getFieldValue(resolveTarget(), fieldName);
         }
     }
 
@@ -277,6 +292,26 @@ public class ReflectionUtils {
             Constructor constructor = c.getConstructor(args);
             return constructor;
 
+        } catch (NoSuchMethodException e) {
+            // ...
+        }
+        return null;
+
+    }
+
+    public static Object getAndCallConstructor(Class c, Object ... args) {
+        Class [] params = new Class[args.length];
+        int i = 0;
+        for(Object o: args) {
+            params[i++] = o.getClass();
+        }
+        try {
+            Constructor constructor = c.getConstructor(params);
+            return constructor.newInstance(args);
+
+        } catch (InstantiationException e) {
+        } catch (IllegalAccessException e) {
+        } catch (InvocationTargetException e) {
         } catch (NoSuchMethodException e) {
             // ...
         }
@@ -393,4 +428,34 @@ public class ReflectionUtils {
         }
         return source;
     }
+
+    public static  List<Member> getAllMembers(Class aClass, Predicate<Member> predicate){
+        List<Member> items = new ArrayList<>();
+        Field fields[] = aClass.getFields();
+        for (Field field : fields) {
+            if( predicate == null || predicate.test(field) ) {
+                items.add(field);
+            }
+        }
+        Method methods[] = aClass.getMethods();
+        for (Method method : methods) {
+            if( predicate == null || predicate.test(method) ) {
+                items.add(method);
+            }
+        }
+        return items;
+    }
+
+    public static  List<Member> getAllMembers(Class aClass) {
+        return getAllMembers(aClass, new DefaultMemberRetrievPredicate());
+    }
+
+    public static class DefaultMemberRetrievPredicate implements Predicate<Member> {
+
+        @Override
+        public boolean test(Member member) {
+            return member.getDeclaringClass() != Object.class;
+        }
+    }
+
 }

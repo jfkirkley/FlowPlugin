@@ -8,6 +8,7 @@ import com.intellij.openapi.wm.ToolWindow;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -44,9 +45,15 @@ public class SimpleTypeListForm<T> implements CRUDForm<List<T>> {
     public class AnyObjectFormAssembler implements FormAssembler<SimpleTypeListForm> {
 
         AnyObjectForm anyObjectForm;
+        List items;
 
         public AnyObjectFormAssembler(AnyObjectForm anyObjectForm){
             this.anyObjectForm = anyObjectForm;
+        }
+
+        public AnyObjectFormAssembler(AnyObjectForm anyObjectForm, List items){
+            this(anyObjectForm);
+            this.items = items;
         }
 
         @Override
@@ -54,8 +61,12 @@ public class SimpleTypeListForm<T> implements CRUDForm<List<T>> {
             addButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    typeListComboBox.addItem(anyObjectForm.getTarget());
+                    Object v = anyObjectForm.getTarget();
+                    typeListComboBox.addItem(v);
                     anyObjectForm.clear();
+                    if(items != null) {
+                        items.add(v);
+                    }
                 }
             });
         }

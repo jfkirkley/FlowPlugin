@@ -4,10 +4,13 @@ import com.intellij.openapi.fileTypes.StdFileTypes;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.BooleanGetter;
 import com.intellij.openapi.wm.ToolWindow;
+import org.androware.flow.base.FlowBase;
+import org.androware.flow.base.StepBase;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jkirkley on 8/23/16.
@@ -22,18 +25,56 @@ public class AnyObjectForm implements CRUDForm {
 
     ButtonGroup buttonGroup;
     private JTextField numberField;
+    private ResourcePickerForm resourcePickerForm;
+
+    public JList getBeanIDList() {
+        return beanIDList;
+    }
+
+    private JList beanIDList;
+    private WidgetIdPickerForm widgetIdPickerForm;
 
     Object target;
 
+    public static class ThisFormAssembler implements FormAssembler<AnyObjectForm> {
+
+        FlowBase flowBase;
+
+        public ThisFormAssembler(FlowBase flowBase) {
+            this.flowBase = flowBase;
+        }
+
+        @Override
+        public void assemble(Project project, ToolWindow toolWindow, AnyObjectForm form) {
+            form.getBeanIDList().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+            Map<String, String> registry = flowBase.buildRegistry();
+            CompFactory.fillJList(form.getBeanIDList(), new ArrayList<>(registry.keySet()));
+
+            form.getBeanIDList().setSelectedIndex(-1);
+        }
+    }
+
     @Override
     public void init(Project project, ToolWindow toolWindow, Object target, FormAssembler formAssembler) {
-
+        formAssembler.assemble(project, toolWindow, this);
+        init(project, toolWindow, target);
     }
 
     @Override
     public void init(Project project, ToolWindow toolWindow, Object target) {
 
+        getBeanIDList().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        Map<String, String> registry = FlowBase.currFlowBase.buildRegistry();
+        CompFactory.fillJList(getBeanIDList(), new ArrayList<>(registry.keySet()));
+        getBeanIDList().setSelectedIndex(-1);
+
+        widgetIdPickerForm.init(project, toolWindow, target);
+        resourcePickerForm.init(project, toolWindow, target);
+
         setTarget(target);
+
+        resourcePickerForm.init(project, toolWindow, target);
+        widgetIdPickerForm.init(project, toolWindow, target);
 
         fileChooserWidget.init(project, "Choose File", StdFileTypes.XML);
         classChooserWidget.init(project, "Choose a Class");
@@ -51,6 +92,20 @@ public class AnyObjectForm implements CRUDForm {
 
     @Override
     public Object getTarget() {
+        Object val = widgetIdPickerForm.getTarget();
+        if(val != null) {
+            return val;
+        }
+        val = resourcePickerForm.getTarget();
+        if(val != null) {
+            return val;
+        }
+
+        val = beanIDList.getSelectedValue();
+        if(val != null) {
+            return val;
+        }
+
         String fileName = fileChooserWidget.getFileName();
         if(fileName != null && fileName.length() > 0) {
             return fileName;
@@ -95,6 +150,11 @@ public class AnyObjectForm implements CRUDForm {
 
         numberField.setText(null);
         buttonGroup.clearSelection();
+
+        getBeanIDList().setSelectedIndex(-1);
+        widgetIdPickerForm.clear();
+        resourcePickerForm.clear();
+
     }
 
     @Override
