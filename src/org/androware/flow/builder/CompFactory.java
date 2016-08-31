@@ -1,6 +1,5 @@
 package org.androware.flow.builder;
 
-import com.intellij.formatting.Wrap;
 import com.intellij.ide.util.TreeClassChooser;
 import com.intellij.ide.util.TreeClassChooserFactory;
 import com.intellij.ide.util.TreeFileChooser;
@@ -13,7 +12,6 @@ import com.intellij.psi.PsiFile;
 import org.androware.androbeans.utils.ReflectionUtils;
 import org.androware.androbeans.utils.ResourceUtils;
 import org.androware.androbeans.utils.Type2TypeDefaultConstructorFactory;
-import org.androware.flow.base.ObjectLoaderSpecBase;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;

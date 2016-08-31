@@ -90,7 +90,9 @@ public class SimpleTypeListForm<T> implements CRUDForm<List<T>> {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if(typeListComboBox.getSelectedIndex() != -1) {
-                    typeListComboBox.removeItem(typeListComboBox.getSelectedItem());
+                    Object item = typeListComboBox.getSelectedItem();
+                    typeListComboBox.removeItem(item);
+                    targetList.remove(item);
                 }
             }
         });

@@ -35,32 +35,6 @@ public class MapForm implements CRUDForm<Map> {
 
     Map map;
 
-    public static class MapNodeWrapper {
-
-        MapNodeWrapper parent;
-        Object value;
-        Map map;
-
-        public MapNodeWrapper(MapNodeWrapper parent, Object value) {
-            this.parent = parent;
-            this.value = value;
-            if (parent != null) {
-                parent.setChild(value, null);
-            }
-        }
-
-        public void setChild(Object childName, Object value) {
-            if (map == null) {
-                map = new HashMap();
-                if (parent != null) {
-                    parent.setChild(value, map);
-                }
-            }
-            map.put(childName, value);
-        }
-
-    }
-
     private void populateTree(Map map, DefaultMutableTreeNode currNode) {
         for (Object k : map.keySet()) {
             Object v = map.get(k);
@@ -76,9 +50,7 @@ public class MapForm implements CRUDForm<Map> {
 
             } else if (v instanceof Map) {
 
-                DefaultMutableTreeNode newMapNode = new DefaultMutableTreeNode(k.toString());
-                keyNode.add(newMapNode);
-                populateTree((Map) v, newMapNode);
+                populateTree((Map) v, keyNode);
 
             } else if (v instanceof List) {
 
@@ -200,64 +172,11 @@ public class MapForm implements CRUDForm<Map> {
 
     }
 
-    private boolean hasLeaf(DefaultMutableTreeNode node) {
-        int numChildren = node.getChildCount();
-
-        for (int i = 0; i < numChildren; ++i) {
-            DefaultMutableTreeNode cnode = (DefaultMutableTreeNode) node.getChildAt(i);
-            if (cnode.isLeaf()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private boolean hasOneLeafChild(DefaultMutableTreeNode node) {
         return node.getChildCount() == 1 && node.getFirstChild().isLeaf();
     }
 
-    private void buildMap(DefaultMutableTreeNode node, Map map) {
-        Object v = node.getUserObject();
-
-        int numChildren = node.getChildCount();
-
-        if (numChildren == 1) {
-            DefaultMutableTreeNode cnode = (DefaultMutableTreeNode) node.getFirstChild();
-            if (cnode.isLeaf()) {
-                map.put(v, cnode.getUserObject());
-            } else {
-                Map newMap = new HashMap();
-                map.put(v, newMap);
-                buildMap(cnode, newMap);
-            }
-        } else {
-
-            if (hasLeaf(node)) {
-                List childList = new ArrayList();
-                map.put(v, childList);
-                for (int i = 0; i < numChildren; ++i) {
-                    DefaultMutableTreeNode cnode = (DefaultMutableTreeNode) node.getChildAt(i);
-                    if (cnode.isLeaf()) {
-                        childList.add(cnode.getUserObject());
-                    } else {
-                        Map newMap = new HashMap();
-                        childList.add(newMap);
-                        buildMap(cnode, newMap);
-                    }
-                }
-            } else {
-                Map newMap = new HashMap();
-                map.put(v, newMap);
-
-                for (int i = 0; i < numChildren; ++i) {
-                    DefaultMutableTreeNode cnode = (DefaultMutableTreeNode) node.getChildAt(i);
-                    buildMap(cnode, newMap);
-                }
-            }
-        }
-    }
-
-    private Object buildMap2(DefaultMutableTreeNode node, Map map) {
+    private Object buildMap(DefaultMutableTreeNode node, Map map) {
         Object v = node.getUserObject();
         int numChildren = node.getChildCount();
 
@@ -270,7 +189,7 @@ public class MapForm implements CRUDForm<Map> {
                 if(hasOneLeafChild(cnode)) {
                     map.put(cnode.getUserObject(), ((DefaultMutableTreeNode) cnode.getFirstChild()).getUserObject());
                 } else {
-                    map.put(cnode.getUserObject(), buildMap2(cnode, null));
+                    map.put(cnode.getUserObject(), buildMap(cnode, null));
                 }
             }
             return map;
@@ -280,7 +199,7 @@ public class MapForm implements CRUDForm<Map> {
 
     @Override
     public void done() {
-        buildMap2(rootNode, map);
+        buildMap(rootNode, map);
     }
 
     @Override

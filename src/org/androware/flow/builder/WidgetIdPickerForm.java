@@ -28,8 +28,11 @@ public class WidgetIdPickerForm implements CRUDForm{
             @Override
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
                 if(!listSelectionEvent.getValueIsAdjusting()) {
-                    String layout = layoutList.getSelectedValue().toString();
-                    CompFactory.fillListWithWidgetIdsFromLayout(widgetList, layout);
+                    Object val = layoutList.getSelectedValue();
+                    if(val != null) {
+                        String layout = val.toString();
+                        CompFactory.fillListWithWidgetIdsFromLayout(widgetList, layout);
+                    }
                 }
             }
         });
@@ -48,8 +51,10 @@ public class WidgetIdPickerForm implements CRUDForm{
 
     @Override
     public void clear() {
-        widgetList.setSelectedIndex(-1);
-        layoutList.setSelectedIndex(-1);
+        //widgetList.setSelectedIndex(-1);
+        //layoutList.setSelectedIndex(-1);
+        widgetList.clearSelection();
+        layoutList.clearSelection();
     }
 
     @Override

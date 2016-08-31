@@ -41,7 +41,7 @@ public class ResourcePickerForm implements CRUDForm{
         groupList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
-                if(!listSelectionEvent.getValueIsAdjusting()) {
+                if(!listSelectionEvent.getValueIsAdjusting() && groupList.getSelectedIndex() != -1) {
                     Class groupClass = groupClasses[groupList.getSelectedIndex()];
 
                     fieldsModel.removeAllElements();
@@ -74,8 +74,10 @@ public class ResourcePickerForm implements CRUDForm{
 
     @Override
     public void clear() {
-        groupList.setSelectedIndex(-1);
-        fieldsList.setSelectedIndex(-1);
+        //groupList.setSelectedIndex(-1);
+        //fieldsList.setSelectedIndex(-1);
+        groupList.clearSelection();
+        fieldsList.clearSelection();
     }
 
     @Override

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static org.androware.flow.base.FlowBase.currFlowBase;
+
 /**
  * Created by jkirkley on 8/23/16.
  */
@@ -34,25 +36,10 @@ public class AnyObjectForm implements CRUDForm {
     private JList beanIDList;
     private WidgetIdPickerForm widgetIdPickerForm;
 
+    private JList targetList;
+
     Object target;
 
-    public static class ThisFormAssembler implements FormAssembler<AnyObjectForm> {
-
-        FlowBase flowBase;
-
-        public ThisFormAssembler(FlowBase flowBase) {
-            this.flowBase = flowBase;
-        }
-
-        @Override
-        public void assemble(Project project, ToolWindow toolWindow, AnyObjectForm form) {
-            form.getBeanIDList().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-            Map<String, String> registry = flowBase.buildRegistry();
-            CompFactory.fillJList(form.getBeanIDList(), new ArrayList<>(registry.keySet()));
-
-            form.getBeanIDList().setSelectedIndex(-1);
-        }
-    }
 
     @Override
     public void init(Project project, ToolWindow toolWindow, Object target, FormAssembler formAssembler) {
@@ -64,9 +51,13 @@ public class AnyObjectForm implements CRUDForm {
     public void init(Project project, ToolWindow toolWindow, Object target) {
 
         getBeanIDList().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        Map<String, String> registry = FlowBase.currFlowBase.buildRegistry();
+        Map<String, String> registry = currFlowBase.buildRegistry();
         CompFactory.fillJList(getBeanIDList(), new ArrayList<>(registry.keySet()));
         getBeanIDList().setSelectedIndex(-1);
+
+        getTargetList().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        CompFactory.fillJList(getTargetList(), new ArrayList(currFlowBase.steps.keySet()));
+        getTargetList().setSelectedIndex(-1);
 
         widgetIdPickerForm.init(project, toolWindow, target);
         resourcePickerForm.init(project, toolWindow, target);
@@ -102,6 +93,11 @@ public class AnyObjectForm implements CRUDForm {
         }
 
         val = beanIDList.getSelectedValue();
+        if(val != null) {
+            return val;
+        }
+
+        val = targetList.getSelectedValue();
         if(val != null) {
             return val;
         }
@@ -151,10 +147,11 @@ public class AnyObjectForm implements CRUDForm {
         numberField.setText(null);
         buttonGroup.clearSelection();
 
-        getBeanIDList().setSelectedIndex(-1);
+          getBeanIDList().clearSelection();
         widgetIdPickerForm.clear();
         resourcePickerForm.clear();
 
+        targetList.clearSelection();
     }
 
     @Override
@@ -187,4 +184,10 @@ public class AnyObjectForm implements CRUDForm {
     public void done() {
 
     }
+
+
+    public JList getTargetList() {
+        return targetList;
+    }
+
 }

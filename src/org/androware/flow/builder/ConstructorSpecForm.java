@@ -26,7 +26,7 @@ public class ConstructorSpecForm implements CRUDForm<ConstructorSpec> {
     private ResourcePickerForm resourcePickerForm;
     private ConstructorSpec constructorSpec;
 
-    List<String> paramObjectList = new ArrayList<>();
+    List paramObjectList = new ArrayList<>();
 
     @Override
     public void populate(ConstructorSpec object) {
@@ -41,6 +41,7 @@ public class ConstructorSpecForm implements CRUDForm<ConstructorSpec> {
     public void init(Project project, ToolWindow toolWindow, ConstructorSpec target, FormAssembler formAssembler) {
     }
 
+/*
     public class ParamObjectFormAssembler implements FormAssembler<SimpleTypeListForm> {
 
         @Override
@@ -73,6 +74,7 @@ public class ConstructorSpecForm implements CRUDForm<ConstructorSpec> {
 
         }
     }
+*/
 
     @Override
     public void init(Project project, ToolWindow toolWindow, ConstructorSpec target) {
@@ -80,8 +82,8 @@ public class ConstructorSpecForm implements CRUDForm<ConstructorSpec> {
         if(target.paramClassNames == null) {
             target.paramClassNames = new ArrayList<>();
         }
-        if(target.paramObjects == null) {
-            target.paramObjects = new Object[0];
+        if(target.paramObjects != null) {
+            paramObjectList = new ArrayList(Arrays.asList(target.paramObjects));
         }
 
         targetClassChooser.init(project, "Choose target class", new ReflectionUtils.FieldSetter(target, "targetClassName"));
@@ -90,9 +92,7 @@ public class ConstructorSpecForm implements CRUDForm<ConstructorSpec> {
 
         paramClassSimpleTypeListForm.init(project, toolWindow, target.paramClassNames, paramClassSimpleTypeListForm.new TreeClassChooserFormAssembler());
 
-        //paramObjectSimpleTypeListForm.init(project, toolWindow, Arrays.asList(target.paramObjects), new ParamObjectFormAssembler());
-
-        paramObjectSimpleTypeListForm.init(project, toolWindow, Arrays.asList(target.paramObjects), paramObjectSimpleTypeListForm.new AnyObjectFormAssembler(paramAnyObjectForm, paramObjectList));
+        paramObjectSimpleTypeListForm.init(project, toolWindow, paramObjectList, paramObjectSimpleTypeListForm.new AnyObjectFormAssembler(paramAnyObjectForm, paramObjectList));
 
     }
 
