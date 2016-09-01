@@ -33,10 +33,11 @@ public class TwoWayMapperForm implements CRUDForm<Map> {
     public static class ThisFormAssembler implements FormAssembler<TwoWayMapperForm> {
         StepBase stepBase;
         FlowBase flowBase;
-
-        public ThisFormAssembler(FlowBase flowBase, StepBase stepBase) {
+        JComboBox stepLayoutCombo;
+        public ThisFormAssembler(FlowBase flowBase, StepBase stepBase, JComboBox stepLayoutCombo) {
             this.stepBase = stepBase;
             this.flowBase = flowBase;
+            this.stepLayoutCombo = stepLayoutCombo;
         }
 
 
@@ -46,10 +47,16 @@ public class TwoWayMapperForm implements CRUDForm<Map> {
             if (layout != null) {
                 CompFactory.fillListWithWidgetIdsFromLayout(form.getWidgetIDList(), layout);
             }
+            stepLayoutCombo.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    String layout = stepLayoutCombo.getSelectedItem().toString();
+                    CompFactory.fillListWithWidgetIdsFromLayout(form.getWidgetIDList(), layout);
+                }
+            });
+
             Map<String, String> registry = flowBase.buildRegistry(stepBase);
-
             CompFactory.fillJList(form.getBeanList(), new ArrayList<>(registry.keySet()));
-
 
             form.getBeanList().addListSelectionListener(new ListSelectionListener() {
                 @Override

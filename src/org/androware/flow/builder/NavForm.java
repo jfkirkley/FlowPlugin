@@ -14,6 +14,7 @@ import java.util.Arrays;
 import static org.androware.flow.builder.CompFactory.setComboItemWithResourceGroupField;
 import static org.androware.flow.builder.CompFactory.setComboVal;
 import static org.androware.flow.builder.CompFactory.setFieldFromComboVal;
+import static org.androware.flow.builder.ResEx.attr.layout;
 
 /**
  * Created by jkirkley on 8/18/16.
@@ -50,9 +51,13 @@ public class NavForm  implements CRUDForm<NavBase> {
 
         @Override
         public void assemble(Project project, ToolWindow toolWindow, NavForm form) {
-            String layout = stepBase.layout;
-            if(layout != null) {
-                CompFactory.fillComboWidthWdgetIdsFromLayout(form.getWidgetIdComboBox(), layout);
+            if(stepBase != null) {
+                String layout = stepBase.layout;
+                if (layout != null) {
+                    CompFactory.fillComboWidthWdgetIdsFromLayout(form.getWidgetIdComboBox(), layout);
+                }
+            } else {
+                form.getWidgetIdComboBox().setEnabled(false);
             }
             CompFactory.fillCombo(form.getTargetComboBox(), new ArrayList<String>(flowBase.steps.keySet()));
         }

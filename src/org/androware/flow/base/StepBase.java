@@ -16,6 +16,7 @@ public class StepBase {
     public String parentContainer;
     public String transitionClassName;
 
+    public String name;
 
     public TwoWayMapperBase twoWayMapper;
     public List<ObjectLoaderSpecBase> objectLoaderSpecs;
@@ -45,4 +46,7 @@ public class StepBase {
         }
     }
 
+    public String toString(){
+        return name != null? name: super.toString();
+    }
 }

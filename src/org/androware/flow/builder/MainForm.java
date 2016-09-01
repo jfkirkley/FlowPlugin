@@ -30,19 +30,27 @@ public class MainForm {
     Project project;
     ToolWindow toolWindow;
     FlowBase flowBase;
+    DefaultMutableTreeNode stepsNode;
 
     public static MainForm mainForm;
 
     public JPanel loadPanelForType(NodeObjectWrapper nodeObjectWrapper) {
 
         Object object = nodeObjectWrapper.getObject();
-        if(object instanceof NavBase) {
+        if (object instanceof NavBase) {
             NavForm navPanel = new NavForm();
             return navPanel.getNavPanel();
-        } else if(object instanceof StepBase){
-            StepForm stepForm = new StepForm(project, toolWindow, (StepBase)object, flowBase);
 
+        } else if (object instanceof StepBase) {
+
+            StepForm stepForm = new StepForm();
+            stepForm.init(project, toolWindow, (StepBase) object, flowBase);
             return stepForm.getRootPanel();
+
+        } else if (object instanceof FlowBase) {
+
+            FlowForm flowForm = new FlowForm(project, toolWindow, (FlowBase) object);
+            return flowForm.getRootPanel();
         }
         return new JPanel();
     }
@@ -53,6 +61,9 @@ public class MainForm {
         this.toolWindow = toolWindow;
         this.flowBase = flowBase;
 
+        FlowForm flowForm = new FlowForm(project, toolWindow, flowBase);
+        setContent(flowForm.getRootPanel());
+
         flowTree.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -60,12 +71,10 @@ public class MainForm {
 
                 Object object = flowTree.getLastSelectedPathComponent();
 
-                if(object != null && object instanceof DefaultMutableTreeNode) {
-                    Object userObject = ((DefaultMutableTreeNode)object).getUserObject();
-                    if(userObject instanceof NodeObjectWrapper) {
-                        //contentPanel.removeAll();
-                        //contentPanel.add(loadPanelForType((NodeObjectWrapper)userObject));
-                        setContent(loadPanelForType((NodeObjectWrapper)userObject));
+                if (object != null && object instanceof DefaultMutableTreeNode) {
+                    Object userObject = ((DefaultMutableTreeNode) object).getUserObject();
+                    if (userObject instanceof NodeObjectWrapper) {
+                        setContent(loadPanelForType((NodeObjectWrapper) userObject));
                     }
                 }
             }
@@ -88,6 +97,7 @@ public class MainForm {
     public class NodeObjectWrapper {
         Object object;
         String name;
+
         public NodeObjectWrapper(Object object, String name) {
             this.object = object;
             this.name = name;
@@ -103,36 +113,73 @@ public class MainForm {
     }
 
     private void addObjLoaderNodes(DefaultMutableTreeNode root, List<ObjectLoaderSpecBase> loaderSpecBaseList) {
-        if(loaderSpecBaseList != null) {
+        if (loaderSpecBaseList != null) {
             int i = 0;
-            for(ObjectLoaderSpecBase objectLoaderSpecBase: loaderSpecBaseList) {
-                root.add( new DefaultMutableTreeNode(new NodeObjectWrapper(objectLoaderSpecBase, objectLoaderSpecBase.objectId == null? "Loader " + (i++): objectLoaderSpecBase.objectId )));
+            for (ObjectLoaderSpecBase objectLoaderSpecBase : loaderSpecBaseList) {
+                root.add(new DefaultMutableTreeNode(new NodeObjectWrapper(objectLoaderSpecBase, objectLoaderSpecBase.objectId == null ? "Loader " + (i++) : objectLoaderSpecBase.objectId)));
             }
         }
 
     }
 
     private void addStepNavs(DefaultMutableTreeNode root, Map<String, NavBase> navBaseMap) {
-        if(navBaseMap != null) {
+        if (navBaseMap != null) {
             int i = 0;
-            for(String k: navBaseMap.keySet()) {
+            for (String k : navBaseMap.keySet()) {
                 NavBase navBase = navBaseMap.get(k);
-                root.add( new DefaultMutableTreeNode(new NodeObjectWrapper(navBase, k)));
+                root.add(new DefaultMutableTreeNode(new NodeObjectWrapper(navBase, k)));
             }
         }
     }
 
     private DefaultMutableTreeNode mkNode(Object o, String n) {
-        return new DefaultMutableTreeNode( new NodeObjectWrapper(o,n));
+        return new DefaultMutableTreeNode(new NodeObjectWrapper(o, n));
     }
 
     private void tryAdd(DefaultMutableTreeNode parent, Object o, String n) {
-        if(o!=null) {
-            parent.add(mkNode(o,n));
+        if (o != null) {
+            parent.add(mkNode(o, n));
         }
     }
 
-    public void buildFlowTree(FlowBase  flowBase) {
+    public void addStep(StepBase stepBase) {
+        String newName = stepBase.name;
+
+        String oldName = (String) Utils.getKeyForValue(flowBase.steps, stepBase);
+        if(!oldName.equals(newName)) {
+            DefaultMutableTreeNode stepNode = addStepNode(stepBase);
+            flowBase.steps.remove(oldName);
+            flowBase.steps.put(newName, stepBase);
+
+            DefaultTreeModel model = (DefaultTreeModel)flowTree.getModel();
+            model.reload();
+            flowTree.setSelectionPath(new TreePath(stepNode.getPath()));
+        }
+
+    }
+
+    public DefaultMutableTreeNode addStepNode(StepBase stepBase) {
+
+        DefaultMutableTreeNode stepNode = new DefaultMutableTreeNode(new NodeObjectWrapper(stepBase, stepBase.name));
+        stepsNode.add(stepNode);
+        DefaultMutableTreeNode loaderNode = new DefaultMutableTreeNode("ObjectLoaders");
+        addObjLoaderNodes(loaderNode, stepBase.objectLoaderSpecs);
+        stepNode.add(loaderNode);
+
+        addObjLoaderNodes(loaderNode, flowBase.objectLoaderSpecs);
+
+        tryAdd(stepNode, stepBase.twoWayMapper, "TwoWayMapper");
+        tryAdd(stepNode, stepBase.objectSaverSpec, "ObjectSaver");
+
+        DefaultMutableTreeNode navs = new DefaultMutableTreeNode("navs");
+        stepNode.add(navs);
+
+        addStepNavs(navs, stepBase.navMap);
+
+        return stepNode;
+    }
+
+    public void buildFlowTree(FlowBase flowBase) {
 
         DefaultMutableTreeNode top = new DefaultMutableTreeNode(new NodeObjectWrapper(flowBase, "Flow"));
 
@@ -143,29 +190,15 @@ public class MainForm {
 
         addObjLoaderNodes(loaderNode, flowBase.objectLoaderSpecs);
 
-        DefaultMutableTreeNode stepsNode = new DefaultMutableTreeNode("Steps");
+        stepsNode = new DefaultMutableTreeNode("Steps");
 
-        if(flowBase.steps != null) {
-            int i = 0;
-            for(String name: flowBase.steps.keySet()) {
+        if (flowBase.steps != null) {
+
+            for (String name : flowBase.steps.keySet()) {
 
                 StepBase stepBase = flowBase.steps.get(name);
-                DefaultMutableTreeNode stepNode = new DefaultMutableTreeNode(new NodeObjectWrapper(stepBase, name));
-                stepsNode.add( stepNode );
-                loaderNode = new DefaultMutableTreeNode("ObjectLoaders");
-                addObjLoaderNodes(loaderNode, stepBase.objectLoaderSpecs);
-                stepNode.add(loaderNode);
-
-                addObjLoaderNodes(loaderNode, flowBase.objectLoaderSpecs);
-
-                tryAdd(stepNode, stepBase.twoWayMapper, "TwoWayMapper");
-                tryAdd(stepNode, stepBase.objectSaverSpec, "ObjectSaver");
-
-                DefaultMutableTreeNode navs = new DefaultMutableTreeNode("navs");
-                stepNode.add(navs);
-
-                addStepNavs(navs, stepBase.navMap);
-
+                stepBase.name = name;
+                addStepNode(stepBase);
             }
         }
         top.add(stepsNode);

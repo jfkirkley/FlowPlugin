@@ -40,6 +40,8 @@ public class FlowToolWindowFactory implements ToolWindowFactory {
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
 
         FlowBase flowBase = loadFlow("/home/jkirkley/tmp/tflow.js");
+        //FlowBase flowBase = loadFlow("/home/jkirkley/tmp/tf.js");
+        //FlowBase flowBase = new FlowBase();
 
         ResourceUtils.R = ResEx.class;
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();

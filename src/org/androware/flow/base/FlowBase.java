@@ -14,6 +14,7 @@ import java.util.Set;
 
 public class FlowBase {
     public HashMap<String, StepBase> steps;
+    public String name;
     public String layout;
     public String processor;
     public List<ObjectLoaderSpecBase> objectLoaderSpecs;
@@ -36,9 +37,11 @@ public class FlowBase {
     public static Set<String> ignoreTheseLoaderClasses;  // TODO,  to avoid things like CachedObjectLoader
 
     public void addLoadedObjectsToRegistry(Map<String, String> registry) {
-        for(ObjectLoaderSpecBase objectLoaderSpecBase: objectLoaderSpecs) {
-            if(objectLoaderSpecBase.objectClassName != null && objectLoaderSpecBase.objectClassName.length()>0) {
-                registry.put(objectLoaderSpecBase.toString(), objectLoaderSpecBase.objectClassName);
+        if(objectLoaderSpecs != null) {
+            for (ObjectLoaderSpecBase objectLoaderSpecBase : objectLoaderSpecs) {
+                if (objectLoaderSpecBase.objectClassName != null && objectLoaderSpecBase.objectClassName.length() > 0) {
+                    registry.put(objectLoaderSpecBase.toString(), objectLoaderSpecBase.objectClassName);
+                }
             }
         }
     }

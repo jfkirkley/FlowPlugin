@@ -17,7 +17,7 @@ import static org.androware.flow.builder.ResEx.attr.layout;
 /**
  * Created by jkirkley on 8/18/16.
  */
-public class StepForm {
+public class StepForm implements CRUDForm<StepBase> {
 
     private JButton addCustomizerButton;
 
@@ -35,13 +35,21 @@ public class StepForm {
     private ObjectSaverSpecForm objectSaverSpecForm;
     private JComboBox layoutComboBox;
     private TwoWayMapperForm twoWayMapperForm;
+
     private JComboBox targetFlowComboBox;
+    private JTextField nameTextField;
 
 
     ToolWindow toolWindow;
     StepBase stepBase;
     FlowBase flowBase;
-    public StepForm(final Project project, ToolWindow toolWindow, StepBase stepBase, FlowBase flowBase) {
+
+    public StepForm() {
+
+    }
+
+
+    public void init(Project project, ToolWindow toolWindow, StepBase stepBase, FlowBase flowBase) {
 
         this.stepBase = stepBase;
         this.toolWindow = toolWindow;
@@ -50,6 +58,8 @@ public class StepForm {
         transitionClassChooserPanel.init(project, "Choose Step Transition Class", new ReflectionUtils.FieldSetter(stepBase, "transitionClassName"));
         parentContainerClassChooserPanel.init(project, "Choose Parent Container Class", new ReflectionUtils.FieldSetter(stepBase, "parentContainer"));
         processorClassChooserPanel.init(project, "Choose Step processor class", new ReflectionUtils.FieldSetter(stepBase, "processor"));
+
+        CompFactory.setTextfieldVal(nameTextField, stepBase, "name");
 
 
         objectLoadersComboBoxCRUDForm.init(
@@ -79,7 +89,7 @@ public class StepForm {
             stepBase.twoWayMapper = new TwoWayMapperBase(new HashMap());
         }
 
-        twoWayMapperForm.init(project, toolWindow, stepBase.twoWayMapper.componentId2BeanFieldMap, new TwoWayMapperForm.ThisFormAssembler(flowBase, stepBase));
+        twoWayMapperForm.init(project, toolWindow, stepBase.twoWayMapper.componentId2BeanFieldMap, new TwoWayMapperForm.ThisFormAssembler(flowBase, stepBase, layoutComboBox));
 
         CompFactory.mkAddEditToggleWidget(project, toolWindow, addCustomizerButton,
                 ConstructorSpecForm.class, ConstructorSpec.class, new ReflectionUtils.FieldSetter(stepBase, "viewCustomizerSpec"));
@@ -99,8 +109,42 @@ public class StepForm {
 
     }
 
+
+    @Override
+    public void init(Project project, ToolWindow toolWindow, StepBase target, FormAssembler formAssembler) {
+
+    }
+
+
+    @Override
     public JPanel getRootPanel() {
         return rootPanel;
+    }
+
+    @Override
+    public StepBase getTarget() {
+        stepBase.name = nameTextField.getText();
+        return stepBase;
+    }
+
+    @Override
+    public void clear() {
+
+    }
+
+    @Override
+    public void populate(StepBase object) {
+
+    }
+
+    @Override
+    public void done() {
+        MainForm.mainForm.addStep(getTarget());
+    }
+
+    @Override
+    public void init(Project project, ToolWindow toolWindow, StepBase target) {
+        init(project, toolWindow, target, FlowBase.currFlowBase);
     }
 
 }

@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import static org.androware.flow.builder.ResEx.id.toggleButton;
 
 
 /**
@@ -470,11 +471,14 @@ public class CompFactory {
     }
 
     public static <T> void mkAddEditToggleWidget(Project project, ToolWindow toolWindow, AbstractButton toggleButton, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter) {
+        mkAddEditToggleWidget(project, toolWindow, toggleButton, formClass, targetClass, fieldSetter, null);
+    }
+    public static <T> void mkAddEditToggleWidget(Project project, ToolWindow toolWindow, AbstractButton toggleButton, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter, FormAssembler formAssembler) {
 
         toggleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                DefaultCRUDEditorImpl<T> editor = new DefaultCRUDEditorImpl<T>(project, toolWindow, formClass, targetClass, fieldSetter);
+                DefaultCRUDEditorImpl<T> editor = new DefaultCRUDEditorImpl<T>(project, toolWindow, formClass, targetClass, fieldSetter, null, formAssembler);
 
                 editor.edit((T)fieldSetter.get());
             }
