@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import static org.androware.flow.builder.PSIclassUtils.fillListWithResourceGroup;
+
 /**
  * Created by jkirkley on 8/29/16.
  */
@@ -21,7 +23,7 @@ public class WidgetIdPickerForm implements CRUDForm{
 
     @Override
     public void init(Project project, ToolWindow toolWindow, Object target) {
-        CompFactory.fillListWithResourceGroup(layoutList, "layout");
+        PSIclassUtils.fillListWithResourceGroup(layoutList, "layout");
 
         layoutList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         layoutList.addListSelectionListener(new ListSelectionListener() {

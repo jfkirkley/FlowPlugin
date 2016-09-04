@@ -60,4 +60,9 @@ public class FileChooserWidget implements CRUDForm<String>{
     public void done() {
 
     }
+
+    public JTextField getFileTextField() {
+        return fileTextField;
+    }
+
 }

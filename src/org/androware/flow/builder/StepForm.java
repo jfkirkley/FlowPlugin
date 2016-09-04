@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 import static org.androware.androbeans.utils.ReflectionUtils.ensureFieldExists;
+import static org.androware.flow.builder.PSIclassUtils.fillComboWithResourceGroup;
+import static org.androware.flow.builder.PSIclassUtils.setComboItemWithResourceGroupField;
 import static org.androware.flow.builder.ResEx.attr.layout;
 
 /**
@@ -38,6 +40,7 @@ public class StepForm implements CRUDForm<StepBase> {
 
     private JComboBox targetFlowComboBox;
     private JTextField nameTextField;
+    private JList parentContainerIDList;
 
 
     ToolWindow toolWindow;
@@ -56,7 +59,13 @@ public class StepForm implements CRUDForm<StepBase> {
         this.flowBase = flowBase;
 
         transitionClassChooserPanel.init(project, "Choose Step Transition Class", new ReflectionUtils.FieldSetter(stepBase, "transitionClassName"));
-        parentContainerClassChooserPanel.init(project, "Choose Parent Container Class", new ReflectionUtils.FieldSetter(stepBase, "parentContainer"));
+
+        if(flowBase.layout != null) {
+            parentContainerIDList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            CompFactory.fillListWithWidgetIdsFromLayout(parentContainerIDList, flowBase.layout);
+            CompFactory.setFieldSetterOnSelect(parentContainerIDList, new ReflectionUtils.FieldSetter(stepBase, "parentContainer"), stepBase.parentContainer);
+        }
+
         processorClassChooserPanel.init(project, "Choose Step processor class", new ReflectionUtils.FieldSetter(stepBase, "processor"));
 
         CompFactory.setTextfieldVal(nameTextField, stepBase, "name");
@@ -94,13 +103,14 @@ public class StepForm implements CRUDForm<StepBase> {
         CompFactory.mkAddEditToggleWidget(project, toolWindow, addCustomizerButton,
                 ConstructorSpecForm.class, ConstructorSpec.class, new ReflectionUtils.FieldSetter(stepBase, "viewCustomizerSpec"));
 
+
     }
 
     public void setUpCombo(JComboBox jComboBox, String resGroup, String name, Object value) {
-        CompFactory.fillComboWithResourceGroup(jComboBox, resGroup);
+        PSIclassUtils.fillComboWithResourceGroup(jComboBox, resGroup);
 
         if(value != null) {
-            CompFactory.setComboItemWithResourceGroupField(jComboBox, resGroup, (String)value);
+            PSIclassUtils.setComboItemWithResourceGroupField(jComboBox, resGroup, (String)value);
             //jComboBox.setSelectedItem(new CompFactory.FieldWrap(ReflectionUtils.getField(StepBase.class, name));
         } else {
             jComboBox.setSelectedIndex(-1);

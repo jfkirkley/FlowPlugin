@@ -13,6 +13,7 @@ import static com.intellij.ui.LoadingNode.getText;
  */
 public class ClassChooserWidget implements CRUDForm<String>{
     private JTextField classNameTextField;
+
     private JButton browseClassesButton;
     private JPanel classChooserPanel;
 
@@ -64,6 +65,8 @@ public class ClassChooserWidget implements CRUDForm<String>{
 
     @Override
     public void populate(String object) {
+        className = object;
+        classNameTextField.setText(className);
 
     }
 
@@ -75,5 +78,9 @@ public class ClassChooserWidget implements CRUDForm<String>{
     public void done() {
 
     }
+    public JButton getBrowseClassesButton() {
+        return browseClassesButton;
+    }
+
 
 }

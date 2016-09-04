@@ -11,10 +11,11 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.androware.flow.builder.CompFactory.setComboItemWithResourceGroupField;
+
 import static org.androware.flow.builder.CompFactory.setComboVal;
 import static org.androware.flow.builder.CompFactory.setFieldFromComboVal;
-import static org.androware.flow.builder.ResEx.attr.layout;
+import static org.androware.flow.builder.PSIclassUtils.setComboItemWithResourceGroupField;
+
 
 /**
  * Created by jkirkley on 8/18/16.
@@ -72,8 +73,8 @@ public class NavForm  implements CRUDForm<NavBase> {
     @Override
     public void init(Project project, ToolWindow toolWindow, NavBase target) {
         this.target = target;
-        CompFactory.fillComboWithResourceGroup(animInComboBox, "anim");
-        CompFactory.fillComboWithResourceGroup(animOutComboBox, "anim");
+        PSIclassUtils.fillComboWithResourceGroup(animInComboBox, "anim");
+        PSIclassUtils.fillComboWithResourceGroup(animOutComboBox, "anim");
         CompFactory.fillCombo(eventComboBox, Arrays.asList(eventNames));
         populate(target);
     }

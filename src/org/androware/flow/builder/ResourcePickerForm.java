@@ -2,6 +2,7 @@ package org.androware.flow.builder;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
+import com.intellij.psi.PsiClass;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -12,7 +13,7 @@ import java.lang.reflect.Field;
  * Created by jkirkley on 8/26/16.
  */
 public class ResourcePickerForm implements CRUDForm{
-    private JList groupList;
+    private JList <PSIclassUtils.PsiClassWrap> groupList;
     private JList fieldsList;
     private JPanel rootPanel;
 
@@ -25,30 +26,32 @@ public class ResourcePickerForm implements CRUDForm{
     @Override
     public void init(Project project, ToolWindow toolWindow, Object target) {
 
+        /*
         final Class[] groupClasses = ResEx.class.getDeclaredClasses();
         DefaultListModel<CompFactory.ClassWrap> model = new DefaultListModel<>();
         for(Class c: groupClasses){
             model.addElement(new CompFactory.ClassWrap(c));
         }
         groupList.setModel(model);
+*/
+
+        PSIclassUtils.fillListWithAllResGroups(groupList, null);
 
         groupList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         fieldsList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        final DefaultListModel<CompFactory.FieldWrap> fieldsModel = new DefaultListModel<>();
+        final DefaultListModel<PSIclassUtils.PsiFieldWrap> fieldsModel = new DefaultListModel<>();
         fieldsList.setModel(fieldsModel);
 
         groupList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
                 if(!listSelectionEvent.getValueIsAdjusting() && groupList.getSelectedIndex() != -1) {
-                    Class groupClass = groupClasses[groupList.getSelectedIndex()];
+                    PsiClass groupClass = (PsiClass)groupList.getSelectedValue().get();
 
                     fieldsModel.removeAllElements();
-                    Field fields[] = groupClass.getFields();
-                    for (Field field : fields) {
-                        fieldsModel.addElement(new CompFactory.FieldWrap(field));
-                    }
+
+                    PSIclassUtils.fillListWithAllClassFields(fieldsList, groupClass, null);
                     //fieldsList.
                 }
             }

@@ -16,6 +16,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import static org.androware.flow.builder.PSIclassUtils.fillListWithResourceGroup;
+
 
 /**
  * Created by jkirkley on 8/31/16.
@@ -64,7 +66,7 @@ public class FlowForm {
         processorClassChooser.init(project, "Choose Flow processor class", new ReflectionUtils.FieldSetter(flowBase, "processor"));
 
         layoutList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        CompFactory.fillListWithResourceGroup(layoutList, "layout");
+        PSIclassUtils.fillListWithResourceGroup(layoutList, "layout");
         CompFactory.setFieldSetterOnSelect(layoutList, new ReflectionUtils.FieldSetter(flowBase, "layout"), flowBase.layout);
 
         fragmentContainerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

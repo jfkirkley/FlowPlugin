@@ -156,7 +156,7 @@ public class Utils {
         return null;
     }
 
-    public static final String HACK_ROOT_DIR = "/home/jkirkley/AndroidStudioProjects/EngEzy/app/src/main/";
+    public static String HACK_ROOT_DIR = "/home/jkirkley/AndroidStudioProjects/EngEzy/app/src/main/";
 
     public static  String HACKgetLayoutFileContents(String layoutName) {
         return getFileContents(HACK_ROOT_DIR + "res/layout/" + layoutName + ".xml");

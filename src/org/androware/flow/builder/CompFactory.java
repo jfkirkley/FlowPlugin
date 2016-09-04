@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import static org.androware.flow.builder.ResEx.id.toggleButton;
 
 
 /**
@@ -61,10 +60,8 @@ public class CompFactory {
                 }
             }
         });
-
-
-
     }
+
     public static void setFieldSetterOnAction(JComboBox jComboBox, ReflectionUtils.FieldSetter fieldSetter) {
         setFieldSetterOnAction(jComboBox, fieldSetter, null);
     }
@@ -163,12 +160,14 @@ public class CompFactory {
             }
         });
     }
+
     //
     public static void addTreeClassChooserAction(final Project project, final AbstractButton abstractButton, JTextField jTextField, String title) {
         addTreeClassChooserAction(project, abstractButton, jTextField, title, null);
     }
+
     public static void addTreeClassChooserAction(final Project project, final AbstractButton abstractButton, JTextField jTextField, String title, ReflectionUtils.FieldSetter fieldSetter) {
-        addTreeClassChooserAction(project, abstractButton, new TextFieldStringSink(jTextField, fieldSetter), title);
+        addTreeClassChooserAction(project, abstractButton, new TextFieldStringSink<String>(jTextField, fieldSetter), title);
     }
 
     public static void addTreeClassChooserAction(final Project project, final AbstractButton abstractButton, JComboBox jComboBox, List items, String title) {
@@ -498,27 +497,6 @@ public class CompFactory {
         }
     }
 
-    public static void fillComboWithClassFields(JComboBox<FieldWrap> jComboBox, Class aClass) {
-        List<FieldWrap> items = new ArrayList<>();
-        Field fields[] = aClass.getFields();
-        for (Field field : fields) {
-            items.add(new FieldWrap(field));
-        }
-        fillCombo(jComboBox, items);
-    }
-
-    public static void fillComboWithResourceGroup(JComboBox<FieldWrap> jComboBox, String resourceGroupName) {
-        fillComboWithClassFields(jComboBox, ResourceUtils.getResourceGroup(resourceGroupName));
-    }
-
-    public static void setComboItemWithResourceGroupField(JComboBox<FieldWrap> jComboBox, String resourceGroupName, String fieldName) {
-        if (fieldName != null) {
-            jComboBox.setSelectedItem(new FieldWrap(resourceGroupName, fieldName));
-        } else {
-            jComboBox.setSelectedIndex(-1);
-        }
-    }
-
     public static abstract class ObjectWrap {
         public abstract String toString();
 
@@ -531,7 +509,6 @@ public class CompFactory {
             return o != null && o.toString().equals(toString());
         }
     }
-
 
     public static class ClassWrap extends ObjectWrap {
         Class clazz;
@@ -557,67 +534,93 @@ public class CompFactory {
         }
     }
 
-    public static class FieldWrap extends ObjectWrap {
-        Field field;
-        public FieldWrap() {}
 
+    /*
 
-        public FieldWrap(String resourceGroupName, String fieldName) {
-            Class resourceGroupClass = ResourceUtils.getResourceGroup(resourceGroupName);
-            try {
-                field = resourceGroupClass.getField(fieldName);
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
+     */
+        public static void fillComboWithClassFields(JComboBox<FieldWrap> jComboBox, Class aClass) {
+            List<FieldWrap> items = new ArrayList<>();
+            Field fields[] = aClass.getFields();
+            for (Field field : fields) {
+                items.add(new FieldWrap(field));
+            }
+            fillCombo(jComboBox, items);
+        }
+
+        public static void fillComboWithResourceGroupx(JComboBox<FieldWrap> jComboBox, String resourceGroupName) {
+            fillComboWithClassFields(jComboBox, ResourceUtils.getResourceGroup(resourceGroupName));
+        }
+
+        public static void setComboItemWithResourceGroupFieldx(JComboBox<FieldWrap> jComboBox, String resourceGroupName, String fieldName) {
+            if (fieldName != null) {
+                jComboBox.setSelectedItem(new FieldWrap(resourceGroupName, fieldName));
+            } else {
+                jComboBox.setSelectedIndex(-1);
             }
         }
-        public FieldWrap(Field field) {
-            this.field = field;
+
+
+        public static class FieldWrap extends ObjectWrap {
+            Field field;
+            public FieldWrap() {}
+
+
+            public FieldWrap(String resourceGroupName, String fieldName) {
+                Class resourceGroupClass = ResourceUtils.getResourceGroup(resourceGroupName);
+                try {
+                    field = resourceGroupClass.getField(fieldName);
+                } catch (NoSuchFieldException e) {
+                    e.printStackTrace();
+                }
+            }
+            public FieldWrap(Field field) {
+                this.field = field;
+            }
+
+            public String toString() {
+                return field.getName();
+            }
+
+            public Object get() {
+                return field;
+            }
+            @Override
+            public Object set(Object o) {
+                field = (Field) o;
+                return field;
+            }
+
         }
 
-        public String toString() {
-            return field.getName();
+        public static class MethodWrap extends ObjectWrap {
+            Method method;
+            public MethodWrap() {}
+
+            public MethodWrap(Method method) {
+                this.method = method;
+            }
+
+            public String toString() {
+                return method.getName() + "()";
+            }
+
+            public Object get() {
+                return method;
+            }
+            @Override
+            public Object set(Object o) {
+                method = (Method) o;
+                return method;
+            }
         }
 
-        public Object get() {
-            return field;
-        }
-        @Override
-        public Object set(Object o) {
-            field = (Field) o;
-            return field;
-        }
-
-    }
-
-    public static class MethodWrap extends ObjectWrap {
-        Method method;
-        public MethodWrap() {}
-
-        public MethodWrap(Method method) {
-            this.method = method;
-        }
-
-        public String toString() {
-            return method.getName() + "()";
-        }
-
-        public Object get() {
-            return method;
-        }
-        @Override
-        public Object set(Object o) {
-            method = (Method) o;
-            return method;
-        }
-    }
 
 
-
-    public static Type2TypeDefaultConstructorFactory objectWrapType2TypeDefaultConstructorFactory =
-            new Type2TypeDefaultConstructorFactory(
-                    Class.class, ClassWrap.class,
-                    Method.class, MethodWrap.class,
-                    Field.class, FieldWrap.class);
+        public static Type2TypeDefaultConstructorFactory objectWrapType2TypeDefaultConstructorFactory =
+                new Type2TypeDefaultConstructorFactory(
+                        Class.class, ClassWrap.class,
+                        Method.class, MethodWrap.class,
+                        Field.class, FieldWrap.class);
 
     public static final String ID_ATTR = "android:id=\"@+id/";
 
@@ -668,7 +671,9 @@ public class CompFactory {
     public static void fillListWithWidgetIdsFromLayout(JList jList, String layout) {
         fillJList(jList, getWidgetIdList(layout));
     }
+/*
 
+ */
     public static void fillListWithClassFields(JList<FieldWrap> jList, Class aClass) {
         fillListWithClassFields(jList, aClass, null);
     }
@@ -691,6 +696,7 @@ public class CompFactory {
             return member.getDeclaringClass() != Object.class;
         }
     }
+
 
     public static void fillListWithAllClassMembers(JList<ObjectWrap> jList, Class aClass) {
         fillListWithAllClassMembers(jList, aClass, new IgnoreBaseObjectPredicate());
@@ -735,11 +741,12 @@ public class CompFactory {
             return !member.getName().startsWith(prefix);
         }
     }
-    public static void fillListWithResourceGroup(JList<FieldWrap> jListBox, String resourceGroupName) {
+    /*
+    public static void fillListWithResourceGroupX(JList<FieldWrap> jListBox, String resourceGroupName) {
         fillListWithClassFields(jListBox, ResourceUtils.getResourceGroup(resourceGroupName), new IgnoreMemberWithPrefix("abc_"));
     }
 
-
+*/
     public static void setComboVal(JComboBox comboBox, Object target, String field) {
         Object v = ReflectionUtils.getFieldValue(target, field);
         System.out.println(field + ": " + v);

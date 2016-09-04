@@ -50,7 +50,7 @@
       </component>
       <component id="9c98d" class="javax.swing.JLabel">
         <constraints>
-          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="View Customizer"/>
@@ -66,18 +66,10 @@
       </component>
       <component id="e37c3" class="javax.swing.JButton" binding="addCustomizerButton">
         <constraints>
-          <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Add"/>
-        </properties>
-      </component>
-      <component id="ed4a4" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="UI.adapterViews"/>
         </properties>
       </component>
       <component id="de71c" class="javax.swing.JLabel">
@@ -90,7 +82,7 @@
       </component>
       <component id="33bdd" class="javax.swing.JLabel">
         <constraints>
-          <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Target Flow"/>
@@ -107,11 +99,6 @@
       <nested-form id="d2a3" form-file="org/androware/flow/builder/ClassChooserWidget.form" binding="transitionClassChooserPanel">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </nested-form>
-      <nested-form id="d9874" form-file="org/androware/flow/builder/ClassChooserWidget.form" binding="parentContainerClassChooserPanel">
-        <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </nested-form>
       <nested-form id="ac9f0" form-file="org/androware/flow/builder/ClassChooserWidget.form" binding="processorClassChooserPanel">
@@ -137,11 +124,6 @@
           <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </nested-form>
-      <nested-form id="ceab6" form-file="org/androware/flow/builder/ComboBoxCRUDForm.form" binding="adapterViewComboBoxCRUDForm">
-        <constraints>
-          <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </nested-form>
       <nested-form id="cf209" form-file="org/androware/flow/builder/ObjectSaverSpecForm.form" binding="objectSaverSpecForm">
         <constraints>
           <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -160,7 +142,7 @@
       </nested-form>
       <component id="1f51b" class="javax.swing.JComboBox" binding="targetFlowComboBox">
         <constraints>
-          <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
@@ -180,6 +162,32 @@
         </constraints>
         <properties/>
       </component>
+      <scrollpane id="e7f2f">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="9b584" class="javax.swing.JList" binding="parentContainerIDList">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
+      <component id="ed4a4" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="UI.adapterViews"/>
+        </properties>
+      </component>
+      <nested-form id="ceab6" form-file="org/androware/flow/builder/ComboBoxCRUDForm.form" binding="adapterViewComboBoxCRUDForm">
+        <constraints>
+          <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </nested-form>
     </children>
   </grid>
 </form>

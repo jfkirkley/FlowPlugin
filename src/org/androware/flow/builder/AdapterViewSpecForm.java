@@ -55,11 +55,11 @@ public class AdapterViewSpecForm implements CRUDForm<AdapterViewSpec> {
                 CompFactory.setFieldSetterOnAction(form.getViewIDComboBox(), new ReflectionUtils.FieldSetter(adapterViewSpec, "viewId"), adapterViewSpec.viewId);
             }
             form.getLayoutList().setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-            CompFactory.fillListWithResourceGroup(form.getLayoutList(), "layout");
+            PSIclassUtils.fillListWithResourceGroup(form.getLayoutList(), "layout");
             CompFactory.setFieldSetterOnSelect(
                     form.getLayoutList(),
                     new ReflectionUtils.FieldSetter(adapterViewSpec, "itemLayoutId"),
-                    adapterViewSpec.itemLayoutId != null? new CompFactory.FieldWrap("layout", adapterViewSpec.itemLayoutId): null
+                    adapterViewSpec.itemLayoutId != null? new PSIclassUtils.PsiFieldWrap("layout", adapterViewSpec.itemLayoutId): null
             );
 
             form.getBeanIdList().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
