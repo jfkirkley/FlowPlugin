@@ -2,9 +2,11 @@ package org.androware.flow.builder;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
+import jdk.nashorn.internal.scripts.JO;
 import org.androware.androbeans.utils.ConstructorSpec;
 import org.androware.androbeans.utils.ReflectionUtils;
 import org.androware.flow.base.*;
+import org.androware.flow.plugin.FlowToolWindowFactory;
 
 
 import javax.swing.*;
@@ -34,6 +36,7 @@ public class FlowForm {
     private JPanel rootPanel;
     private JTextField nameTextField;
     private JButton saveButton;
+    private JButton closeButton;
 
 
     ToolWindow toolWindow;
@@ -44,13 +47,30 @@ public class FlowForm {
 
         CompFactory.setTextfieldVal(nameTextField, flowBase, "name");
 
+        closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int answer = JOptionPane.showConfirmDialog(closeButton, "Are you sure you wish to close this flow?");
+                System.out.println("answer: " + answer);
+                if(answer == JOptionPane.YES_OPTION) {
+                    FlowToolWindowFactory.instance.createToolWindowContent(project, toolWindow);
+                }
+            }
+        });
 
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 String flowName = nameTextField.getText();
                 try {
-                    JsonObjectWriter jsonObjectWriter = new JsonObjectWriter(new FileOutputStream(new File( Utils.HACK_ROOT_DIR + "_res_raw_" + flowName + ".js")));
+                    String baseDir = project.getBaseDir().getCanonicalPath();
+
+                    String SRC_DIR = "/app/src/main/";
+                    String path = baseDir + SRC_DIR + "res/raw/" + flowName + ".js";
+
+                    System.out.println(path);
+
+                    JsonObjectWriter jsonObjectWriter = new JsonObjectWriter(new FileOutputStream(new File( path )));
 
                     jsonObjectWriter.write(flowBase);
 

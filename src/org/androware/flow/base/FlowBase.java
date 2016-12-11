@@ -25,6 +25,8 @@ public class FlowBase {
     public static FlowBase currFlowBase = null;
     public FlowBase() {
         currFlowBase = this;
+
+        steps = new HashMap<>();
     }
 
     public void __get_type_overrides__(Map map) {
@@ -50,6 +52,7 @@ public class FlowBase {
         Map<String, String> registry = new HashMap<>();
         addLoadedObjectsToRegistry(registry);
         stepBase.addLoadedObjectsToRegistry(registry);
+        System.out.println("build map: " + registry);
         return registry;
     }
 

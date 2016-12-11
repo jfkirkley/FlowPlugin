@@ -24,6 +24,7 @@ public class ReflectionUtils {
     }
 
     public static Class getClass(String className) {
+        System.out.println("get class: " + className);
         try {
             if(name2primitiveClassMap.containsKey(className)) {
                 return name2primitiveClassMap.get(className);
@@ -179,12 +180,25 @@ public class ReflectionUtils {
         return toInvoke;
     }
 
+
     public static class FieldSetter {
+        public static abstract class Listener {
+            public abstract void fieldSet(FieldSetter fieldSetter, Object value);
+
+            public abstract void fieldGet(FieldSetter fieldSetter, Object value);
+
+        }
+        Listener listener;
         String fieldName;
         Object target;
         public FieldSetter(Object object, String fieldName) {
+            this(object, fieldName, null);
+        }
+
+        public FieldSetter(Object object, String fieldName, Listener listener) {
             target = object;
             this.fieldName = fieldName;
+            this.listener = listener;
         }
 
         private Object resolveTarget() {
@@ -200,6 +214,10 @@ public class ReflectionUtils {
 
         public Object set(Object v) {
             setField(resolveTarget().getClass(), fieldName, target, v);
+            if(listener != null ) {
+                System.out.println("set val: " + v);
+                listener.fieldSet(this, v);
+            }
             return v;
         }
 
@@ -209,7 +227,11 @@ public class ReflectionUtils {
         }
 
         public Object get() {
-            return getFieldValue(resolveTarget(), fieldName);
+            Object obj = getFieldValue(resolveTarget(), fieldName);
+            if(listener != null){
+                listener.fieldGet(this,obj);
+            }
+            return obj;
         }
     }
 
@@ -430,6 +452,7 @@ public class ReflectionUtils {
     }
 
     public static  List<Member> getAllMembers(Class aClass, Predicate<Member> predicate){
+
         List<Member> items = new ArrayList<>();
         Field fields[] = aClass.getFields();
         for (Field field : fields) {

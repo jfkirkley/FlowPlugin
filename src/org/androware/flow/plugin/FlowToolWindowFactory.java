@@ -20,17 +20,22 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.androware.flow.builder.MainForm.mainForm;
-import static org.androware.flow.builder.Utils.HACK_ROOT_DIR;
 
 /**
  * Created by jkirkley on 8/19/16.
  */
 
 public class FlowToolWindowFactory implements ToolWindowFactory {
+
+    public String baseDir;
+    public String resDir;
+
+    public static FlowToolWindowFactory instance = null;
 
     public FlowBase loadFlow(String fname) throws ObjectReadException {
 
@@ -47,10 +52,18 @@ public class FlowToolWindowFactory implements ToolWindowFactory {
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
 
+        if(instance == null) {
+            instance = this;
+        } else {
+            toolWindow.getContentManager().removeAllContents(true);
+        }
 
-        String baseDir = project.getBaseDir().getCanonicalPath();
+        baseDir = project.getBaseDir().getCanonicalPath();
 
         String SRC_DIR = "/app/src/main/";
+
+        resDir = baseDir + SRC_DIR + "res";
+
         System.out.println("root: " + baseDir);
         System.out.println("root: " + baseDir + SRC_DIR);
 
@@ -66,13 +79,18 @@ public class FlowToolWindowFactory implements ToolWindowFactory {
 
                 String resClassName = startFlowForm.getResourceClassName();
                 ResourceUtils.R = ReflectionUtils.getClass(resClassName);
-
-                String path = baseDir + SRC_DIR + "res/raw/" + startFlowForm.getFileName();
-
-                System.out.println(path);
-
+                String path = "";
                 try {
-                    FlowBase flowBase = loadFlow(path);
+
+                    FlowBase flowBase = null;
+                    String fileName = startFlowForm.getFileName();
+                    if (fileName == null || fileName.length() == 0) {
+                        flowBase = new FlowBase();
+                    } else {
+                        path = resDir + "/raw/" + fileName;
+                        flowBase = loadFlow(path);
+                        System.out.println(path);
+                    }
 
                     MainForm mainForm = new MainForm(project, toolWindow, flowBase);
 
@@ -84,8 +102,11 @@ public class FlowToolWindowFactory implements ToolWindowFactory {
                     toolWindow.getContentManager().addContent(content);
 
                 } catch (Exception e) {
+                    StringWriter sw = new StringWriter();
+                    PrintWriter pw = new PrintWriter(sw);
+                    e.printStackTrace(pw);
 
-                    startFlowForm.setErrorMsg("Could not load Flow: " + path + "\n exception: " + e.getStackTrace());
+                    startFlowForm.setErrorMsg("Could not load Flow: " + path + "\n exception:\n " + sw.toString());
                 }
 
             }

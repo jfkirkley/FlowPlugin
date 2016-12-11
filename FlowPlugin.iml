@@ -11,5 +11,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="net.maritimecloud.3rdparty:org.glassfish.javax.json:1.0.4" level="project" />
     <orderEntry type="library" name="org.glassfish:javax.json:1.0-b06" level="project" />
+    <orderEntry type="library" name="net.bytebuddy:byte-buddy:1.5.7" level="project" />
   </component>
 </module>

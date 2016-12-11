@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Arrays;
 
 import org.androware.androbeans.utils.ReflectionUtils;
+import org.androware.flow.plugin.FlowToolWindowFactory;
 import sun.rmi.runtime.Log;
 
 import javax.swing.text.View;
@@ -156,9 +157,9 @@ public class Utils {
         return null;
     }
 
-    public static String HACK_ROOT_DIR = "/home/jkirkley/AndroidStudioProjects/EngEzy/app/src/main/";
+    //public static String HACK_ROOT_DIR = "/home/jkirkley/AndroidStudioProjects/EngEzy/app/src/main/";
 
     public static  String HACKgetLayoutFileContents(String layoutName) {
-        return getFileContents(HACK_ROOT_DIR + "res/layout/" + layoutName + ".xml");
+        return getFileContents(FlowToolWindowFactory.instance.resDir + "/layout/" + layoutName + ".xml");
     }
 }

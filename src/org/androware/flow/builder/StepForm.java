@@ -7,6 +7,11 @@ import org.androware.androbeans.utils.ReflectionUtils;
 import org.androware.flow.base.*;
 
 import javax.swing.*;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,7 +65,7 @@ public class StepForm implements CRUDForm<StepBase> {
 
         transitionClassChooserPanel.init(project, "Choose Step Transition Class", new ReflectionUtils.FieldSetter(stepBase, "transitionClassName"));
 
-        if(flowBase.layout != null) {
+        if (flowBase.layout != null) {
             parentContainerIDList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             CompFactory.fillListWithWidgetIdsFromLayout(parentContainerIDList, flowBase.layout);
             CompFactory.setFieldSetterOnSelect(parentContainerIDList, new ReflectionUtils.FieldSetter(stepBase, "parentContainer"), stepBase.parentContainer);
@@ -70,12 +75,53 @@ public class StepForm implements CRUDForm<StepBase> {
 
         CompFactory.setTextfieldVal(nameTextField, stepBase, "name");
 
+        CompFactory.DefaultCRUDEditorImpl.Listener<ObjectLoaderSpecBase> listener = new CompFactory.DefaultCRUDEditorImpl.Listener() {
 
-        objectLoadersComboBoxCRUDForm.init(
-                project,
-                new CompFactory.DefaultCRUDEditorImpl<ObjectLoaderSpecBase>(project, toolWindow, ObjectLoaderSpecForm.class, ObjectLoaderSpecBase.class),
-                new ReflectionUtils.FieldSetter(stepBase, "objectLoaderSpecs")
-        );
+            @Override
+            public void onEdit(CompFactory.DefaultCRUDEditorImpl editor, Object object) {
+            }
+
+            @Override
+            public Object onCreate(CompFactory.DefaultCRUDEditorImpl editor, Object object) {
+                return null;
+            }
+
+            @Override
+            public void onDone(CompFactory.DefaultCRUDEditorImpl editor) {
+                System.out.println("Edit ondone got set val: ");
+                CompFactory.fillJList(twoWayMapperForm.getBeanList(), new ArrayList<>(flowBase.buildRegistry(stepBase).keySet()));
+            }
+
+            @Override
+            public void onCancel(CompFactory.DefaultCRUDEditorImpl editor) {
+            }
+
+            @Override
+            public void onSetCompWrapper(CompFactory.DefaultCRUDEditorImpl editor, CompFactory.CRUDCompWrapper crudCompWrapper) {
+            }
+        };
+
+        objectLoadersComboBoxCRUDForm.init
+                (
+                        project,
+                        //new CompFactory.DefaultCRUDEditorImpl<ObjectLoaderSpecBase>(project, toolWindow, ObjectLoaderSpecForm.class, ObjectLoaderSpecBase.class),
+                        new CompFactory.DefaultCRUDEditorImpl<ObjectLoaderSpecBase>(project, toolWindow, ObjectLoaderSpecForm.class, ObjectLoaderSpecBase.class, null, null, null, listener),
+                        new ReflectionUtils.FieldSetter(stepBase, "objectLoaderSpecs"),
+                        new CompFactory.JComboBoxCRUDWrapper.Listener() {
+                            @Override
+                            public void itemAdded(Object value) {
+                                System.out.println("ll got set val: " + value);
+                                CompFactory.fillJList(twoWayMapperForm.getBeanList(), new ArrayList<>(flowBase.buildRegistry(stepBase).keySet()));
+                            }
+
+                            @Override
+                            public void itemRemoved(Object value) {
+                                System.out.println("ll got set val: " + value);
+                                CompFactory.fillJList(twoWayMapperForm.getBeanList(), new ArrayList<>(flowBase.buildRegistry(stepBase).keySet()));
+                            }
+                        }
+                );
+
 
         navsComboBoxCRUDForm.init(
                 project,
@@ -89,12 +135,12 @@ public class StepForm implements CRUDForm<StepBase> {
                 new ReflectionUtils.FieldSetter(new ReflectionUtils.FieldSetter(stepBase, "ui"), "adapterViews")
         );
 
-        objectSaverSpecForm.init(project, toolWindow, (ObjectSaverSpecBase)ReflectionUtils.ensureFieldExists(stepBase, "objectSaverSpec"));
+        objectSaverSpecForm.init(project, toolWindow, (ObjectSaverSpecBase) ReflectionUtils.ensureFieldExists(stepBase, "objectSaverSpec"));
 
         setUpCombo(layoutComboBox, "layout", "layout", stepBase.layout);
         setUpCombo(targetFlowComboBox, "raw", "targetFlow", stepBase.targetFlow);
 
-        if(stepBase.twoWayMapper == null) {
+        if (stepBase.twoWayMapper == null) {
             stepBase.twoWayMapper = new TwoWayMapperBase(new HashMap());
         }
 
@@ -109,8 +155,8 @@ public class StepForm implements CRUDForm<StepBase> {
     public void setUpCombo(JComboBox jComboBox, String resGroup, String name, Object value) {
         PSIclassUtils.fillComboWithResourceGroup(jComboBox, resGroup);
 
-        if(value != null) {
-            PSIclassUtils.setComboItemWithResourceGroupField(jComboBox, resGroup, (String)value);
+        if (value != null) {
+            PSIclassUtils.setComboItemWithResourceGroupField(jComboBox, resGroup, (String) value);
             //jComboBox.setSelectedItem(new CompFactory.FieldWrap(ReflectionUtils.getField(StepBase.class, name));
         } else {
             jComboBox.setSelectedIndex(-1);

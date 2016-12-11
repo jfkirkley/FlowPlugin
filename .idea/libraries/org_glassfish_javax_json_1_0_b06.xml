@@ -4,6 +4,8 @@
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/javax.json/1.0-b06/javax.json-1.0-b06.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/javax/json/javax.json-api/1.0-b06/javax.json-api-1.0-b06.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/javax.json/1.0-b06/javax.json-1.0-b06.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/javax/json/javax.json-api/1.0-b06/javax.json-api-1.0-b06.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

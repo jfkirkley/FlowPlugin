@@ -21,6 +21,7 @@ public class StartFlowForm {
     private JTextPane errorMsgTextPane;
 
     public void init(Project project) {
+
         flowFileChooserWidget.init(project, "Choose Flow", FileTypeRegistry.getInstance().getFileTypeByExtension(".js"));
         resourceClassChooser.getBrowseClassesButton().addActionListener(new ActionListener() {
             @Override

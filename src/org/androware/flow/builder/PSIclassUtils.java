@@ -167,7 +167,8 @@ public class PSIclassUtils {
 
         @Override
         public boolean test(PsiMember member) {
-            return member.getContainingClass().getQualifiedName().equals(Object.class.getName());
+            //System.out.println("mem qtn: " + member.getContainingClass().getQualifiedName());
+            return !member.getContainingClass().getQualifiedName().equals(Object.class.getName());
         }
     }
 
@@ -188,6 +189,7 @@ public class PSIclassUtils {
 
         PsiField fields [] = psiClass.getAllFields();
         for(PsiField field: fields) {
+            //System.out.println(field.getName());
             if(predicate == null || predicate.test(field)) {
                 items.add(new PsiFieldWrap(field));
             }
@@ -195,6 +197,7 @@ public class PSIclassUtils {
 
         PsiMethod methods [] = psiClass.getAllMethods();
         for(PsiMethod method: methods) {
+            //System.out.println(method.getName());
             if(predicate == null || predicate.test(method)) {
                 items.add(new PsiMethodWrap(method));
             }

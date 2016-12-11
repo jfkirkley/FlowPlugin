@@ -12,7 +12,7 @@ import static org.androware.flow.builder.PSIclassUtils.fillListWithResourceGroup
 /**
  * Created by jkirkley on 8/29/16.
  */
-public class WidgetIdPickerForm implements CRUDForm{
+public class WidgetIdPickerForm implements CRUDForm {
     private JList layoutList;
     private JList widgetList;
     private JPanel rootPanel;

@@ -2,6 +2,9 @@ package org.androware.flow.builder;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
+import com.intellij.psi.JavaPsiFacade;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.search.GlobalSearchScope;
 import org.androware.androbeans.utils.ReflectionUtils;
 import org.androware.flow.base.FlowBase;
 import org.androware.flow.base.StepBase;
@@ -15,6 +18,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.intellij.psi.search.GlobalSearchScope.allScope;
+import static groovy.xml.Entity.reg;
 
 /**
  * Created by jkirkley on 8/26/16.
@@ -55,8 +61,8 @@ public class TwoWayMapperForm implements CRUDForm<Map> {
                 }
             });
 
-            Map<String, String> registry = flowBase.buildRegistry(stepBase);
-            CompFactory.fillJList(form.getBeanList(), new ArrayList<>(registry.keySet()));
+            //Map<String, String> registry = flowBase.buildRegistry(stepBase);
+            CompFactory.fillJList(form.getBeanList(), new ArrayList<>(flowBase.buildRegistry(stepBase).keySet()));
 
             form.getBeanList().addListSelectionListener(new ListSelectionListener() {
                 @Override
@@ -64,8 +70,16 @@ public class TwoWayMapperForm implements CRUDForm<Map> {
                     if (!listSelectionEvent.getValueIsAdjusting()) {
                         String beanId = (String)form.getBeanList().getSelectedValue();
 
-                        Class beanClass = ReflectionUtils.getClass(registry.get(beanId));
-                        CompFactory.fillListWithAllClassMembers(form.getFieldList(), beanClass);
+                        Map<String, String> registry = flowBase.buildRegistry(stepBase);
+                        System.out.println(beanId + " : " + registry);
+                        if(registry.containsKey(beanId)) {  // SWING IS FUCKING USELESS!!!!!!!!!!!!!!!!!!!!!!
+                            //Class beanClass = ReflectionUtils.getClass(registry.get(beanId));
+
+
+                            PsiClass psibeanClass = JavaPsiFacade.getInstance(project).findClass(registry.get(beanId), GlobalSearchScope.allScope(project));
+                            PSIclassUtils.fillListWithAllClassMembers(form.getFieldList(), psibeanClass);
+                            //CompFactory.fillListWithAllClassMembers(form.getFieldList(), beanClass);
+                        }
                     }
                 }
             });

@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import static javafx.scene.input.KeyCode.T;
 
 
 /**
@@ -217,7 +218,12 @@ public class CompFactory {
     }
 
     public static class JComboBoxCRUDWrapper<T> implements CRUDCompWrapper<T> {
+        public static abstract class Listener {
+            public abstract void itemAdded(Object value);
 
+            public abstract void itemRemoved(Object value);
+        }
+        Listener listener;
         JComboBox<T> jComboBox;
 
         Object collection;
@@ -233,6 +239,10 @@ public class CompFactory {
             } else {
                 ((List)collection).add(item);
             }
+
+            if(listener != null) {
+                listener.itemAdded(item);
+            }
         }
 
         private void removeItem(T item) {
@@ -241,9 +251,17 @@ public class CompFactory {
             } else {
                 ((List)collection).remove(item);
             }
+            if(listener != null) {
+                listener.itemRemoved(item);
+            }
         }
 
         public JComboBoxCRUDWrapper(JComboBox<T> jComboBox, ReflectionUtils.FieldSetter collectionFieldSetter) {
+            this(jComboBox, collectionFieldSetter, null);
+        }
+
+        public JComboBoxCRUDWrapper(JComboBox<T> jComboBox, ReflectionUtils.FieldSetter collectionFieldSetter, Listener listener) {
+            this.listener = listener;
             this.jComboBox = jComboBox;
             this.collectionFieldSetter = collectionFieldSetter;
             this.collection = collectionFieldSetter.get();
@@ -383,6 +401,21 @@ public class CompFactory {
         CRUDCompWrapper<T> crudCompWrapper;
         CRUDForm<T> form;
         FormAssembler formAssembler;
+        Listener listener = null;
+
+        // IDEA:  Listener api that auto creates listener, and broadcast api through intorspective aop style patterns
+        public  static abstract class Listener<T> {
+            public abstract void onEdit(DefaultCRUDEditorImpl<T> editor, T object);
+
+            public abstract T onCreate(DefaultCRUDEditorImpl<T> editor, T object);
+
+            public abstract void onDone(DefaultCRUDEditorImpl<T> editor);
+
+            public abstract void onCancel(DefaultCRUDEditorImpl<T> editor);
+
+            public abstract void onSetCompWrapper(DefaultCRUDEditorImpl editor, CRUDCompWrapper<T> crudCompWrapper);
+
+        }
 
         public DefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass) {
             this(project, toolWindow, formClass, targetClass, null);
@@ -397,6 +430,11 @@ public class CompFactory {
         }
 
         public DefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter, T defaultTemplateObject, FormAssembler formAssembler) {
+            this(project, toolWindow, formClass, targetClass, fieldSetter, defaultTemplateObject, formAssembler, null);
+        }
+
+        public DefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter, T defaultTemplateObject, FormAssembler formAssembler, Listener listener) {
+            this.listener = listener;
             this.project = project;
             this.formAssembler = formAssembler;
             this.toolWindow = toolWindow;
@@ -419,6 +457,9 @@ public class CompFactory {
             }
             EditFormWrapperForm editFormWrapperForm = new EditFormWrapperForm();
             editFormWrapperForm.init(project, toolWindow, form.getRootPanel(), this);
+            if(this.listener != null) {
+                this.listener.onEdit(this, object);
+            }
         }
 
         @Override
@@ -428,22 +469,34 @@ public class CompFactory {
             if (fieldSetter != null) {
                 fieldSetter.set(obj);
             }
+            if(this.listener != null) {
+                this.listener.onCreate(this, obj);
+            }
             return obj;
         }
 
         @Override
         public void done() {
             form.done();
+            if(this.listener != null) {
+                this.listener.onDone(this);
+            }
         }
 
         @Override
         public void cancel() {
+            if(this.listener != null) {
+                this.listener.onCancel(this);
+            }
 
         }
 
         @Override
         public void setCompWrapper(CRUDCompWrapper<T> crudCompWrapper) {
             this.crudCompWrapper = crudCompWrapper;
+            if(this.listener != null) {
+                this.listener.onSetCompWrapper(this, crudCompWrapper);
+            }
         }
     }
 
@@ -537,7 +590,7 @@ public class CompFactory {
 
     /*
 
-     */
+
         public static void fillComboWithClassFields(JComboBox<FieldWrap> jComboBox, Class aClass) {
             List<FieldWrap> items = new ArrayList<>();
             Field fields[] = aClass.getFields();
@@ -558,7 +611,7 @@ public class CompFactory {
                 jComboBox.setSelectedIndex(-1);
             }
         }
-
+     */
 
         public static class FieldWrap extends ObjectWrap {
             Field field;
@@ -649,6 +702,11 @@ public class CompFactory {
 
     public static <T> void fillJList(JList<T> jList, List<T> items) {
 
+        // ensure active lists won't get an NPE
+        jList.clearSelection();
+        jList.setValueIsAdjusting(true);
+
+
         ListModel listModel = jList.getModel();
 
         if (listModel == null || !(listModel instanceof DefaultListModel)) {
@@ -665,6 +723,8 @@ public class CompFactory {
         }
 
         jList.setModel(jListModel);
+
+        jList.setValueIsAdjusting(false);
     }
 
 
@@ -674,6 +734,7 @@ public class CompFactory {
 /*
 
  */
+    /*
     public static void fillListWithClassFields(JList<FieldWrap> jList, Class aClass) {
         fillListWithClassFields(jList, aClass, null);
     }
@@ -689,7 +750,7 @@ public class CompFactory {
         }
         fillJList(jList, items);
     }
-
+*/
     public static class IgnoreBaseObjectPredicate implements Predicate<Member> {
         @Override
         public boolean test(Member member) {
@@ -697,7 +758,7 @@ public class CompFactory {
         }
     }
 
-
+/*
     public static void fillListWithAllClassMembers(JList<ObjectWrap> jList, Class aClass) {
         fillListWithAllClassMembers(jList, aClass, new IgnoreBaseObjectPredicate());
     }
@@ -714,7 +775,7 @@ public class CompFactory {
 
 
     }
-
+*/
     public static void setSelectedValueOnJList(JList jList, Object value) {
         if(value != null) {
             if(value instanceof List) {
