@@ -1,5 +1,6 @@
 package org.androware.aop;
 
+import javafx.scene.effect.Light;
 import net.bytebuddy.implementation.bind.annotation.*;
 
 import java.lang.reflect.Method;
@@ -7,22 +8,22 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 /**
- * Created by jkirkley on 12/11/16.
+ * Created by jkirkley on 12/12/16.
  */
-public class Interceptor {
+public class LightInterceptor  {
     private List<Aspect> aspects;
 
-    public Interceptor(List<Aspect> aspects) {
+    public LightInterceptor(List<Aspect> aspects) {
         this.aspects = aspects;
     }
 
     @RuntimeType
-    public Object intercept(@SuperCall Callable<?> zuper, @This Object theThis, @Origin Class origin, @Origin Method method, @AllArguments Object[] args)
+    public Object intercept(@SuperCall Callable<?> zuper, @This Object theThis,  @Origin String methodName, @AllArguments Object[] args)
             throws Exception {
 
         if(aspects != null) {
             for(Aspect aspect: aspects) {
-                aspect.before(zuper, theThis, origin, method, args);
+                aspect.before(theThis, methodName, args);
             }
         }
 
@@ -35,7 +36,7 @@ public class Interceptor {
 
             if(aspects != null) {
                 for(Aspect aspect: aspects) {
-                    aspect.onException(t, zuper, theThis, origin, method, args);
+                    aspect.onException(t, theThis, methodName, args);
                 }
             }
 
@@ -43,10 +44,9 @@ public class Interceptor {
 
             if(aspects != null) {
                 for(Aspect aspect: aspects) {
-                    aspect.after(returnValue, zuper, theThis, origin, method, args);
+                    aspect.after(returnValue, theThis, methodName, args);
                 }
             }
-            System.out.println("Returned from database");
         }
         return returnValue;
     }

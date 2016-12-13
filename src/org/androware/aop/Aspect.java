@@ -13,4 +13,7 @@ public interface Aspect {
     public void after(Object returnValue, Callable<?> zuper, Object theThis, Class origin, Method method, Object[] args) throws IntrospectionException;
     public void onException(Throwable t, Callable<?> zuper, Object theThis, Class origin, Method method, Object[] args) throws IntrospectionException;
 
+    public void before(Object theThis, String methodName, Object[] args) throws IntrospectionException;
+    public void after(Object returnValue, Object theThis, String methodName, Object[] args) throws IntrospectionException;
+    public void onException(Throwable t, Object theThis, String methodName, Object[] args) throws IntrospectionException;
 }

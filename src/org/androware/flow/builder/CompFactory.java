@@ -12,6 +12,7 @@ import com.intellij.psi.PsiFile;
 import org.androware.androbeans.utils.ReflectionUtils;
 import org.androware.androbeans.utils.ResourceUtils;
 import org.androware.androbeans.utils.Type2TypeDefaultConstructorFactory;
+import org.androware.flow.base.ObjectLoaderSpecBase;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -229,7 +230,7 @@ public class CompFactory {
         Object collection;
         ReflectionUtils.FieldSetter collectionFieldSetter;
 
-        private void addItem(T item) {
+        public void addItem(T item) {
             if(collection == null) {
                 collection = collectionFieldSetter.set();
             }
@@ -245,7 +246,7 @@ public class CompFactory {
             }
         }
 
-        private void removeItem(T item) {
+        public void removeItem(T item) {
             if(collection instanceof Map) {
                 ((Map)collection).remove(item.toString());
             } else {
@@ -390,7 +391,7 @@ public class CompFactory {
         crudObjectEditor.setCompWrapper(crudCompWrapper);
     }
 
-
+    //project, toolWindow, ObjectLoaderSpecForm.class, ObjectLoaderSpecBase.class),
     public static class DefaultCRUDEditorImpl<T> implements CompFactory.CRUDObjectEditor<T> {
         ToolWindow toolWindow;
         Project project;

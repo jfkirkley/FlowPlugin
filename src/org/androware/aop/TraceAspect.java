@@ -1,32 +1,40 @@
 package org.androware.aop;
 
 
-import java.lang.reflect.Method;
-import java.util.concurrent.Callable;
-
 /**
  * Created by jkirkley on 12/11/16.
  */
-public class TraceAspect implements Aspect {
+public class TraceAspect extends SimpleAspect {
+    private static String indent = ""; // static so all instances will use the same indent
+
+
+    // override to direct output to a place other than System.out
+    public void trace(String s) {
+        System.out.println(indent + s);
+    }
 
     @Override
-    public void before(Callable<?> zuper, Object theThis, Class origin, Method method, Object[] args) throws IntrospectionException {
-        System.out.println("ta: Calling " + zuper);
-        System.out.println("ta: origin " + origin);
-        System.out.println("ta: this " + theThis.getClass().getName());
+    public void before(Object theThis, String methodName, Object[] args) throws IntrospectionException {
+        trace("call " + theThis.getClass().getName() + " -> " + methodName);
 
         for(Object arg: args) {
-            System.out.println("ta: " + arg);
+            trace(": " + arg);
+        }
+        indent += "  ";
+    }
+
+    @Override
+    public void after(Object returnValue, Object theThis, String methodName, Object[] args) throws IntrospectionException {
+        trace("return " + returnValue + " from " + methodName);
+        if(indent.length()>=2) {
+            indent = indent.substring(2);
         }
     }
 
     @Override
-    public void after(Object returnValue, Callable<?> zuper, Object theThis, Class origin, Method method, Object[] args) throws IntrospectionException {
-        System.out.println("ta return: " + returnValue);
+    public void onException(Throwable t, Object theThis, String methodName, Object[] args) throws IntrospectionException {
+        trace("exception: " + t.getMessage());
     }
 
-    @Override
-    public void onException(Throwable t, Callable<?> zuper, Object theThis, Class origin, Method method, Object[] args) throws IntrospectionException {
 
-    }
 }
