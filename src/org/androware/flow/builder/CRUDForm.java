@@ -10,9 +10,12 @@ import javax.swing.*;
  */
 public interface CRUDForm<T> {
 
+    public void init(Project project, ToolWindow toolWindow, T target, FormAssembler formAssembler, CRUDForm parentForm);
+
     public void init(Project project, ToolWindow toolWindow, T target, FormAssembler formAssembler);
 
     public void init(Project project, ToolWindow toolWindow, T target);
+
 
     public JPanel getRootPanel();
 
@@ -23,4 +26,6 @@ public interface CRUDForm<T> {
     public void populate(T object);
 
     public void done();
+
+    public void handleChildValue(Object childValue);
 }

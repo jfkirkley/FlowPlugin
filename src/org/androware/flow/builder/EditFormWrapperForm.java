@@ -29,7 +29,6 @@ public class EditFormWrapperForm {
             public void actionPerformed(ActionEvent actionEvent) {
                 crudObjectEditor.done();
                 MainForm.mainForm.setContent((JPanel) lastComp);
-                crudObjectEditor.done();
             }
         });
 

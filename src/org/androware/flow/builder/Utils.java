@@ -99,11 +99,17 @@ public class Utils {
     public static boolean isPrimitiveOrString(Object object) {
         if (object != null) {
             Class cls = object.getClass();
-            return cls.isPrimitive() || cls == String.class || cls == Integer.class ||
-                    cls == Boolean.class || cls == Long.class || cls == Character.class ||
-                    cls == Float.class || cls == Double.class;
+            return isPrimitiveOrString(cls);
         }
         return false;
+    }
+
+    public static boolean isPrimitiveOrString(Class cls) {
+
+        return cls.isPrimitive() || cls == String.class || cls == Integer.class ||
+                cls == Boolean.class || cls == Long.class || cls == Character.class ||
+                cls == Float.class || cls == Double.class;
+
     }
 
 

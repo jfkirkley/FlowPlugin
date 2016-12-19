@@ -79,6 +79,7 @@ public class JsonObjectWriter {
 
             jsonObjectBuilder = Json.createObjectBuilder();
             builderStack.push(new BuilderAndName(jsonObjectBuilder, currName));
+            jsonArrayBuilder = null;
         }
 
         public void endObject() {
@@ -134,7 +135,7 @@ public class JsonObjectWriter {
 
             Class fieldType = value.getClass();
 
-            if (currName == null && jsonArrayBuilder != null) {
+            if (/*currName == null &&*/ jsonArrayBuilder != null) {
 
                 if (int.class == fieldType || Integer.class == fieldType) {
                     jsonArrayBuilder.add((int) value);

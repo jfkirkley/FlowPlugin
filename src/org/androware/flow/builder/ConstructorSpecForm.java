@@ -38,6 +38,16 @@ public class ConstructorSpecForm implements CRUDForm<ConstructorSpec> {
     }
 
     @Override
+    public void handleChildValue(Object childValue) {
+
+    }
+
+    @Override
+    public void init(Project project, ToolWindow toolWindow, ConstructorSpec target, FormAssembler formAssembler, CRUDForm parentForm) {
+
+    }
+
+    @Override
     public void init(Project project, ToolWindow toolWindow, ConstructorSpec target, FormAssembler formAssembler) {
     }
 

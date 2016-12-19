@@ -81,6 +81,11 @@ public class SimpleTypeListForm<T> implements CRUDForm<List<T>> {
     }
 
     @Override
+    public void init(Project project, ToolWindow toolWindow, List<T> target, FormAssembler formAssembler, CRUDForm parentForm) {
+
+    }
+
+    @Override
     public void init(Project project, ToolWindow toolWindow, List<T> target, FormAssembler formAssembler) {
         targetList = target;
         if(formAssembler != null) {
@@ -131,6 +136,11 @@ public class SimpleTypeListForm<T> implements CRUDForm<List<T>> {
 
     @Override
     public void done() {
+
+    }
+
+    @Override
+    public void handleChildValue(Object childValue) {
 
     }
 

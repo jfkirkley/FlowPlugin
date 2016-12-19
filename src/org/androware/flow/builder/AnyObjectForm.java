@@ -42,6 +42,11 @@ public class AnyObjectForm implements CRUDForm {
 
 
     @Override
+    public void init(Project project, ToolWindow toolWindow, Object target, FormAssembler formAssembler, CRUDForm parentForm) {
+
+    }
+
+    @Override
     public void init(Project project, ToolWindow toolWindow, Object target, FormAssembler formAssembler) {
         formAssembler.assemble(project, toolWindow, this);
         init(project, toolWindow, target);
@@ -58,9 +63,6 @@ public class AnyObjectForm implements CRUDForm {
         getTargetList().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         CompFactory.fillJList(getTargetList(), new ArrayList(currFlowBase.steps.keySet()));
         getTargetList().setSelectedIndex(-1);
-
-        widgetIdPickerForm.init(project, toolWindow, target);
-        resourcePickerForm.init(project, toolWindow, target);
 
         setTarget(target);
 
@@ -85,11 +87,11 @@ public class AnyObjectForm implements CRUDForm {
     public Object getTarget() {
         Object val = widgetIdPickerForm.getTarget();
         if(val != null) {
-            return val;
+            return ((PSIclassUtils.PsiFieldWrap)val).toString();
         }
         val = resourcePickerForm.getTarget();
         if(val != null) {
-            return val;
+            return ((PSIclassUtils.PsiFieldWrap)val).toString();
         }
 
         val = beanIDList.getSelectedValue();
@@ -182,6 +184,11 @@ public class AnyObjectForm implements CRUDForm {
 
     @Override
     public void done() {
+
+    }
+
+    @Override
+    public void handleChildValue(Object childValue) {
 
     }
 

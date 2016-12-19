@@ -6,23 +6,11 @@ import org.androware.androbeans.utils.ConstructorSpec;
 import org.androware.androbeans.utils.ReflectionUtils;
 import org.androware.aop.AOP;
 import org.androware.aop.NotifyAspect;
-import org.androware.aop.TraceAspect;
 import org.androware.flow.base.*;
 
 import javax.swing.*;
-import javax.swing.event.ListDataEvent;
-import javax.swing.event.ListDataListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static org.androware.androbeans.utils.ReflectionUtils.ensureFieldExists;
-import static org.androware.flow.builder.PSIclassUtils.fillComboWithResourceGroup;
-import static org.androware.flow.builder.PSIclassUtils.setComboItemWithResourceGroupField;
-import static org.androware.flow.builder.ResEx.attr.layout;
 
 /**
  * Created by jkirkley on 8/18/16.
@@ -81,24 +69,24 @@ public class StepForm implements CRUDForm<StepBase> {
         try {
 
             CompFactory.JComboBoxCRUDWrapper jComboBoxCRUDWrapper =
-                    AOP.w(CompFactory.JComboBoxCRUDWrapper.class, "removeItem",
+                    AOP.w(CompFactory.JComboBoxCRUDWrapper.class,
                             new NotifyAspect() {
                                 @Override
                                 public void notifyDone() {
                                     CompFactory.fillJList(twoWayMapperForm.getBeanList(), new ArrayList<>(flowBase.buildRegistry(stepBase).keySet()));
                                 }
-                            }, objectLoadersComboBoxCRUDForm.getComboBox(), new ReflectionUtils.FieldSetter(stepBase, "objectLoaderSpecs"));
+                            }, "removeItem").newInstance(objectLoadersComboBoxCRUDForm.getComboBox(), new ReflectionUtils.FieldSetter(stepBase, "objectLoaderSpecs"));
 
             objectLoadersComboBoxCRUDForm.init
                     (
                             project,
-                            AOP.w(CompFactory.DefaultCRUDEditorImpl.class, "done",
+                            AOP.w(CompFactory.DefaultCRUDEditorImpl.class,
                                     new NotifyAspect() {
                                         @Override
                                         public void notifyDone() {
                                             CompFactory.fillJList(twoWayMapperForm.getBeanList(), new ArrayList<>(flowBase.buildRegistry(stepBase).keySet()));
                                         }
-                                    }, project, toolWindow, ObjectLoaderSpecForm.class, ObjectLoaderSpecBase.class),
+                                    }, "done").newInstance(project, toolWindow, ObjectLoaderSpecForm.class, ObjectLoaderSpecBase.class),
                             jComboBoxCRUDWrapper
                     );
 
@@ -151,6 +139,11 @@ public class StepForm implements CRUDForm<StepBase> {
 
 
     @Override
+    public void init(Project project, ToolWindow toolWindow, StepBase target, FormAssembler formAssembler, CRUDForm parentForm) {
+
+    }
+
+    @Override
     public void init(Project project, ToolWindow toolWindow, StepBase target, FormAssembler formAssembler) {
 
     }
@@ -180,6 +173,11 @@ public class StepForm implements CRUDForm<StepBase> {
     @Override
     public void done() {
         MainForm.mainForm.addStep(getTarget());
+    }
+
+    @Override
+    public void handleChildValue(Object childValue) {
+
     }
 
     @Override

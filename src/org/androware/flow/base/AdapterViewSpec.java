@@ -23,7 +23,11 @@ public class AdapterViewSpec {
 
     public ConstructorSpec itemGeneratorSpec;
 
+    //public ListMapper listMapper;
+
     private ItemGenerator itemGenerator;
+
+
 
     public AdapterViewSpec() {
     }

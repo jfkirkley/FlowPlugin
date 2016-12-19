@@ -1,14 +1,16 @@
 package org.androware.flow.builder;
 
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiField;
-import com.intellij.psi.PsiMember;
-import com.intellij.psi.PsiMethod;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.*;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.search.PsiShortNamesCache;
+import com.intellij.psi.util.PsiUtil;
 
 import javax.swing.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 
 import static org.androware.flow.builder.CompFactory.fillCombo;
@@ -21,6 +23,7 @@ import static org.androware.flow.builder.CompFactory.fillJList;
 public class PSIclassUtils {
 
     public static PsiClass resourceClass;
+    public static Project project;
 
     public static class PsiClassWrap extends CompFactory.ObjectWrap {
         PsiClass psiClass;
@@ -67,6 +70,7 @@ public class PSIclassUtils {
             return field;
         }
         @Override
+
         public Object set(Object o) {
             field = (PsiField) o;
             return field;
@@ -264,4 +268,55 @@ public class PSIclassUtils {
         fillListWithAllClassFields(jListBox, getInnerClass(resourceClass, resourceGroupName), new IgnoreMemberWithPrefix("abc_"));
     }
 
+    public static PsiClass getClass(String className) {
+
+        System.out.println(className);
+        return JavaPsiFacade.getInstance(project).findClass(className, GlobalSearchScope.allScope(project));
+        //return JavaPsiFacade.getInstance(project).findClass(className, GlobalSearchScope.(project));
+    }
+
+    public static PsiClass getClassOfField(PsiField psiField) {
+
+        return PsiUtil.resolveClassInType(psiField.getType());
+        //PsiType.getTypeByName(psiField.getType().getNproject, GlobalSearchScope.allScope(project)).resolve();
+    }
+
+    public static TreeSet<String> simpleTypeSet = new TreeSet();
+
+    static {
+        simpleTypeSet.add("String");
+        simpleTypeSet.add("int");
+        simpleTypeSet.add("Integer");
+        simpleTypeSet.add("long");
+        simpleTypeSet.add("Long");
+        simpleTypeSet.add("float");
+        simpleTypeSet.add("Float");
+        simpleTypeSet.add("double");
+        simpleTypeSet.add("Double");
+        simpleTypeSet.add("byte");
+        simpleTypeSet.add("Byte");
+        simpleTypeSet.add("short");
+        simpleTypeSet.add("Short");
+        simpleTypeSet.add("char");
+        simpleTypeSet.add("Character");
+        simpleTypeSet.add("boolean");
+        simpleTypeSet.add("Boolean");
+    }
+    public static String getTypeName(PsiType type) {
+        return type.toString().substring("PsiType:".length());
+    }
+
+    public static boolean isPrimitiveOrString(PsiType type) {
+        return simpleTypeSet.contains(getTypeName(type));
+    }
+
+    public static String getFieldIdentifier(PsiField field) {
+        return field.getNameIdentifier().toString().substring("PsiIdentifier:".length());
+    }
+
+
+    public static PsiType getParameterType(PsiClassType psiClassType, int index) {
+        PsiType[] params = psiClassType.getParameters();
+        return index < params.length? params[index]: null;
+    }
 }

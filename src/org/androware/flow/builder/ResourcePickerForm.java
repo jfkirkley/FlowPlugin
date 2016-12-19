@@ -19,6 +19,11 @@ public class ResourcePickerForm implements CRUDForm{
 
 
     @Override
+    public void init(Project project, ToolWindow toolWindow, Object target, FormAssembler formAssembler, CRUDForm parentForm) {
+
+    }
+
+    @Override
     public void init(Project project, ToolWindow toolWindow, Object target, FormAssembler formAssembler) {
 
     }
@@ -90,6 +95,11 @@ public class ResourcePickerForm implements CRUDForm{
 
     @Override
     public void done() {
+
+    }
+
+    @Override
+    public void handleChildValue(Object childValue) {
 
     }
 

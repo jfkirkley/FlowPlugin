@@ -79,6 +79,11 @@ public class MapForm implements CRUDForm<Map> {
     }
 
     @Override
+    public void init(Project project, ToolWindow toolWindow, Map target, FormAssembler formAssembler, CRUDForm parentForm) {
+
+    }
+
+    @Override
     public void init(Project project, ToolWindow toolWindow, Map target, FormAssembler formAssembler) {
 
     }
@@ -200,6 +205,11 @@ public class MapForm implements CRUDForm<Map> {
     @Override
     public void done() {
         buildMap(rootNode, map);
+    }
+
+    @Override
+    public void handleChildValue(Object childValue) {
+
     }
 
     @Override

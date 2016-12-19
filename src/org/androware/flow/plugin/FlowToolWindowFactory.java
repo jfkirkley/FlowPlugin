@@ -9,11 +9,14 @@ import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
+import com.intellij.psi.search.PsiShortNamesCache;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import org.androware.androbeans.utils.ReflectionUtils;
 import org.androware.androbeans.utils.ResourceUtils;
 import org.androware.flow.base.FlowBase;
+import org.androware.flow.base.ListMapper;
+import org.androware.flow.base.StepBase;
 import org.androware.flow.builder.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -52,12 +55,19 @@ public class FlowToolWindowFactory implements ToolWindowFactory {
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
 
-        if(instance == null) {
+        PSIclassUtils.project = project;
+
+        if (instance == null) {
             instance = this;
         } else {
             toolWindow.getContentManager().removeAllContents(true);
         }
-
+        /*
+        String [] names = PsiShortNamesCache.getInstance(project).getAllClassNames();
+        for(String n: names) {
+            System.out.println(n);
+        }
+*/
         baseDir = project.getBaseDir().getCanonicalPath();
 
         String SRC_DIR = "/app/src/main/";
@@ -67,50 +77,78 @@ public class FlowToolWindowFactory implements ToolWindowFactory {
         System.out.println("root: " + baseDir);
         System.out.println("root: " + baseDir + SRC_DIR);
 
-        StartFlowForm startFlowForm = new StartFlowForm();
-        startFlowForm.init(project);
-        ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
-        Content content = contentFactory.createContent(startFlowForm.getRootPanel(), "", false);
-        toolWindow.getContentManager().addContent(content);
 
-        startFlowForm.getOpenButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
+        if (false) {
 
-                String resClassName = startFlowForm.getResourceClassName();
-                ResourceUtils.R = ReflectionUtils.getClass(resClassName);
-                String path = "";
-                try {
+            BeanTree beanTree = new BeanTree();
 
-                    FlowBase flowBase = null;
-                    String fileName = startFlowForm.getFileName();
-                    if (fileName == null || fileName.length() == 0) {
-                        flowBase = new FlowBase();
+            //beanTree.init(PSIclassUtils.getClass(TestBean.class.getName()));
+
+            beanTree.init(PSIclassUtils.getClass(StepBase.class.getName()));
+
+            ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
+            Content content = contentFactory.createContent(beanTree.getRootPanel(), "", false);
+            toolWindow.getContentManager().addContent(content);
+
+        } else {
+
+            StartFlowForm startFlowForm = new StartFlowForm();
+            startFlowForm.init(project);
+
+            ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
+            Content content = contentFactory.createContent(startFlowForm.getRootPanel(), "", false);
+            toolWindow.getContentManager().addContent(content);
+
+            startFlowForm.getOpenButton().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    String resClassName = startFlowForm.getResourceClassName();
+                    ResourceUtils.R = ReflectionUtils.getClass(resClassName);
+
+                    if(false) {
+                        toolWindow.getContentManager().removeAllContents(false);
+                        // test code:
+                        StandardJSONlistGeneratorForm form = new StandardJSONlistGeneratorForm();
+
+                        //form.init(project, toolWindow, new ListMapper(), "pref_list_item", StepBase.class, null);
+                        ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
+                        Content content = contentFactory.createContent(form.getRootPanel(), "", false);
+                        toolWindow.getContentManager().addContent(content);
+
+
                     } else {
-                        path = resDir + "/raw/" + fileName;
-                        flowBase = loadFlow(path);
-                        System.out.println(path);
+                        String path = "";
+                        try {
+
+                            FlowBase flowBase = null;
+                            String fileName = startFlowForm.getFileName();
+                            if (fileName == null || fileName.length() == 0) {
+                                flowBase = new FlowBase();
+                            } else {
+                                path = resDir + "/raw/" + fileName;
+                                flowBase = loadFlow(path);
+                                System.out.println(path);
+                            }
+
+                            MainForm mainForm = new MainForm(project, toolWindow, flowBase);
+
+                            mainForm.buildFlowTree(flowBase);
+
+                            toolWindow.getContentManager().removeAllContents(false);
+
+                            Content content = contentFactory.createContent(mainForm.getRootPanel(), "", false);
+                            toolWindow.getContentManager().addContent(content);
+
+                        } catch (Exception e) {
+                            StringWriter sw = new StringWriter();
+                            PrintWriter pw = new PrintWriter(sw);
+                            e.printStackTrace(pw);
+
+                            startFlowForm.setErrorMsg("Could not load Flow: " + path + "\n exception:\n " + sw.toString());
+                        }
                     }
-
-                    MainForm mainForm = new MainForm(project, toolWindow, flowBase);
-
-                    mainForm.buildFlowTree(flowBase);
-
-                    toolWindow.getContentManager().removeAllContents(false);
-
-                    Content content = contentFactory.createContent(mainForm.getRootPanel(), "", false);
-                    toolWindow.getContentManager().addContent(content);
-
-                } catch (Exception e) {
-                    StringWriter sw = new StringWriter();
-                    PrintWriter pw = new PrintWriter(sw);
-                    e.printStackTrace(pw);
-
-                    startFlowForm.setErrorMsg("Could not load Flow: " + path + "\n exception:\n " + sw.toString());
                 }
-
-            }
-        });
-
+            });
+        }
     }
 }

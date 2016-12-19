@@ -65,6 +65,11 @@ public class NavForm  implements CRUDForm<NavBase> {
     }
 
     @Override
+    public void init(Project project, ToolWindow toolWindow, NavBase target, FormAssembler formAssembler, CRUDForm parentForm) {
+
+    }
+
+    @Override
     public void init(Project project, ToolWindow toolWindow, NavBase target, FormAssembler formAssembler) {
         formAssembler.assemble(project, toolWindow, this);
         init(project, toolWindow, target);
@@ -130,6 +135,11 @@ public class NavForm  implements CRUDForm<NavBase> {
         setFieldFromComboVal(targetComboBox, target, "target");
 
         target.useStepGenerator = useseStepGeneratorCheckBox.isSelected();
+
+    }
+
+    @Override
+    public void handleChildValue(Object childValue) {
 
     }
 

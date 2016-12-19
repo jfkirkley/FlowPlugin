@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import static javafx.scene.input.KeyCode.O;
 import static javafx.scene.input.KeyCode.T;
 
 
@@ -236,7 +237,12 @@ public class CompFactory {
             }
 
             if(collection instanceof Map) {
-                ((Map)collection).put(item.toString(), item);
+                if(item instanceof Map.Entry) {
+                    Map.Entry entry = (Map.Entry) item;
+                    ((Map)collection).put(entry.getKey(), entry.getValue());
+                } else {
+                    ((Map) collection).put(item.toString(), item);
+                }
             } else {
                 ((List)collection).add(item);
             }
@@ -248,7 +254,12 @@ public class CompFactory {
 
         public void removeItem(T item) {
             if(collection instanceof Map) {
-                ((Map)collection).remove(item.toString());
+                if(item instanceof Map.Entry) {
+                    Map.Entry entry = (Map.Entry) item;
+                    ((Map) collection).remove(entry.getKey());
+                } else {
+                    ((Map) collection).remove(item.toString());
+                }
             } else {
                 ((List)collection).remove(item);
             }
@@ -257,24 +268,39 @@ public class CompFactory {
             }
         }
 
-        public JComboBoxCRUDWrapper(JComboBox<T> jComboBox, ReflectionUtils.FieldSetter collectionFieldSetter) {
-            this(jComboBox, collectionFieldSetter, null);
+        public JComboBoxCRUDWrapper(JComboBox<T> jComboBox, ReflectionUtils.FieldSetter collectionFieldSetter ) {
+            this(jComboBox, collectionFieldSetter, null, false);
         }
 
-        public JComboBoxCRUDWrapper(JComboBox<T> jComboBox, ReflectionUtils.FieldSetter collectionFieldSetter, Listener listener) {
+        public JComboBoxCRUDWrapper(JComboBox<T> jComboBox, ReflectionUtils.FieldSetter collectionFieldSetter, boolean useEntries ) {
+            this(jComboBox, collectionFieldSetter, null, useEntries);
+        }
+
+        public JComboBoxCRUDWrapper(JComboBox<T> jComboBox, ReflectionUtils.FieldSetter collectionFieldSetter, Listener listener, boolean useEntries) {
             this.listener = listener;
             this.jComboBox = jComboBox;
             this.collectionFieldSetter = collectionFieldSetter;
             this.collection = collectionFieldSetter.get();
-            fillCombo();
+            fillCombo(useEntries);
         }
 
-        private void fillCombo(){
+        public void reset(boolean useEntries) {
+            jComboBox.removeAllItems();
+            fillCombo(useEntries);
+        }
+
+        public void fillCombo(boolean useEntries){
             if(collection != null) {
                 if (collection instanceof Map) {
                     Map<String, T> itemMap = (Map<String, T>) collection;
-                    for (String s : itemMap.keySet()) {
-                        this.jComboBox.addItem(itemMap.get(s));
+                    if(useEntries) {
+                        for (Map.Entry entry: itemMap.entrySet()) {
+                            this.jComboBox.addItem((T)entry);
+                        }
+                    } else {
+                        for (String s : itemMap.keySet()) {
+                            this.jComboBox.addItem(itemMap.get(s));
+                        }
                     }
                 } else {
                     List<T> items = (List<T>) collection;
@@ -391,6 +417,22 @@ public class CompFactory {
         crudObjectEditor.setCompWrapper(crudCompWrapper);
     }
 
+    public static abstract class ObjectBuilder<T> {
+        public abstract T build();
+    }
+
+    public static class CopyBuilder<T> extends ObjectBuilder<T> {
+        private T objectToCopy;
+        public CopyBuilder(T objectToCopy) {
+            this.objectToCopy = objectToCopy;
+        }
+
+        @Override
+        public T build() {
+            return (T)ReflectionUtils.tryCopy(objectToCopy);
+        }
+    }
+
     //project, toolWindow, ObjectLoaderSpecForm.class, ObjectLoaderSpecBase.class),
     public static class DefaultCRUDEditorImpl<T> implements CompFactory.CRUDObjectEditor<T> {
         ToolWindow toolWindow;
@@ -398,25 +440,11 @@ public class CompFactory {
         Class formClass;
         Class targetClass;
         ReflectionUtils.FieldSetter fieldSetter;
-        T defaultTemplateObject;
+        ObjectBuilder<T> objectBuilder;
         CRUDCompWrapper<T> crudCompWrapper;
         CRUDForm<T> form;
         FormAssembler formAssembler;
-        Listener listener = null;
-
-        // IDEA:  Listener api that auto creates listener, and broadcast api through intorspective aop style patterns
-        public  static abstract class Listener<T> {
-            public abstract void onEdit(DefaultCRUDEditorImpl<T> editor, T object);
-
-            public abstract T onCreate(DefaultCRUDEditorImpl<T> editor, T object);
-
-            public abstract void onDone(DefaultCRUDEditorImpl<T> editor);
-
-            public abstract void onCancel(DefaultCRUDEditorImpl<T> editor);
-
-            public abstract void onSetCompWrapper(DefaultCRUDEditorImpl editor, CRUDCompWrapper<T> crudCompWrapper);
-
-        }
+        CRUDForm parentForm;
 
         public DefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass) {
             this(project, toolWindow, formClass, targetClass, null);
@@ -426,23 +454,23 @@ public class CompFactory {
             this(project, toolWindow, formClass, targetClass, fieldSetter, null);
         }
 
-        public DefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter, T defaultTemplateObject) {
-            this(project, toolWindow, formClass, targetClass, fieldSetter, defaultTemplateObject, null);
+        public DefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter, ObjectBuilder<T> objectBuilder) {
+            this(project, toolWindow, formClass, targetClass, fieldSetter, objectBuilder, null);
         }
 
-        public DefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter, T defaultTemplateObject, FormAssembler formAssembler) {
-            this(project, toolWindow, formClass, targetClass, fieldSetter, defaultTemplateObject, formAssembler, null);
+        public DefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter, ObjectBuilder<T> objectBuilder, FormAssembler formAssembler) {
+            this(project, toolWindow, formClass, targetClass, fieldSetter, objectBuilder, formAssembler, null);
         }
 
-        public DefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter, T defaultTemplateObject, FormAssembler formAssembler, Listener listener) {
-            this.listener = listener;
+        public DefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter, ObjectBuilder<T> objectBuilder, FormAssembler formAssembler, CRUDForm parentForm) {
+            this.parentForm = parentForm;
             this.project = project;
             this.formAssembler = formAssembler;
             this.toolWindow = toolWindow;
             this.formClass = formClass;
             this.targetClass = targetClass;
             this.fieldSetter = fieldSetter;
-            this.defaultTemplateObject = defaultTemplateObject;
+            this.objectBuilder = objectBuilder;
         }
 
         @Override
@@ -451,27 +479,29 @@ public class CompFactory {
                 object = create();
             }
             form = (CRUDForm) ReflectionUtils.newInstance(formClass);
-            if (formAssembler == null) {
-                form.init(project, toolWindow, object);
+            if(formAssembler == null) {
+                if(parentForm == null) {
+                    form.init(project, toolWindow, object);
+                } else {
+                    form.init(project, toolWindow, object, formAssembler, parentForm);
+                }
             } else {
-                form.init(project, toolWindow, object, formAssembler);
+                if(parentForm == null) {
+                    form.init(project, toolWindow, object, formAssembler);
+                } else {
+                    form.init(project, toolWindow, object, formAssembler, parentForm);
+                }
             }
             EditFormWrapperForm editFormWrapperForm = new EditFormWrapperForm();
             editFormWrapperForm.init(project, toolWindow, form.getRootPanel(), this);
-            if(this.listener != null) {
-                this.listener.onEdit(this, object);
-            }
         }
 
         @Override
         public T create() {
 
-            T obj = defaultTemplateObject != null ? (T) ReflectionUtils.tryCopy(defaultTemplateObject) : (T) ReflectionUtils.newInstance(targetClass);
+            T obj = objectBuilder != null ? (T) objectBuilder.build() : (T) ReflectionUtils.newInstance(targetClass);
             if (fieldSetter != null) {
                 fieldSetter.set(obj);
-            }
-            if(this.listener != null) {
-                this.listener.onCreate(this, obj);
             }
             return obj;
         }
@@ -479,25 +509,16 @@ public class CompFactory {
         @Override
         public void done() {
             form.done();
-            if(this.listener != null) {
-                this.listener.onDone(this);
-            }
         }
 
         @Override
         public void cancel() {
-            if(this.listener != null) {
-                this.listener.onCancel(this);
-            }
 
         }
 
         @Override
         public void setCompWrapper(CRUDCompWrapper<T> crudCompWrapper) {
             this.crudCompWrapper = crudCompWrapper;
-            if(this.listener != null) {
-                this.listener.onSetCompWrapper(this, crudCompWrapper);
-            }
         }
     }
 
@@ -512,8 +533,8 @@ public class CompFactory {
             super(project, toolWindow, formClass, targetClass, fieldSetter);
         }
 
-        public PrimitiveTypeDefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter, T defaultTemplateObject) {
-            super(project, toolWindow, formClass, targetClass, fieldSetter, defaultTemplateObject);
+        public PrimitiveTypeDefaultCRUDEditorImpl(Project project, ToolWindow toolWindow, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter, ObjectBuilder<T> objectBuilder) {
+            super(project, toolWindow, formClass, targetClass, fieldSetter, objectBuilder);
         }
 
         @Override
@@ -527,11 +548,15 @@ public class CompFactory {
         mkAddEditToggleWidget(project, toolWindow, toggleButton, formClass, targetClass, fieldSetter, null);
     }
     public static <T> void mkAddEditToggleWidget(Project project, ToolWindow toolWindow, AbstractButton toggleButton, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter, FormAssembler formAssembler) {
+        mkAddEditToggleWidget(project, toolWindow, toggleButton, formClass, targetClass, fieldSetter, formAssembler, null);
+    }
+
+    public static <T> void mkAddEditToggleWidget(Project project, ToolWindow toolWindow, AbstractButton toggleButton, Class formClass, Class targetClass, ReflectionUtils.FieldSetter fieldSetter, FormAssembler formAssembler, CRUDForm parentForm) {
 
         toggleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                DefaultCRUDEditorImpl<T> editor = new DefaultCRUDEditorImpl<T>(project, toolWindow, formClass, targetClass, fieldSetter, null, formAssembler);
+                DefaultCRUDEditorImpl<T> editor = new DefaultCRUDEditorImpl<T>(project, toolWindow, formClass, targetClass, fieldSetter, null, formAssembler, parentForm);
 
                 editor.edit((T)fieldSetter.get());
             }

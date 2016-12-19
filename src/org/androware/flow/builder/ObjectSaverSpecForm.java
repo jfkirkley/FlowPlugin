@@ -21,6 +21,11 @@ public class ObjectSaverSpecForm implements CRUDForm<ObjectSaverSpecBase>{
     private ObjectSaverSpecBase target;
 
     @Override
+    public void init(Project project, ToolWindow toolWindow, ObjectSaverSpecBase target, FormAssembler formAssembler, CRUDForm parentForm) {
+
+    }
+
+    @Override
     public void init(Project project, ToolWindow toolWindow, ObjectSaverSpecBase target, FormAssembler formAssembler) {
 
     }
@@ -72,6 +77,11 @@ public class ObjectSaverSpecForm implements CRUDForm<ObjectSaverSpecBase>{
 
     @Override
     public void done() {
+
+    }
+
+    @Override
+    public void handleChildValue(Object childValue) {
 
     }
 

@@ -76,7 +76,7 @@ public class TwoWayMapperForm implements CRUDForm<Map> {
                             //Class beanClass = ReflectionUtils.getClass(registry.get(beanId));
 
 
-                            PsiClass psibeanClass = JavaPsiFacade.getInstance(project).findClass(registry.get(beanId), GlobalSearchScope.allScope(project));
+                            PsiClass psibeanClass = PSIclassUtils.getClass(registry.get(beanId));
                             PSIclassUtils.fillListWithAllClassMembers(form.getFieldList(), psibeanClass);
                             //CompFactory.fillListWithAllClassMembers(form.getFieldList(), beanClass);
                         }
@@ -115,6 +115,11 @@ public class TwoWayMapperForm implements CRUDForm<Map> {
     public void addMappedItem(String widgetId, String beanSpec) {
         map.put(widgetId, beanSpec);
         simpleTypeListForm.getTypeListComboBox().addItem(widgetId + KEY_VALUE_SEPERATOR + beanSpec);
+    }
+
+    @Override
+    public void init(Project project, ToolWindow toolWindow, Map target, FormAssembler formAssembler, CRUDForm parentForm) {
+
     }
 
     @Override
@@ -173,6 +178,11 @@ public class TwoWayMapperForm implements CRUDForm<Map> {
 
     @Override
     public void done() {
+
+    }
+
+    @Override
+    public void handleChildValue(Object childValue) {
 
     }
 }

@@ -15,10 +15,12 @@ public class TraceAspect extends SimpleAspect {
 
     @Override
     public void before(Object theThis, String methodName, Object[] args) throws IntrospectionException {
-        trace("call " + theThis.getClass().getName() + " -> " + methodName);
+        //trace("call " + theThis.getClass().getName() + " -> " + methodName);
+        //trace("call -> " + methodName);
+        trace(methodName);
 
         for(Object arg: args) {
-            trace(": " + arg);
+            trace(": " + arg + " | " + (arg != null? arg.getClass().getName(): " null value "));
         }
         indent += "  ";
     }

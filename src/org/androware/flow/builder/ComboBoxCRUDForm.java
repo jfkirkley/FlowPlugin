@@ -25,42 +25,57 @@ public class ComboBoxCRUDForm<T> {
     private JButton deleteButton;
     private JPanel rootPanel;
 
-    public void init(Project project, CompFactory.CRUDObjectEditor<T> crudObjectEditor, CompFactory.JComboBoxCRUDWrapper jComboBoxCRUDWrapper) {
+    public CompFactory.JComboBoxCRUDWrapper getjComboBoxCRUDWrapper() {
+        return jComboBoxCRUDWrapper;
+    }
 
+    private CompFactory.JComboBoxCRUDWrapper jComboBoxCRUDWrapper;
+
+    public void init(Project project, CompFactory.CRUDObjectEditor<T> crudObjectEditor, CompFactory.JComboBoxCRUDWrapper jComboBoxCRUDWrapper) {
+        this.jComboBoxCRUDWrapper = jComboBoxCRUDWrapper;
         CompFactory.addCRUDWrapper(project, crudObjectEditor, editButton, addMutton, deleteButton, jComboBoxCRUDWrapper);
     }
 
     public void init(Project project, CompFactory.CRUDObjectEditor<T> crudObjectEditor, ReflectionUtils.FieldSetter fieldSetter, CompFactory.JComboBoxCRUDWrapper.Listener listener) {
-        CompFactory.JComboBoxCRUDWrapper jComboBoxCRUDWrapper = new CompFactory.JComboBoxCRUDWrapper(comboBox, fieldSetter, listener);
+        jComboBoxCRUDWrapper = new CompFactory.JComboBoxCRUDWrapper(comboBox, fieldSetter, listener, false);
 
         CompFactory.addCRUDWrapper(project, crudObjectEditor, editButton, addMutton, deleteButton, jComboBoxCRUDWrapper);
     }
 
+    public void init(Project project, CompFactory.CRUDObjectEditor<T> crudObjectEditor, ReflectionUtils.FieldSetter fieldSetter, boolean useEntries) {
+        //CompFactory.JComboBoxCRUDWrapper jComboBoxCRUDWrapper = new CompFactory.JComboBoxCRUDWrapper(comboBox, fieldSetter, useEntries);
+        try {
+            jComboBoxCRUDWrapper = AOP.t(CompFactory.JComboBoxCRUDWrapper.class, comboBox, fieldSetter, useEntries);
+
+            CompFactory.addCRUDWrapper(project, crudObjectEditor, editButton, addMutton, deleteButton, jComboBoxCRUDWrapper);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void init(Project project, CompFactory.CRUDObjectEditor<T> crudObjectEditor, ReflectionUtils.FieldSetter fieldSetter) {
-        CompFactory.JComboBoxCRUDWrapper jComboBoxCRUDWrapper = new CompFactory.JComboBoxCRUDWrapper(comboBox, fieldSetter);
+        jComboBoxCRUDWrapper = new CompFactory.JComboBoxCRUDWrapper(comboBox, fieldSetter);
 
         CompFactory.addCRUDWrapper(project, crudObjectEditor, editButton, addMutton, deleteButton, jComboBoxCRUDWrapper);
     }
 
 
     public void init(Project project, CompFactory.CRUDObjectEditor<T> crudObjectEditor, List<T> items) {
-        CompFactory.JComboBoxCRUDWrapper jComboBoxCRUDWrapper = new CompFactory.JComboBoxCRUDWrapper(comboBox, items);
+        jComboBoxCRUDWrapper = new CompFactory.JComboBoxCRUDWrapper(comboBox, items);
 
         CompFactory.addCRUDWrapper(project, crudObjectEditor, editButton, addMutton, deleteButton, jComboBoxCRUDWrapper);
     }
 
     public void init(Project project, CompFactory.CRUDObjectEditor<T> crudObjectEditor, Map<String, T> itemMap) {
-        CompFactory.JComboBoxCRUDWrapper jComboBoxCRUDWrapper = new CompFactory.JComboBoxCRUDWrapper(comboBox, itemMap);
+        jComboBoxCRUDWrapper = new CompFactory.JComboBoxCRUDWrapper(comboBox, itemMap);
 
         CompFactory.addCRUDWrapper(project, crudObjectEditor, editButton, addMutton, deleteButton, jComboBoxCRUDWrapper);
     }
 
     public void init(Project project, CompFactory.CRUDObjectEditor<T> crudObjectEditor, T[] items) {
-        CompFactory.JComboBoxCRUDWrapper jComboBoxCRUDWrapper = new CompFactory.JComboBoxCRUDWrapper(comboBox, Arrays.asList(items));
+        jComboBoxCRUDWrapper = new CompFactory.JComboBoxCRUDWrapper(comboBox, Arrays.asList(items));
 
         CompFactory.addCRUDWrapper(project, crudObjectEditor, editButton, addMutton, deleteButton, jComboBoxCRUDWrapper);
-
-
     }
 
 }

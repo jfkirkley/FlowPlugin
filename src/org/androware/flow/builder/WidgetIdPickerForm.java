@@ -18,6 +18,11 @@ public class WidgetIdPickerForm implements CRUDForm {
     private JPanel rootPanel;
 
     @Override
+    public void init(Project project, ToolWindow toolWindow, Object target, FormAssembler formAssembler, CRUDForm parentForm) {
+
+    }
+
+    @Override
     public void init(Project project, ToolWindow toolWindow, Object target, FormAssembler formAssembler) {
     }
 
@@ -66,6 +71,11 @@ public class WidgetIdPickerForm implements CRUDForm {
 
     @Override
     public void done() {
+
+    }
+
+    @Override
+    public void handleChildValue(Object childValue) {
 
     }
 }

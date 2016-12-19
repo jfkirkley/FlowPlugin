@@ -23,6 +23,11 @@ public class FileChooserWidget implements CRUDForm<String>{
     }
 
     @Override
+    public void init(Project project, ToolWindow toolWindow, String target, FormAssembler formAssembler, CRUDForm parentForm) {
+
+    }
+
+    @Override
     public void init(Project project, ToolWindow toolWindow, String target, FormAssembler formAssembler) {
 
     }
@@ -58,6 +63,11 @@ public class FileChooserWidget implements CRUDForm<String>{
 
     @Override
     public void done() {
+
+    }
+
+    @Override
+    public void handleChildValue(Object childValue) {
 
     }
 
