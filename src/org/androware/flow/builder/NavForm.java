@@ -14,6 +14,7 @@ import java.util.Arrays;
 
 import static org.androware.flow.builder.CompFactory.setComboVal;
 import static org.androware.flow.builder.CompFactory.setFieldFromComboVal;
+import static org.androware.flow.builder.CompFactory.setFieldSetterOnAction;
 import static org.androware.flow.builder.PSIclassUtils.setComboItemWithResourceGroupField;
 
 
@@ -38,6 +39,9 @@ public class NavForm  implements CRUDForm<NavBase> {
 
     private JComboBox widgetIdComboBox;
 
+    private JComboBox adapterNameComboBox;
+    private JCheckBox useListAdapterCheckBox;
+    private CRUDForm parentForm;
     NavBase target;
 
     public static class NavFormAssembler implements FormAssembler<NavForm> {
@@ -61,12 +65,16 @@ public class NavForm  implements CRUDForm<NavBase> {
                 form.getWidgetIdComboBox().setEnabled(false);
             }
             CompFactory.fillCombo(form.getTargetComboBox(), new ArrayList<String>(flowBase.steps.keySet()));
+            if(stepBase.ui != null && stepBase.ui.adapterViews != null) {
+                CompFactory.fillCombo(form.getAdapterNameComboBox(), new ArrayList<String>(stepBase.ui.adapterViews.keySet()));
+            }
         }
     }
 
     @Override
     public void init(Project project, ToolWindow toolWindow, NavBase target, FormAssembler formAssembler, CRUDForm parentForm) {
-
+        this.parentForm = parentForm;
+        init(project, toolWindow, target, formAssembler);
     }
 
     @Override
@@ -132,9 +140,15 @@ public class NavForm  implements CRUDForm<NavBase> {
         setFieldFromComboVal(animInComboBox, target, "anim_in");
         setFieldFromComboVal(animOutComboBox, target, "anim_out");
         setFieldFromComboVal(widgetIdComboBox, target, "compName");
+        setFieldFromComboVal(adapterNameComboBox, target, "listAdapterName");
         setFieldFromComboVal(targetComboBox, target, "target");
 
         target.useStepGenerator = useseStepGeneratorCheckBox.isSelected();
+
+        if(parentForm != null) {
+            parentForm.handleChildValue(target);
+        }
+
 
     }
 
@@ -142,5 +156,11 @@ public class NavForm  implements CRUDForm<NavBase> {
     public void handleChildValue(Object childValue) {
 
     }
+
+
+    public JComboBox getAdapterNameComboBox() {
+        return adapterNameComboBox;
+    }
+
 
 }

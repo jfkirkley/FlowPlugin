@@ -12,6 +12,8 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static org.androware.flow.builder.PSIclassUtils.project;
+
 /**
  * Created by jkirkley on 8/18/16.
  */
@@ -94,10 +96,9 @@ public class StepForm implements CRUDForm<StepBase> {
             e.printStackTrace();
         }
 
-
         navsComboBoxCRUDForm.init(
                 project,
-                new CompFactory.DefaultCRUDEditorImpl<NavBase>(project, toolWindow, NavForm.class, NavBase.class, null, null, new NavForm.NavFormAssembler(flowBase, stepBase)),
+                new CompFactory.DefaultCRUDEditorImpl<NavBase>(project, toolWindow, NavForm.class, NavBase.class, null, null, new NavForm.NavFormAssembler(flowBase, stepBase), this),
                 new ReflectionUtils.FieldSetter(stepBase, "navMap")
         );
 
@@ -177,7 +178,9 @@ public class StepForm implements CRUDForm<StepBase> {
 
     @Override
     public void handleChildValue(Object childValue) {
-
+        if(childValue instanceof NavBase) {
+            CompFactory.ensureCorrectMapKey(stepBase, "navMap", childValue, childValue.toString());
+        }
     }
 
     @Override

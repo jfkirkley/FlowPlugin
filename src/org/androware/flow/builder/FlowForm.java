@@ -37,6 +37,7 @@ public class FlowForm {
     private JTextField nameTextField;
     private JButton saveButton;
     private JButton closeButton;
+    private JCheckBox isRootCheckBox;
 
 
     ToolWindow toolWindow;
@@ -124,6 +125,7 @@ public class FlowForm {
                 new NavForm.NavFormAssembler(flowBase, null)
         );
 
+        CompFactory.setFieldSetterOnAction(isRootCheckBox, new ReflectionUtils.FieldSetter(flowBase, "isRoot"), flowBase.isRoot);
     }
 
 

@@ -32,7 +32,12 @@ import java.util.List;
 /**
  * Created by jkirkley on 8/19/16.
  */
+/*
+TODO:
+- remove name properties
+- validate to ensure essential fields are filled in: processor, parentContainer, layout etc.
 
+ */
 public class FlowToolWindowFactory implements ToolWindowFactory {
 
     public String baseDir;
@@ -127,6 +132,7 @@ public class FlowToolWindowFactory implements ToolWindowFactory {
                             } else {
                                 path = resDir + "/raw/" + fileName;
                                 flowBase = loadFlow(path);
+                                flowBase.name = fileName.substring(0, fileName.indexOf('.'));
                                 System.out.println(path);
                             }
 

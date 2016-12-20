@@ -154,6 +154,9 @@ public class AdapterViewSpecForm implements CRUDForm<AdapterViewSpec> {
     @Override
     public void done() {
         CompFactory.setValFromTextfield(nameTextField, adapterViewSpec, "name");
+        if(adapterViewSpec.name != null ) {
+            CompFactory.ensureCorrectMapKey(myStepBase.ui, "adapterViews", adapterViewSpec, adapterViewSpec.toString());
+        }
     }
 
     @Override

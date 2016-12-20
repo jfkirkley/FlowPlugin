@@ -5,6 +5,7 @@ package org.androware.flow.base;
  */
 
 public class NavBase {
+    public String listAdapterName;
     public String compName;
     public String event;
     public String anim_in;
@@ -13,6 +14,6 @@ public class NavBase {
     public boolean useStepGenerator;
 
     public String toString() {
-        return target != null? target: compName != null? compName: super.toString();
+        return target != null? target: listAdapterName != null? listAdapterName: super.toString();
     }
 }

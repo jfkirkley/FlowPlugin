@@ -30,6 +30,9 @@ public class ObjectLoaderSpecForm implements CRUDForm<ObjectLoaderSpecBase> {
     private ComboBoxCRUDForm propertiesComboBoxCRUDForm;
 
     private ObjectLoaderSpecBase objectLoaderSpecBase;
+
+    private CRUDForm parentForm;
+
     ButtonGroup whenButtonGroup = new ButtonGroup();
     HashMap<String, ButtonModel> whenMap = new HashMap<>();
 
@@ -44,6 +47,12 @@ public class ObjectLoaderSpecForm implements CRUDForm<ObjectLoaderSpecBase> {
         objectLoaderSpecBase.objectId = objectIdTextField.getText();
         objectLoaderSpecBase.alias = aliasTextField.getText();
         objectLoaderSpecBase.autoCreate = autoCreateCheckBox.isSelected();
+
+        if(parentForm != null) {
+            parentForm.handleChildValue(objectLoaderSpecBase);
+        }
+
+
     }
 
     @Override
@@ -95,7 +104,8 @@ public class ObjectLoaderSpecForm implements CRUDForm<ObjectLoaderSpecBase> {
 
     @Override
     public void init(Project project, ToolWindow toolWindow, ObjectLoaderSpecBase target, FormAssembler formAssembler, CRUDForm parentForm) {
-
+        this.parentForm = parentForm;
+        init(project, toolWindow, target);
     }
 
     @Override

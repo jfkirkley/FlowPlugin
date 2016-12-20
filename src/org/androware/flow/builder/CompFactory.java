@@ -38,6 +38,23 @@ import static javafx.scene.input.KeyCode.T;
  */
 public class CompFactory {
 
+    public static void ensureCorrectMapKey(Object parentObject, String mapFieldName, Object childObject, String childKey) {
+        Map map = (Map)ReflectionUtils.getFieldValue(parentObject, mapFieldName);
+
+        if(map != null && childKey != null) {
+            for (Object key : map.keySet()) {
+                Object value = map.get(key);
+                if(value.equals(childObject)) {
+                    if(!key.equals(childKey)) {
+                        map.remove(key);
+                        map.put(childKey, value);
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
     public static void setFieldSetterOnSelect(JList jList, ReflectionUtils.FieldSetter fieldSetter) {
         setFieldSetterOnSelect(jList, fieldSetter, null);
     }
@@ -558,11 +575,15 @@ public class CompFactory {
             public void actionPerformed(ActionEvent actionEvent) {
                 DefaultCRUDEditorImpl<T> editor = new DefaultCRUDEditorImpl<T>(project, toolWindow, formClass, targetClass, fieldSetter, null, formAssembler, parentForm);
 
-                editor.edit((T)fieldSetter.get());
+                if(fieldSetter != null ) {
+                    editor.edit((T)fieldSetter.get());
+                } else {
+                    editor.edit(null);
+                }
             }
         });
 
-        if (fieldSetter.get() != null) {
+        if (fieldSetter != null && fieldSetter.get() != null) {
             toggleButton.setText("Edit");
         } else {
             toggleButton.setText("Add");

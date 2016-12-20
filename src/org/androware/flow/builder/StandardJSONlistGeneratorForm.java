@@ -111,15 +111,16 @@ public class StandardJSONlistGeneratorForm implements CRUDForm<ListMapper> {
 
                 if( node != null && node instanceof PsiField) {
                     PsiField psiField = (PsiField) node;
-                    if(psiField.getType().toString().contains("List<")) {
+                    String typeRep = psiField.getType().toString();
+                    if(typeRep.contains("List<") || typeRep.contains("Map<")) {
                         String fieldName = PSIclassUtils.getFieldIdentifier(psiField);
                         listField.setText(fieldName);
                         listMapper.listFieldName = fieldName;
                     } else {
-                        JOptionPane.showMessageDialog(rootPanel, "Please select a list type from the bean tree.");
+                        JOptionPane.showMessageDialog(rootPanel, "Please select a list or map type from the bean tree.");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(rootPanel, "Please select a list type from the bean tree.");
+                    JOptionPane.showMessageDialog(rootPanel, "Please select a list or map type from the bean tree.");
                 }
             }
         });

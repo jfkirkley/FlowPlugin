@@ -22,6 +22,8 @@ public class FlowBase {
     public NavBase startNav;    // navigates to the first step
     public String fragmentContainer;
 
+    public boolean isRoot = false; // marks the top level flow
+
     public static FlowBase currFlowBase = null;
     public FlowBase() {
         currFlowBase = this;
