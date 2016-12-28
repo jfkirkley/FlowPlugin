@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/org/androware/flow/builder/CompFactory.java" line="777" />
+    <bookmark url="file://$PROJECT_DIR$/src/org/androware/flow/builder/CompFactory.java" line="782" />
     <bookmark url="file://$PROJECT_DIR$/src/org/androware/flow/base/FlowBase.java" line="64" mnemonic="9" />
-    <bookmark url="file://$PROJECT_DIR$/src/org/androware/flow/builder/CompFactory.java" line="784" />
+    <bookmark url="file://$PROJECT_DIR$/src/org/androware/flow/builder/CompFactory.java" line="789" />
     <bookmark url="file://$PROJECT_DIR$/src/org/androware/flow/builder/JsonObjectWriter.java" line="133" />
     <bookmark url="file://$PROJECT_DIR$/src/org/androware/flow/builder/JsonObjectWriter.java" line="137" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e6b2747-1f5d-40db-8c8a-7b0c17664713" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FlowPlugin.zip" afterPath="$PROJECT_DIR$/FlowPlugin.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/base/FlowBase.java" afterPath="$PROJECT_DIR$/src/org/androware/flow/base/FlowBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/base/NavBase.java" afterPath="$PROJECT_DIR$/src/org/androware/flow/base/NavBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/builder/AdapterViewSpecForm.java" afterPath="$PROJECT_DIR$/src/org/androware/flow/builder/AdapterViewSpecForm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/base/ObjectLoaderSpecBase.java" afterPath="$PROJECT_DIR$/src/org/androware/flow/base/ObjectLoaderSpecBase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/base/ObjectSaverSpecBase.java" afterPath="$PROJECT_DIR$/src/org/androware/flow/base/ObjectSaverSpecBase.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/builder/CompFactory.java" afterPath="$PROJECT_DIR$/src/org/androware/flow/builder/CompFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/builder/FlowForm.form" afterPath="$PROJECT_DIR$/src/org/androware/flow/builder/FlowForm.form" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/builder/FlowForm.java" afterPath="$PROJECT_DIR$/src/org/androware/flow/builder/FlowForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/builder/NavForm.form" afterPath="$PROJECT_DIR$/src/org/androware/flow/builder/NavForm.form" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/builder/NavForm.java" afterPath="$PROJECT_DIR$/src/org/androware/flow/builder/NavForm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/builder/ObjectLoaderSpecForm.form" afterPath="$PROJECT_DIR$/src/org/androware/flow/builder/ObjectLoaderSpecForm.form" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/builder/ObjectLoaderSpecForm.java" afterPath="$PROJECT_DIR$/src/org/androware/flow/builder/ObjectLoaderSpecForm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/builder/ObjectSaverSpecForm.form" afterPath="$PROJECT_DIR$/src/org/androware/flow/builder/ObjectSaverSpecForm.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/builder/ObjectSaverSpecForm.java" afterPath="$PROJECT_DIR$/src/org/androware/flow/builder/ObjectSaverSpecForm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/builder/PSIclassUtils.java" afterPath="$PROJECT_DIR$/src/org/androware/flow/builder/PSIclassUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/builder/PropertiesForm.java" afterPath="$PROJECT_DIR$/src/org/androware/flow/builder/PropertiesForm.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/builder/SimpleTypeListForm.java" afterPath="$PROJECT_DIR$/src/org/androware/flow/builder/SimpleTypeListForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/builder/StandardJSONlistGeneratorForm.java" afterPath="$PROJECT_DIR$/src/org/androware/flow/builder/StandardJSONlistGeneratorForm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/builder/StepForm.form" afterPath="$PROJECT_DIR$/src/org/androware/flow/builder/StepForm.form" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/builder/StepForm.java" afterPath="$PROJECT_DIR$/src/org/androware/flow/builder/StepForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/androware/flow/plugin/FlowToolWindowFactory.java" afterPath="$PROJECT_DIR$/src/org/androware/flow/plugin/FlowToolWindowFactory.java" />
     </list>
     <ignored path="FlowPlugin.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,104 +44,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="StepForm.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/StepForm.java">
+      <file leaf-file-name="ObjectSaverSpecForm.form" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/ObjectSaverSpecForm.form">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="112" column="8" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="8" />
-              <folding>
-                <element signature="e#6635#6636#0" expanded="true" />
-                <element signature="e#6689#6690#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdapterViewSpec.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/base/AdapterViewSpec.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NavForm.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/NavForm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="142" column="0" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
-              <folding>
-                <element signature="e#5119#5120#0" expanded="true" />
-                <element signature="e#5161#5162#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NavForm.form" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/NavForm.form">
-          <provider selected="true" editor-type-id="ui-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NavBase.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/base/NavBase.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FlowForm.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/FlowForm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FlowBase.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/base/FlowBase.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ObjectLoaderSpecForm.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/ObjectLoaderSpecForm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="792">
-              <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ComboBoxCRUDForm.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/ComboBoxCRUDForm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CompFactory.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CompFactory.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/CompFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="481" column="214" selection-start-line="481" selection-start-column="213" selection-end-line="481" selection-end-column="214" />
+            <state relative-caret-position="292">
+              <caret line="568" column="27" selection-start-line="568" selection-start-column="27" selection-end-line="568" selection-end-column="27" />
               <folding>
                 <element signature="docComment;class#CompFactory#0" expanded="false" />
                 <element signature="method#setFieldSetterOnSelect#0;class#CompFactory#0" expanded="false" />
@@ -161,14 +78,14 @@
                 <element signature="method#ComboBoxSink#0;class#ComboBoxSink#0;class#CompFactory#0" expanded="false" />
                 <element signature="method#sink#0;class#ComboBoxSink#0;class#CompFactory#0" expanded="false" />
                 <element signature="method#addTreeClassChooserAction#0;class#CompFactory#0" expanded="false" />
-                <element signature="class#5638:6144" expanded="false" />
-                <element signature="method#actionPerformed#0;class#5638:6144" expanded="false" />
+                <element signature="class#5826:6332" expanded="false" />
+                <element signature="method#actionPerformed#0;class#5826:6332" expanded="false" />
                 <element signature="method#addTreeClassChooserAction#1;class#CompFactory#0" expanded="false" />
                 <element signature="method#addTreeClassChooserAction#2;class#CompFactory#0" expanded="false" />
                 <element signature="method#addTreeClassChooserAction#3;class#CompFactory#0" expanded="false" />
                 <element signature="method#addFileChooserAction#0;class#CompFactory#0" expanded="false" />
-                <element signature="class#7213:7719" expanded="false" />
-                <element signature="method#actionPerformed#0;class#7213:7719" expanded="false" />
+                <element signature="class#7401:7907" expanded="false" />
+                <element signature="method#actionPerformed#0;class#7401:7907" expanded="false" />
                 <element signature="method#addFileChooserAction#1;class#CompFactory#0" expanded="false" />
                 <element signature="method#addFileChooserAction#2;class#CompFactory#0" expanded="false" />
                 <element signature="class#CRUDObjectEditor#0;class#CompFactory#0" expanded="false" />
@@ -177,8 +94,6 @@
                 <element signature="class#CopyBuilder#0;class#CompFactory#0" expanded="false" />
                 <element signature="method#DefaultCRUDEditorImpl#0;class#DefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
                 <element signature="method#DefaultCRUDEditorImpl#1;class#DefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
-                <element signature="method#DefaultCRUDEditorImpl#2;class#DefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
-                <element signature="method#DefaultCRUDEditorImpl#4;class#DefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
                 <element signature="method#create#0;class#DefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
                 <element signature="method#cancel#0;class#DefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
                 <element signature="class#PrimitiveTypeDefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
@@ -186,7 +101,6 @@
                 <element signature="method#PrimitiveTypeDefaultCRUDEditorImpl#1;class#PrimitiveTypeDefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
                 <element signature="method#PrimitiveTypeDefaultCRUDEditorImpl#2;class#PrimitiveTypeDefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
                 <element signature="method#done#0;class#PrimitiveTypeDefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
-                <element signature="method#mkAddEditToggleWidget#0;class#CompFactory#0" expanded="false" />
                 <element signature="method#mkAddEditToggleWidget#1;class#CompFactory#0" expanded="false" />
                 <element signature="method#fillCombo#0;class#CompFactory#0" expanded="false" />
                 <element signature="class#ObjectWrap#0;class#CompFactory#0" expanded="false" />
@@ -210,14 +124,120 @@
                 <element signature="method#setFieldFromComboVal#0;class#CompFactory#0" expanded="false" />
                 <element signature="method#setTextfieldVal#0;class#CompFactory#0" expanded="false" />
                 <element signature="method#setValFromTextfield#0;class#CompFactory#0" expanded="false" />
-                <marker date="1482227522259" expanded="false" signature="2265:2928" ph="{...}" />
-                <marker date="1482227522259" expanded="false" signature="23065:23325" ph="{...}" />
-                <marker date="1482227522259" expanded="false" signature="23440:23551" ph="{...}" />
-                <marker date="1482227522259" expanded="false" signature="23692:23911" ph="{...}" />
-                <marker date="1482227522259" expanded="false" signature="27539:27600" ph="{...}" />
-                <marker date="1482227522259" expanded="false" signature="27716:28024" ph="{...}" />
-                <marker date="1482227522259" expanded="false" signature="28345:28437" ph="{...}" />
-                <marker date="1482227522259" expanded="false" signature="28558:28898" ph="{...}" />
+                <marker date="1482485792876" expanded="false" signature="2265:2928" ph="{...}" />
+                <marker date="1482485792876" expanded="false" signature="23253:23513" ph="{...}" />
+                <marker date="1482485792876" expanded="false" signature="23628:23739" ph="{...}" />
+                <marker date="1482485792876" expanded="false" signature="23880:24099" ph="{...}" />
+                <marker date="1482485792876" expanded="false" signature="27727:27788" ph="{...}" />
+                <marker date="1482485792876" expanded="false" signature="27904:28212" ph="{...}" />
+                <marker date="1482485792876" expanded="false" signature="28533:28625" ph="{...}" />
+                <marker date="1482485792876" expanded="false" signature="28746:29086" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ObjectLoaderSpecForm.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/ObjectLoaderSpecForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="540">
+              <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StepForm.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/StepForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="610">
+              <caret line="125" column="20" selection-start-line="125" selection-start-column="20" selection-end-line="125" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PropertiesForm.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/PropertiesForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="624">
+              <caret line="62" column="8" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StepForm.form" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/StepForm.form">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ComboBoxCRUDForm.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/ComboBoxCRUDForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="472">
+              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MapForm.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/MapForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1458">
+              <caret line="100" column="8" selection-start-line="100" selection-start-column="8" selection-end-line="100" selection-end-column="8" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#4841#4842#0" expanded="false" />
+                <element signature="e#4894#4895#0" expanded="false" />
+                <element signature="e#5535#5536#0" expanded="false" />
+                <element signature="e#5567#5568#0" expanded="false" />
+                <element signature="e#5611#5612#0" expanded="false" />
+                <element signature="e#5638#5639#0" expanded="false" />
+                <element signature="e#6643#6644#0" expanded="false" />
+                <element signature="e#6682#6683#0" expanded="false" />
+                <element signature="e#6812#6813#0" expanded="false" />
+                <element signature="e#6900#6901#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NavForm.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/NavForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1332">
+              <caret line="91" column="8" selection-start-line="91" selection-start-column="8" selection-end-line="91" selection-end-column="8" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#1028#1029#0" expanded="false" />
+                <element signature="e#1059#1060#0" expanded="false" />
+                <element signature="e#3291#3292#0" expanded="false" />
+                <element signature="e#3322#3323#0" expanded="false" />
+                <element signature="e#4251#4252#0" expanded="false" />
+                <element signature="e#4290#4291#0" expanded="false" />
+                <element signature="e#4334#4335#0" expanded="false" />
+                <element signature="e#4371#4372#0" expanded="false" />
+                <element signature="e#5119#5120#0" expanded="false" />
+                <element signature="e#5161#5162#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ObjectSaverSpecForm.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/ObjectSaverSpecForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="570">
+              <caret line="52" column="39" selection-start-line="52" selection-start-column="39" selection-end-line="52" selection-end-column="39" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -244,11 +264,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/org/androware/androbeans/utils/ReflectionUtils.java" />
-        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/ComboBoxCRUDForm.form" />
-        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/StepForm.form" />
-        <option value="$PROJECT_DIR$/src/org/androware/aop/NoopAspect.java" />
-        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/ObjectLoaderSpecForm.form" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/PropertiesForm.form" />
         <option value="$PROJECT_DIR$/src/org/androware/aop/TraceAspect.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/EditFormWrapperForm.java" />
@@ -258,11 +273,9 @@
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/ResourcePickerForm.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/WidgetIdPickerForm.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/ConstructorSpecForm.java" />
-        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/ObjectSaverSpecForm.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/StringForm.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/UIform.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/MapForm.java" />
-        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/PropertiesForm.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/ComboBoxCRUDForm.java" />
         <option value="$PROJECT_DIR$/src/org/androware/aop/AOP.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/AnyObjectForm.java" />
@@ -278,23 +291,30 @@
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/StandardJSONlistGeneratorForm.form" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/TwoWayMapperForm.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/BeanTree.java" />
-        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/PSIclassUtils.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/base/ListMapperItemGenerator.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/base/AdapterViewSpec.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/base/FlowBase.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/FlowForm.form" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/plugin/FlowToolWindowFactory.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/StandardJSONlistGeneratorForm.java" />
-        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/SimpleTypeListForm.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/JsonObjectWriter.java" />
-        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/CompFactory.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/AdapterViewSpecForm.java" />
-        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/ObjectLoaderSpecForm.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/FlowForm.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/NavForm.form" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/builder/NavForm.java" />
-        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/StepForm.java" />
         <option value="$PROJECT_DIR$/src/org/androware/flow/base/NavBase.java" />
+        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/ObjectLoaderSpecForm.form" />
+        <option value="$PROJECT_DIR$/src/org/androware/flow/base/ObjectLoaderSpecBase.java" />
+        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/PSIclassUtils.java" />
+        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/SimpleTypeListForm.java" />
+        <option value="$PROJECT_DIR$/src/org/androware/flow/base/ObjectSaverSpecBase.java" />
+        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/ObjectSaverSpecForm.form" />
+        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/CompFactory.java" />
+        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/ObjectLoaderSpecForm.java" />
+        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/StepForm.form" />
+        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/PropertiesForm.java" />
+        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/ObjectSaverSpecForm.java" />
+        <option value="$PROJECT_DIR$/src/org/androware/flow/builder/StepForm.java" />
       </list>
     </option>
   </component>
@@ -310,9 +330,8 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="1928" />
-    <option name="y" value="-29" />
     <option name="width" value="1920" />
-    <option name="height" value="1109" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -325,7 +344,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator currentView="PackagesPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -635,59 +654,59 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1928" y="-29" width="1920" height="1109" extended-state="6" />
+    <frame x="1928" y="0" width="1920" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36012208" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35939085" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37007454" sideWeight="0.46795523" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23646408" sideWeight="0.4659212" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15495208" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4345048" sideWeight="0.4923703" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4330011" sideWeight="0.4923703" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5963791" sideWeight="0.53204477" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2518637" sideWeight="0.53407884" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36012208" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35939085" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32960597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37007454" sideWeight="0.46795523" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23748669" sideWeight="0.46795523" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15495208" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4345048" sideWeight="0.4923703" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4330011" sideWeight="0.4923703" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5963791" sideWeight="0.53204477" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5963791" sideWeight="0.53204477" order="3" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -748,13 +767,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/org/androware/flow/builder/ObjectLoaderSpecForm.java</url>
-          <line>118</line>
+          <line>130</line>
           <properties />
           <option name="timeStamp" value="68" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/org/androware/flow/builder/CompFactory.java</url>
-          <line>527</line>
+          <line>532</line>
           <properties />
           <option name="timeStamp" value="74" />
         </line-breakpoint>
@@ -782,11 +801,29 @@
           <properties />
           <option name="timeStamp" value="82" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/org/androware/flow/builder/PropertiesForm.java</url>
+          <line>22</line>
+          <properties />
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/org/androware/flow/builder/CompFactory.java</url>
+          <line>580</line>
+          <properties />
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/org/androware/flow/builder/CompFactory.java</url>
+          <line>503</line>
+          <properties />
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="83" />
+      <option name="time" value="86" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -795,86 +832,7 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/StartFlowForm.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/glassfish/javax.json/1.0-b06/javax.json-1.0-b06.jar!/org/glassfish/json/JsonObjectBuilderImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#Utils#0" expanded="false" />
-            <element signature="method#concat#0;class#Utils#0" expanded="false" />
-            <element signature="method#deleteFiles#0;class#Utils#0" expanded="false" />
-            <element signature="class#1081:1225" expanded="false" />
-            <element signature="method#getFiles#0;class#Utils#0" expanded="false" />
-            <element signature="class#1429:1576" expanded="false" />
-            <element signature="method#normalizeStringToFilePath#0;class#Utils#0" expanded="false" />
-            <element signature="e#1803#1816#0" expanded="false" />
-            <element signature="method#removePunctuation#0;class#Utils#0" expanded="false" />
-            <element signature="method#removePunctuation#1;class#Utils#0" expanded="false" />
-            <element signature="e#2243#2256#0" expanded="false" />
-            <element signature="method#makeSet#0;class#Utils#0" expanded="false" />
-            <element signature="method#addToContainerValue#0;class#Utils#0" expanded="false" />
-            <element signature="method#getKeyForValue#0;class#Utils#0" expanded="false" />
-            <element signature="method#addValueToMappedContainer#0;class#Utils#0" expanded="false" />
-            <element signature="method#getFileContents#0;class#Utils#0" expanded="false" />
-            <element signature="method#HACKgetLayoutFileContents#0;class#Utils#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/plugin/TestBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/BeanTree.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/MainForm.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/Bean2LayoutMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/Bean2LayoutMapper.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/plugin/StandardJSONlistGeneratorForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="30" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/plugin/StandardJSONlistGeneratorForm.java" />
     <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/WidgetIdPickerForm.form">
       <provider selected="true" editor-type-id="ui-designer">
         <state />
@@ -884,7 +842,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -900,7 +857,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -913,7 +869,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -997,43 +952,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/PSIclassUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="798">
-          <caret line="312" column="4" selection-start-line="312" selection-start-column="4" selection-end-line="312" selection-end-column="4" />
-          <folding>
-            <element signature="docComment;class#PSIclassUtils#0" expanded="false" />
-            <element signature="class#PsiClassWrap#0;class#PSIclassUtils#0" expanded="false" />
-            <element signature="method#set#0;class#PsiClassWrap#0;class#PSIclassUtils#0" expanded="false" />
-            <element signature="method#PsiFieldWrap#1;class#PsiFieldWrap#0;class#PSIclassUtils#0" expanded="false" />
-            <element signature="method#set#0;class#PsiFieldWrap#0;class#PSIclassUtils#0" expanded="false" />
-            <element signature="class#PsiMethodWrap#0;class#PSIclassUtils#0" expanded="false" />
-            <element signature="method#PsiMethodWrap#1;class#PsiMethodWrap#0;class#PSIclassUtils#0" expanded="false" />
-            <element signature="method#set#0;class#PsiMethodWrap#0;class#PSIclassUtils#0" expanded="false" />
-            <element signature="method#getInnerClass#0;class#PSIclassUtils#0" expanded="false" />
-            <element signature="method#getMethod#0;class#PSIclassUtils#0" expanded="false" />
-            <element signature="method#getField#0;class#PSIclassUtils#0" expanded="false" />
-            <element signature="method#wrapInnerClasses#0;class#PSIclassUtils#0" expanded="false" />
-            <element signature="method#fillListWithClassPsiFields#0;class#PSIclassUtils#0" expanded="false" />
-            <element signature="method#wrapAllClassMembers#1;class#PSIclassUtils#0" expanded="false" />
-            <element signature="method#fillListWithAllInnerClasses#0;class#PSIclassUtils#0" expanded="false" />
-            <element signature="method#fillListWithAllResGroups#0;class#PSIclassUtils#0" expanded="false" />
-            <element signature="method#fillComboWithClassFields#0;class#PSIclassUtils#0" expanded="false" />
-            <element signature="method#setComboItemWithResourceGroupField#0;class#PSIclassUtils#0" expanded="false" />
-            <element signature="class#IgnoreMemberWithPrefix#0;class#PSIclassUtils#0" expanded="false" />
-            <element signature="e#9968#9969#0" expanded="true" />
-            <element signature="e#10037#10038#0" expanded="true" />
-            <element signature="e#10100#10101#0" expanded="true" />
-            <element signature="e#10164#10165#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/androware/flow/base/Field2WidgetIdMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1041,10 +963,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-          <folding>
-            <element signature="e#265#266#0" expanded="false" />
-            <element signature="e#292#293#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1052,7 +970,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="102" column="8" selection-start-line="102" selection-start-column="8" selection-end-line="102" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1060,7 +977,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1068,7 +984,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="624">
           <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1084,24 +999,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/FlowForm.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/base/StepBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/StepForm.form">
       <provider selected="true" editor-type-id="ui-designer">
         <state />
       </provider>
@@ -1134,28 +1035,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/TwoWayMapperForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="128" column="27" selection-start-line="128" selection-start-column="27" selection-end-line="128" selection-end-column="27" />
-          <folding>
-            <element signature="e#6367#6368#0" expanded="true" />
-            <element signature="e#6408#6409#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/SimpleTypeListForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
-          <folding>
-            <element signature="e#3735#3736#0" expanded="true" />
-            <element signature="e#3768#3769#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/JsonObjectWriter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -1172,122 +1051,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/AdapterViewSpecForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
-          <folding>
-            <element signature="e#9692#9693#0" expanded="true" />
-            <element signature="e#9728#9729#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/androware/flow/base/UI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/CompFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="481" column="214" selection-start-line="481" selection-start-column="213" selection-end-line="481" selection-end-column="214" />
-          <folding>
-            <element signature="docComment;class#CompFactory#0" expanded="false" />
-            <element signature="method#setFieldSetterOnSelect#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#setFieldSetterOnSelect#1;class#CompFactory#0" expanded="false" />
-            <element signature="class#2240:2928" expanded="false" />
-            <element signature="method#valueChanged#0;class#2240:2928" expanded="false" />
-            <element signature="method#setFieldSetterOnAction#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#setFieldSetterOnAction#1;class#CompFactory#0" expanded="false" />
-            <element signature="class#3365:3733" expanded="false" />
-            <element signature="method#actionPerformed#0;class#3365:3733" expanded="false" />
-            <element signature="method#setFieldSetterOnAction#2;class#CompFactory#0" expanded="false" />
-            <element signature="class#Sink#0;class#CompFactory#0" expanded="false" />
-            <element signature="class#TextFieldStringSink#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#TextFieldStringSink#1;class#TextFieldStringSink#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#sink#0;class#TextFieldStringSink#0;class#CompFactory#0" expanded="false" />
-            <element signature="class#ComboBoxSink#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#ComboBoxSink#0;class#ComboBoxSink#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#sink#0;class#ComboBoxSink#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#addTreeClassChooserAction#0;class#CompFactory#0" expanded="false" />
-            <element signature="class#5638:6144" expanded="false" />
-            <element signature="method#actionPerformed#0;class#5638:6144" expanded="false" />
-            <element signature="method#addTreeClassChooserAction#1;class#CompFactory#0" expanded="false" />
-            <element signature="method#addTreeClassChooserAction#2;class#CompFactory#0" expanded="false" />
-            <element signature="method#addTreeClassChooserAction#3;class#CompFactory#0" expanded="false" />
-            <element signature="method#addFileChooserAction#0;class#CompFactory#0" expanded="false" />
-            <element signature="class#7213:7719" expanded="false" />
-            <element signature="method#actionPerformed#0;class#7213:7719" expanded="false" />
-            <element signature="method#addFileChooserAction#1;class#CompFactory#0" expanded="false" />
-            <element signature="method#addFileChooserAction#2;class#CompFactory#0" expanded="false" />
-            <element signature="class#CRUDObjectEditor#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#addCRUDWrapper#0;class#CompFactory#0" expanded="false" />
-            <element signature="class#ObjectBuilder#0;class#CompFactory#0" expanded="false" />
-            <element signature="class#CopyBuilder#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#DefaultCRUDEditorImpl#0;class#DefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#DefaultCRUDEditorImpl#1;class#DefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#DefaultCRUDEditorImpl#2;class#DefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#DefaultCRUDEditorImpl#4;class#DefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#create#0;class#DefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#cancel#0;class#DefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
-            <element signature="class#PrimitiveTypeDefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#PrimitiveTypeDefaultCRUDEditorImpl#0;class#PrimitiveTypeDefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#PrimitiveTypeDefaultCRUDEditorImpl#1;class#PrimitiveTypeDefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#PrimitiveTypeDefaultCRUDEditorImpl#2;class#PrimitiveTypeDefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#done#0;class#PrimitiveTypeDefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#mkAddEditToggleWidget#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#mkAddEditToggleWidget#1;class#CompFactory#0" expanded="false" />
-            <element signature="method#fillCombo#0;class#CompFactory#0" expanded="false" />
-            <element signature="class#ObjectWrap#0;class#CompFactory#0" expanded="false" />
-            <element signature="class#ClassWrap#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#set#0;class#ClassWrap#0;class#CompFactory#0" expanded="false" />
-            <element signature="class#FieldWrap#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#FieldWrap#1;class#FieldWrap#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#set#0;class#FieldWrap#0;class#CompFactory#0" expanded="false" />
-            <element signature="class#MethodWrap#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#set#0;class#MethodWrap#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#getWidgetIdList#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#fillComboWidthWdgetIdsFromLayout#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#fillJList#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#fillListWithWidgetIdsFromLayout#0;class#CompFactory#0" expanded="false" />
-            <element signature="class#IgnoreBaseObjectPredicate#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#setSelectedValueOnJList#0;class#CompFactory#0" expanded="false" />
-            <element signature="n#!!doc;n#IgnoreMemberWithPrefix#0;n#CompFactory#0" expanded="false" />
-            <element signature="class#IgnoreMemberWithPrefix#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#IgnoreMemberWithPrefix#0;class#IgnoreMemberWithPrefix#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#setComboVal#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#setFieldFromComboVal#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#setTextfieldVal#0;class#CompFactory#0" expanded="false" />
-            <element signature="method#setValFromTextfield#0;class#CompFactory#0" expanded="false" />
-            <marker date="1482227522259" expanded="false" signature="2265:2928" ph="{...}" />
-            <marker date="1482227522259" expanded="false" signature="23065:23325" ph="{...}" />
-            <marker date="1482227522259" expanded="false" signature="23440:23551" ph="{...}" />
-            <marker date="1482227522259" expanded="false" signature="23692:23911" ph="{...}" />
-            <marker date="1482227522259" expanded="false" signature="27539:27600" ph="{...}" />
-            <marker date="1482227522259" expanded="false" signature="27716:28024" ph="{...}" />
-            <marker date="1482227522259" expanded="false" signature="28345:28437" ph="{...}" />
-            <marker date="1482227522259" expanded="false" signature="28558:28898" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/ObjectLoaderSpecForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/ComboBoxCRUDForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1312,40 +1079,302 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/NavForm.java">
+    <entry file="jar://$USER_HOME$/3p/java/jdk1.8.0_51/src.zip!/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="142" column="0" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
+        <state relative-caret-position="318">
+          <caret line="234" column="18" selection-start-line="234" selection-start-column="18" selection-end-line="234" selection-end-column="18" />
           <folding>
-            <element signature="e#5119#5120#0" expanded="true" />
-            <element signature="e#5161#5162#0" expanded="true" />
+            <element signature="e#10065#10066#0" expanded="false" />
+            <element signature="e#10148#10149#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/androware/flow/base/AdapterViewSpec.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state relative-caret-position="668">
+          <caret line="60" column="102" selection-start-line="60" selection-start-column="102" selection-end-line="60" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/AdapterViewSpecForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="157" column="108" selection-start-line="157" selection-start-column="108" selection-end-line="157" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/base/StepBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="794">
+          <caret line="49" column="41" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
+          <folding>
+            <element signature="e#1636#1637#0" expanded="false" />
+            <element signature="e#1695#1696#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/base/ObjectLoaderSpecBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="30" column="113" selection-start-line="30" selection-start-column="113" selection-end-line="30" selection-end-column="113" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/androware/flow/base/NavBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        <state relative-caret-position="288">
+          <caret line="16" column="87" selection-start-line="16" selection-start-column="87" selection-end-line="16" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/PSIclassUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#PSIclassUtils#0" expanded="false" />
+            <element signature="class#PsiClassWrap#0;class#PSIclassUtils#0" expanded="false" />
+            <element signature="method#set#0;class#PsiClassWrap#0;class#PSIclassUtils#0" expanded="false" />
+            <element signature="method#PsiFieldWrap#1;class#PsiFieldWrap#0;class#PSIclassUtils#0" expanded="false" />
+            <element signature="method#set#0;class#PsiFieldWrap#0;class#PSIclassUtils#0" expanded="false" />
+            <element signature="method#PsiMethodWrap#1;class#PsiMethodWrap#0;class#PSIclassUtils#0" expanded="false" />
+            <element signature="e#2351#2352#0" expanded="false" />
+            <element signature="e#2395#2396#0" expanded="false" />
+            <element signature="method#set#0;class#PsiMethodWrap#0;class#PSIclassUtils#0" expanded="false" />
+            <element signature="method#getInnerClass#0;class#PSIclassUtils#0" expanded="false" />
+            <element signature="method#getMethod#0;class#PSIclassUtils#0" expanded="false" />
+            <element signature="method#getField#0;class#PSIclassUtils#0" expanded="false" />
+            <element signature="method#wrapInnerClasses#0;class#PSIclassUtils#0" expanded="false" />
+            <element signature="method#fillListWithClassPsiFields#0;class#PSIclassUtils#0" expanded="false" />
+            <element signature="method#wrapAllClassMembers#1;class#PSIclassUtils#0" expanded="false" />
+            <element signature="method#fillListWithAllInnerClasses#0;class#PSIclassUtils#0" expanded="false" />
+            <element signature="method#fillListWithAllResGroups#0;class#PSIclassUtils#0" expanded="false" />
+            <element signature="method#fillComboWithClassFields#0;class#PSIclassUtils#0" expanded="false" />
+            <element signature="method#setComboItemWithResourceGroupField#0;class#PSIclassUtils#0" expanded="false" />
+            <element signature="class#IgnoreMemberWithPrefix#0;class#PSIclassUtils#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/TwoWayMapperForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/SimpleTypeListForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="88" column="16" selection-start-line="88" selection-start-column="16" selection-end-line="88" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/base/ObjectSaverSpecBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/ObjectLoaderSpecForm.form">
+      <provider editor-type-id="ui-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/ObjectSaverSpecForm.form">
+      <provider editor-type-id="ui-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/MapForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1458">
+          <caret line="100" column="8" selection-start-line="100" selection-start-column="8" selection-end-line="100" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#4841#4842#0" expanded="false" />
+            <element signature="e#4894#4895#0" expanded="false" />
+            <element signature="e#5535#5536#0" expanded="false" />
+            <element signature="e#5567#5568#0" expanded="false" />
+            <element signature="e#5611#5612#0" expanded="false" />
+            <element signature="e#5638#5639#0" expanded="false" />
+            <element signature="e#6643#6644#0" expanded="false" />
+            <element signature="e#6682#6683#0" expanded="false" />
+            <element signature="e#6812#6813#0" expanded="false" />
+            <element signature="e#6900#6901#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/NavForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1332">
+          <caret line="91" column="8" selection-start-line="91" selection-start-column="8" selection-end-line="91" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1028#1029#0" expanded="false" />
+            <element signature="e#1059#1060#0" expanded="false" />
+            <element signature="e#3291#3292#0" expanded="false" />
+            <element signature="e#3322#3323#0" expanded="false" />
+            <element signature="e#4251#4252#0" expanded="false" />
+            <element signature="e#4290#4291#0" expanded="false" />
+            <element signature="e#4334#4335#0" expanded="false" />
+            <element signature="e#4371#4372#0" expanded="false" />
+            <element signature="e#5119#5120#0" expanded="false" />
+            <element signature="e#5161#5162#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/StepForm.form">
+      <provider editor-type-id="ui-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/PropertiesForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="624">
+          <caret line="62" column="8" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/ObjectLoaderSpecForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/ComboBoxCRUDForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/ObjectSaverSpecForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="52" column="39" selection-start-line="52" selection-start-column="39" selection-end-line="52" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/StepForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="112" column="8" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="8" />
+        <state relative-caret-position="610">
+          <caret line="125" column="20" selection-start-line="125" selection-start-column="20" selection-end-line="125" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/androware/flow/builder/CompFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="568" column="27" selection-start-line="568" selection-start-column="27" selection-end-line="568" selection-end-column="27" />
           <folding>
-            <element signature="e#6635#6636#0" expanded="true" />
-            <element signature="e#6689#6690#0" expanded="true" />
+            <element signature="docComment;class#CompFactory#0" expanded="false" />
+            <element signature="method#setFieldSetterOnSelect#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#setFieldSetterOnSelect#1;class#CompFactory#0" expanded="false" />
+            <element signature="class#2240:2928" expanded="false" />
+            <element signature="method#valueChanged#0;class#2240:2928" expanded="false" />
+            <element signature="method#setFieldSetterOnAction#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#setFieldSetterOnAction#1;class#CompFactory#0" expanded="false" />
+            <element signature="class#3365:3733" expanded="false" />
+            <element signature="method#actionPerformed#0;class#3365:3733" expanded="false" />
+            <element signature="method#setFieldSetterOnAction#2;class#CompFactory#0" expanded="false" />
+            <element signature="class#Sink#0;class#CompFactory#0" expanded="false" />
+            <element signature="class#TextFieldStringSink#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#TextFieldStringSink#1;class#TextFieldStringSink#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#sink#0;class#TextFieldStringSink#0;class#CompFactory#0" expanded="false" />
+            <element signature="class#ComboBoxSink#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#ComboBoxSink#0;class#ComboBoxSink#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#sink#0;class#ComboBoxSink#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#addTreeClassChooserAction#0;class#CompFactory#0" expanded="false" />
+            <element signature="class#5826:6332" expanded="false" />
+            <element signature="method#actionPerformed#0;class#5826:6332" expanded="false" />
+            <element signature="method#addTreeClassChooserAction#1;class#CompFactory#0" expanded="false" />
+            <element signature="method#addTreeClassChooserAction#2;class#CompFactory#0" expanded="false" />
+            <element signature="method#addTreeClassChooserAction#3;class#CompFactory#0" expanded="false" />
+            <element signature="method#addFileChooserAction#0;class#CompFactory#0" expanded="false" />
+            <element signature="class#7401:7907" expanded="false" />
+            <element signature="method#actionPerformed#0;class#7401:7907" expanded="false" />
+            <element signature="method#addFileChooserAction#1;class#CompFactory#0" expanded="false" />
+            <element signature="method#addFileChooserAction#2;class#CompFactory#0" expanded="false" />
+            <element signature="class#CRUDObjectEditor#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#addCRUDWrapper#0;class#CompFactory#0" expanded="false" />
+            <element signature="class#ObjectBuilder#0;class#CompFactory#0" expanded="false" />
+            <element signature="class#CopyBuilder#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#DefaultCRUDEditorImpl#0;class#DefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#DefaultCRUDEditorImpl#1;class#DefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#create#0;class#DefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#cancel#0;class#DefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
+            <element signature="class#PrimitiveTypeDefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#PrimitiveTypeDefaultCRUDEditorImpl#0;class#PrimitiveTypeDefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#PrimitiveTypeDefaultCRUDEditorImpl#1;class#PrimitiveTypeDefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#PrimitiveTypeDefaultCRUDEditorImpl#2;class#PrimitiveTypeDefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#done#0;class#PrimitiveTypeDefaultCRUDEditorImpl#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#mkAddEditToggleWidget#1;class#CompFactory#0" expanded="false" />
+            <element signature="method#fillCombo#0;class#CompFactory#0" expanded="false" />
+            <element signature="class#ObjectWrap#0;class#CompFactory#0" expanded="false" />
+            <element signature="class#ClassWrap#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#set#0;class#ClassWrap#0;class#CompFactory#0" expanded="false" />
+            <element signature="class#FieldWrap#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#FieldWrap#1;class#FieldWrap#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#set#0;class#FieldWrap#0;class#CompFactory#0" expanded="false" />
+            <element signature="class#MethodWrap#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#set#0;class#MethodWrap#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#getWidgetIdList#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#fillComboWidthWdgetIdsFromLayout#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#fillJList#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#fillListWithWidgetIdsFromLayout#0;class#CompFactory#0" expanded="false" />
+            <element signature="class#IgnoreBaseObjectPredicate#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#setSelectedValueOnJList#0;class#CompFactory#0" expanded="false" />
+            <element signature="n#!!doc;n#IgnoreMemberWithPrefix#0;n#CompFactory#0" expanded="false" />
+            <element signature="class#IgnoreMemberWithPrefix#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#IgnoreMemberWithPrefix#0;class#IgnoreMemberWithPrefix#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#setComboVal#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#setFieldFromComboVal#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#setTextfieldVal#0;class#CompFactory#0" expanded="false" />
+            <element signature="method#setValFromTextfield#0;class#CompFactory#0" expanded="false" />
+            <marker date="1482485792876" expanded="false" signature="2265:2928" ph="{...}" />
+            <marker date="1482485792876" expanded="false" signature="23253:23513" ph="{...}" />
+            <marker date="1482485792876" expanded="false" signature="23628:23739" ph="{...}" />
+            <marker date="1482485792876" expanded="false" signature="23880:24099" ph="{...}" />
+            <marker date="1482485792876" expanded="false" signature="27727:27788" ph="{...}" />
+            <marker date="1482485792876" expanded="false" signature="27904:28212" ph="{...}" />
+            <marker date="1482485792876" expanded="false" signature="28533:28625" ph="{...}" />
+            <marker date="1482485792876" expanded="false" signature="28746:29086" ph="{...}" />
           </folding>
         </state>
       </provider>

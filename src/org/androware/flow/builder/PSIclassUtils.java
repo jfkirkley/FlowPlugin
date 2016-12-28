@@ -94,7 +94,7 @@ public class PSIclassUtils {
         }
 
         public String toString() {
-            return method.getName();
+            return method.getName() + "()";
         }
 
         public Object get() {

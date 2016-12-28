@@ -13,6 +13,12 @@ public class ObjectLoaderSpecBase {
     public final static String ON_PRE_POST_STEP_TRANS = "onPrePostStepTrans";
     public final static String ON_POST_POST_STEP_TRANS = "onPostPostStepTrans";
     public final static String ON_DEMAND = "onDemand";
+
+    public final static String STEP_SCOPE = "stepScope";
+    public final static String GLOBAL_SCOPE = "globalScope";
+    public final static String FLOW_SCOPE = "flowScope";
+
+    public String scope = FLOW_SCOPE;
     public String objectLoaderClassName;
     public String objectClassName;
     public String objectId;

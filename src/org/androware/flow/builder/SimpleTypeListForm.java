@@ -97,7 +97,7 @@ public class SimpleTypeListForm<T> implements CRUDForm<List<T>> {
                 if(typeListComboBox.getSelectedIndex() != -1) {
                     Object item = typeListComboBox.getSelectedItem();
                     typeListComboBox.removeItem(item);
-                    if(targetList == null) {
+                    if(targetList != null) {
                         targetList.remove(item);
                     }
                 }

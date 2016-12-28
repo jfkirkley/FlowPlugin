@@ -39,6 +39,7 @@ public class StepForm implements CRUDForm<StepBase> {
     private JComboBox targetFlowComboBox;
     private JTextField nameTextField;
     private JList parentContainerIDList;
+    private JButton objectSaverButton;
 
 
     ToolWindow toolWindow;
@@ -121,6 +122,10 @@ public class StepForm implements CRUDForm<StepBase> {
 
         CompFactory.mkAddEditToggleWidget(project, toolWindow, addCustomizerButton,
                 ConstructorSpecForm.class, ConstructorSpec.class, new ReflectionUtils.FieldSetter(stepBase, "viewCustomizerSpec"));
+
+        CompFactory.mkAddEditToggleWidget(project, toolWindow, objectSaverButton,
+                ObjectSaverSpecForm.class, ObjectSaverSpecBase.class, new ReflectionUtils.FieldSetter(stepBase, "objectSaverSpec"));
+
 
 
     }

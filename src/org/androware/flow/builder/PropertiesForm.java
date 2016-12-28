@@ -57,6 +57,9 @@ public class PropertiesForm implements CRUDForm<Map.Entry> {
 
     @Override
     public void done() {
+        System.out.println("parentForm: " + parentForm);
+        System.out.println("keyField: " + keyField);
+        System.out.println("anyobjform: " + anyObjectForm);
         parentForm.handleChildValue(new HashMap.SimpleEntry<>(keyField.getText(), anyObjectForm.getTarget() ));
     }
 

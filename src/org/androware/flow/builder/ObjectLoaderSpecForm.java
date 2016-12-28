@@ -7,9 +7,7 @@ import org.androware.aop.AOP;
 import org.androware.flow.base.ObjectLoaderSpecBase;
 
 import javax.swing.*;
-import java.util.AbstractMap;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by jkirkley on 8/20/16.
@@ -28,6 +26,9 @@ public class ObjectLoaderSpecForm implements CRUDForm<ObjectLoaderSpecBase> {
     private JRadioButton flowInitRadioButton;
     private JCheckBox autoCreateCheckBox;
     private ComboBoxCRUDForm propertiesComboBoxCRUDForm;
+    private JRadioButton globalRadioButton;
+    private JRadioButton stepRadioButton;
+    private JRadioButton flowRadioButton;
 
     private ObjectLoaderSpecBase objectLoaderSpecBase;
 
@@ -36,12 +37,22 @@ public class ObjectLoaderSpecForm implements CRUDForm<ObjectLoaderSpecBase> {
     ButtonGroup whenButtonGroup = new ButtonGroup();
     HashMap<String, ButtonModel> whenMap = new HashMap<>();
 
+    ButtonGroup scopeButtonGroup = new ButtonGroup();
+    HashMap<String, ButtonModel> scopeMap = new HashMap<>();
+
+
     @Override
     public void done() {
         ButtonModel model = whenButtonGroup.getSelection();
         if (model != null) {
             objectLoaderSpecBase.when = (String) Utils.getKeyForValue(whenMap, model);
         }
+
+        model = scopeButtonGroup.getSelection();
+        if (model != null) {
+            objectLoaderSpecBase.scope = (String) Utils.getKeyForValue(scopeMap, model);
+        }
+
         objectLoaderSpecBase.objectClassName = targetObjectClassChooser.getClassName();
         objectLoaderSpecBase.objectLoaderClassName = objectLoaderClassChooser.getClassName();
         objectLoaderSpecBase.objectId = objectIdTextField.getText();
@@ -51,7 +62,6 @@ public class ObjectLoaderSpecForm implements CRUDForm<ObjectLoaderSpecBase> {
         if(parentForm != null) {
             parentForm.handleChildValue(objectLoaderSpecBase);
         }
-
 
     }
 
@@ -75,12 +85,10 @@ public class ObjectLoaderSpecForm implements CRUDForm<ObjectLoaderSpecBase> {
         if (objectLoaderSpecBase.when != null) {
             whenButtonGroup.setSelected(whenMap.get(objectLoaderSpecBase.when), true);
         }
+        if (objectLoaderSpecBase.scope != null) {
+            scopeButtonGroup.setSelected(scopeMap.get(objectLoaderSpecBase.scope), true);
+        }
         autoCreateCheckBox.setSelected(objectLoaderSpecBase.autoCreate);
-    }
-
-    private void addRadioButton(JRadioButton button, String key) {
-        whenButtonGroup.add(button);
-        whenMap.put(key, button.getModel());
     }
 
     public void init(Project project, ObjectLoaderSpecBase objectLoaderSpecBase) {
@@ -90,12 +98,16 @@ public class ObjectLoaderSpecForm implements CRUDForm<ObjectLoaderSpecBase> {
         this.objectLoaderSpecBase = objectLoaderSpecBase;
 
 
-        addRadioButton(prePreRadioButton, ObjectLoaderSpecBase.ON_PRE_PRE_STEP_TRANS);
-        addRadioButton(postPreRadioButton, ObjectLoaderSpecBase.ON_POST_PRE_STEP_TRANS);
-        addRadioButton(prePostRadioButton, ObjectLoaderSpecBase.ON_PRE_POST_STEP_TRANS);
-        addRadioButton(postPostRadioButton, ObjectLoaderSpecBase.ON_POST_POST_STEP_TRANS);
-        addRadioButton(onDemandRadioButton, ObjectLoaderSpecBase.ON_DEMAND);
-        addRadioButton(flowInitRadioButton, ObjectLoaderSpecBase.ON_FLOW_INIT);
+        CompFactory.addRadioButton(prePreRadioButton, ObjectLoaderSpecBase.ON_PRE_PRE_STEP_TRANS, whenButtonGroup, whenMap);
+        CompFactory.addRadioButton(postPreRadioButton, ObjectLoaderSpecBase.ON_POST_PRE_STEP_TRANS, whenButtonGroup, whenMap);
+        CompFactory.addRadioButton(prePostRadioButton, ObjectLoaderSpecBase.ON_PRE_POST_STEP_TRANS, whenButtonGroup, whenMap);
+        CompFactory.addRadioButton(postPostRadioButton, ObjectLoaderSpecBase.ON_POST_POST_STEP_TRANS, whenButtonGroup, whenMap);
+        CompFactory.addRadioButton(onDemandRadioButton, ObjectLoaderSpecBase.ON_DEMAND, whenButtonGroup, whenMap);
+        CompFactory.addRadioButton(flowInitRadioButton, ObjectLoaderSpecBase.ON_FLOW_INIT, whenButtonGroup, whenMap);
+
+        CompFactory.addRadioButton(flowRadioButton, ObjectLoaderSpecBase.FLOW_SCOPE, scopeButtonGroup, scopeMap);
+        CompFactory.addRadioButton(stepRadioButton, ObjectLoaderSpecBase.STEP_SCOPE, scopeButtonGroup, scopeMap);
+        CompFactory.addRadioButton(globalRadioButton, ObjectLoaderSpecBase.GLOBAL_SCOPE, scopeButtonGroup, scopeMap);
 
         this.populate(objectLoaderSpecBase);
 

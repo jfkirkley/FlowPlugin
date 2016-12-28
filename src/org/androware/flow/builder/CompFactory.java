@@ -117,6 +117,11 @@ public class CompFactory {
         });
     }
 
+    public static void addRadioButton(JRadioButton button, String key, ButtonGroup buttonGroup, Map map) {
+        buttonGroup.add(button);
+        map.put(key, button.getModel());
+    }
+
     public interface Sink<T> {
         public void sink(T t);
     }
